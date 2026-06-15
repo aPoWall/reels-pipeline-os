@@ -309,6 +309,10 @@
   .exo p{margin:0;font-size:11.5px;line-height:1.5}
   .exo .en{font-size:10.5px;color:var(--muted);border-top:1px dashed var(--soft);padding-top:6px;margin-top:3px}
 
+  /* inline code block */
+  pre.code{border:1px solid var(--ink);background:var(--hi);padding:12px 14px;margin:4px 0 8px;
+    font-size:11.5px;line-height:1.55;overflow:auto;white-space:pre;tab-size:2}
+
   /* kpi strip */
   .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--ink);margin:4px 0 8px}
   @media(max-width:840px){.kpis{grid-template-columns:repeat(2,1fr)}}
@@ -352,7 +356,7 @@
       <span class="ctaTop"><span class="g">↓</span> скачать весь стек</span>
       <span class="ctaSub">STACK.md · пайплайн по слоям + EDL-схема + контракты + skill</span>
     </a>
-    <a class="cta" href="CONTRIBUTING.md">
+    <a class="cta" href="https://github.com/aPoWall/reel-stack-compare/blob/main/CONTRIBUTING.md">
       <span class="ctaTop"><span class="g">+</span> сконтрибьютить ветку</span>
       <span class="ctaSub">пришли свой EDL / пример / правку слоя</span>
     </a>
@@ -363,16 +367,69 @@
   </div>
 
   <nav class="tabs" role="tablist">
-    <button role="tab" aria-selected="true" onclick="tab('compare',this)">сравнение</button>
-    <button role="tab" aria-selected="false" onclick="tab('shortform',this)">короткий формат</button>
+    <button role="tab" aria-selected="true" onclick="tab('how',this)">как работает</button>
     <button role="tab" aria-selected="false" onclick="tab('live',this)">живой пример</button>
+    <button role="tab" aria-selected="false" onclick="tab('compare',this)">сравнение</button>
+    <button role="tab" aria-selected="false" onclick="tab('shortform',this)">короткий формат</button>
     <button role="tab" aria-selected="false" onclick="tab('adopt',this)">заимствуем</button>
     <button role="tab" aria-selected="false" onclick="tab('evolve',this)">развитие</button>
     <button role="tab" aria-selected="false" onclick="tab('tech',this)">технологии</button>
   </nav>
 
+  <!-- ============ TAB: HOW IT WORKS ============ -->
+  <section class="panel on" id="how">
+    <h2 class="sec">как работает — pipeline за 30 секунд</h2>
+    <p class="lead">короткий рилз собирает <b>агент из одной записи</b>: транскрипт даёт word-таймкоды → агент режет на смысловые блоки → решения пишутся в <b>EDL</b> (единый источник истины) → overlay-дорожки кладутся независимо → дешёвый draft на проверку → QA → финал 1080×1920. <span class="muted">весь рецепт хранится как данные, не как один mp4 — поэтому стиль можно закрепить, повторить и форкнуть.</span></p>
+    <div class="pipeflow">
+      <span class="pf">запись</span><span class="pa">→</span>
+      <span class="pf">transcript</span><span class="pa">→</span>
+      <span class="pf">source blocks</span><span class="pa">→</span>
+      <span class="pf">EDL · SSOT</span><span class="pa">→</span>
+      <span class="pf">overlay lanes</span><span class="pa">→</span>
+      <span class="pf draft">draft</span><span class="pa">→</span>
+      <span class="pf">QA</span><span class="pa">→</span>
+      <span class="pf final">final 1080×1920</span>
+    </div>
+
+    <h2 class="sec">блок-эдитор — как это водится руками</h2>
+    <p class="lead">блок-эдитор (skill <b>reel-block-edit</b>) — single-file HTML поверх стека. он превращает хороший дубль в <b>переиспользуемый cut map + overlay-дорожки</b>, а не в галерею mp4. собираешь рилз визуально, экспортируешь EDL+manifest, рендерер собирает финал.</p>
+    <div class="lanes">
+      <div class="lname">source blocks</div><div class="ldesc">фразы из транскрипта тегируются по роли (hook/tension/turn/…); каждый блок самодостаточен и переставляем</div>
+      <div class="lname">branch surface</div><div class="ldesc">одна cut-карта → много веток (clean/captions/micro/low-rail/soft-card); baseline никогда не перезаписывается</div>
+      <div class="lname">trim</div><div class="ldesc">точная подрезка блока слева/справа по source-диапазону, live-preview из исходника</div>
+      <div class="lname">overlay lanes</div><div class="ldesc">caption/card/rail/stamp как независимые дорожки поверх cut map</div>
+      <div class="lname">export</div><div class="ldesc">manifest <b>realself.timeline.json</b> + EDL → рендерер (moviepy/ffmpeg сейчас, Remotion/OTIO дальше)</div>
+    </div>
+
+    <h2 class="sec">механика скиллов — как агент водит пайплайн</h2>
+    <div class="cards three">
+      <article class="block"><div class="num">1</div><h3>reel-edit</h3><div class="ld">video / EDL state</div><p>транскрипт, умный рез, режим→стиль, presets, audio-first рендер, draft→final. владеет реальным editing-state.</p></article>
+      <article class="block"><div class="num">2</div><h3>reel-block-edit</h3><div class="ld">branch surface UI</div><p>EDL strip, overlay lanes как first-class дорожки, manifest realself.timeline.json, dashboard export.</p></article>
+      <article class="block inv"><div class="num">3</div><h3>stack-compare</h3><div class="ld">shaper artifact</div><p>строит этот дашборд, держит public/private boundary и no-personal-data правило. package должен быть usable, не just readable.</p></article>
+    </div>
+
+    <h2 class="sec">что такое «блок» — generic пример EDL</h2>
+    <p class="lead">минимальный кусок монтажного плана — так выглядит один блок внутри EDL:</p>
+    <pre class="code">{ "id": "c01", "label": "hook",
+  "sourceStart": 0.0, "sourceEnd": 3.7,
+  "risk": "baseline", "note": "generic public-safe note" }</pre>
+    <p class="lead"><span class="muted">overlay-дорожка независима от блока:</span></p>
+    <pre class="code">{ "id": "captions", "type": "caption",
+  "items": [ { "start": 0.8, "end": 2.8, "text": "caption", "safeZone": "lower-third" } ] }</pre>
+
+    <h2 class="sec">развернуть у себя</h2>
+    <ol class="road">
+      <li><span class="eff">инструменты</span><b>возьми базу</b><p>ffmpeg (с libx264), python (opencv, pillow), транскрипт — ElevenLabs Scribe или локальный Whisper.</p></li>
+      <li><span class="eff">skills</span><b>поставь скиллы</b><p>reel-edit / reel-block-edit / stack-compare в свой Claude Code или Codex (skill-каталог) — они и водят пайплайн.</p></li>
+      <li><span class="eff">stack</span><b>скачай стек</b><p><a href="STACK.md" download="ai-mindset-reels-pipeline-STACK.md">STACK.md</a> — слои, контракты, EDL-схема. форкни дашборд как свой шаблон сравнения.</p></li>
+      <li><span class="eff">go</span><b>собери первый рилз</b><p>одна запись → агент режет по блокам → EDL → overlay lanes → draft → final. победил вариант — закрепи рецепт веткой.</p></li>
+    </ol>
+
+    <p class="lead" style="margin-top:14px"><span class="muted">подробнее — в <a href="https://github.com/aPoWall/reel-stack-compare/blob/main/STACK.md">STACK.md</a> (полный стек по слоям) и <a href="https://github.com/aPoWall/reel-stack-compare/blob/main/CONTRIBUTING.md">CONTRIBUTING</a> (как прислать свою ветку).</span></p>
+  </section>
+
   <!-- ============ TAB 1: COMPARE ============ -->
-  <section class="panel on" id="compare">
+  <section class="panel" id="compare">
 
     <h2 class="sec">два пайплайна, один примитив</h2>
     <p class="lead">слева — их линейная цепочка под длинный ролик. справа — наш блок-граф под reels. <span class="muted">инверсия (чёрный блок) = наша система.</span></p>
@@ -694,19 +751,19 @@
   </section>
 
   <h2 class="sec" style="margin-top:30px">библиотека примеров — ветки стека</h2>
-  <p class="lead">каждая ветка = воспроизводимый рецепт. форкни любую, поменяй слой, пришли свою. <span class="muted">нюансы каждой — в <a href="STACK.md">STACK.md</a> и <a href="CONTRIBUTING.md">CONTRIBUTING</a>.</span></p>
+  <p class="lead">каждая ветка = воспроизводимый рецепт. форкни любую, поменяй слой, пришли свою. <span class="muted">нюансы каждой — в <a href="https://github.com/aPoWall/reel-stack-compare/blob/main/STACK.md">STACK.md</a> и <a href="https://github.com/aPoWall/reel-stack-compare/blob/main/CONTRIBUTING.md">CONTRIBUTING</a>.</span></p>
   <div class="exlib">
     <div class="exo"><div class="et">long-form</div><div class="eh">max postnikov</div><p>детерминированная youtube cut-chain: монтажный план = SSOT, draft→final, Scribe, videotoolbox.</p><div class="en">нюанс: исток заимствований — план как единственный источник истины.</div></div>
     <div class="exo"><div class="et">short-form · наш</div><div class="eh">reels block editor</div><p>визуальный блок-редактор, режим→стиль, audio-first lip-sync, Trial Reels A/B.</p><div class="en">нюанс: editor хранит рецепт (карта + lanes + branches), не mp4.</div></div>
     <div class="exo"><div class="et">recipe</div><div class="eh">answer-card</div><p>ответный reel из одной записи: 7 source-блоков, 3 overlay-слоя (hook card / captions / terminal + answer card).</p><div class="en">нюанс: overlay lanes независимы от cut map; copy всегда viewer-facing.</div></div>
     <div class="exo"><div class="et">density ladder</div><div class="eh">soft v04–v08</div><p>одна soft cut-карта, пять веток по плотности: clean → captions → micro → low-rail → soft card.</p><div class="en">нюанс: один рез — много смысловых слоёв, выбираешь под цель/KPI.</div></div>
     <div class="exo"><div class="et">policy</div><div class="eh">audio · default + exception</div><p>default = один voice master; cross-take splice только как explicit experimental branch с сохранённым baseline.</p><div class="en">нюанс: осознанный remix — это ветка, а не нарушение.</div></div>
-    <div class="exo you"><div class="et">open slot</div><div class="eh">твоя ветка</div><p>форкни репо, добавь свой generic EDL / пример / правку слоя, пришли PR.</p><div class="en"><a href="CONTRIBUTING.md">CONTRIBUTING →</a></div></div>
+    <div class="exo you"><div class="et">open slot</div><div class="eh">твоя ветка</div><p>форкни репо, добавь свой generic EDL / пример / правку слоя, пришли PR.</p><div class="en"><a href="https://github.com/aPoWall/reel-stack-compare/blob/main/CONTRIBUTING.md">CONTRIBUTING →</a></div></div>
   </div>
 
   <div class="ctxbar">
     <div class="ct">community</div>
-    <p><b>это открытый стек, а не один «правильный» пайплайн.</b> ветки сейчас: <b>max postnikov</b> (длинный youtube), <b>наш reels</b> блок-редактор, <b>answer-card</b> рецепт-пример. твоя ветка — следующая: форкни репо, добавь свой EDL / пример / правку слоя и пришли PR. формат веток — в <a href="CONTRIBUTING.md">CONTRIBUTING</a>, весь стек — в <a href="STACK.md">STACK.md</a>. родилось в ai mindset {space}; агент и человек ведут стек вместе.</p>
+    <p><b>это открытый стек, а не один «правильный» пайплайн.</b> ветки сейчас: <b>max postnikov</b> (длинный youtube), <b>наш reels</b> блок-редактор, <b>answer-card</b> рецепт-пример. твоя ветка — следующая: форкни репо, добавь свой EDL / пример / правку слоя и пришли PR. формат веток — в <a href="https://github.com/aPoWall/reel-stack-compare/blob/main/CONTRIBUTING.md">CONTRIBUTING</a>, весь стек — в <a href="https://github.com/aPoWall/reel-stack-compare/blob/main/STACK.md">STACK.md</a>. родилось в ai mindset {space}; агент и человек ведут стек вместе.</p>
   </div>
 
   <footer class="stamp">
@@ -729,8 +786,8 @@
   }
   // keyboard 1-6
   document.addEventListener('keydown',e=>{
-    const order=['compare','shortform','live','adopt','evolve','tech'];
-    const map={'1':'compare','2':'shortform','3':'live','4':'adopt','5':'evolve','6':'tech'};
+    const order=['how','live','compare','shortform','adopt','evolve','tech'];
+    const map={'1':'how','2':'live','3':'compare','4':'shortform','5':'adopt','6':'evolve','7':'tech'};
     if(map[e.key]){
       const btns=[...document.querySelectorAll('nav.tabs button')];
       tab(map[e.key], btns[order.indexOf(map[e.key])]);
