@@ -205,7 +205,7 @@
   .edlstrip .cut:last-child{border-right:0}
   .edlstrip .cut .ci{font-size:9px;color:var(--muted);font-variant-numeric:tabular-nums}
   .edlstrip .cut .cl{font-size:11.8px;font-weight:600}
-  .edlstrip .cut.death{background:var(--hi)}
+  .edlstrip .cut.ins{background:var(--hi)}
 
   .lanes{display:grid;grid-template-columns:96px 1fr;border:1px solid var(--ink);margin:4px 0 8px}
   .lanes .lname{border-bottom:1px solid var(--soft);border-right:1px solid var(--ink);padding:9px 11px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
@@ -248,7 +248,7 @@
 <div class="wrap">
 
   <header class="app">
-    <div class="brand"><img class="lt" src="assets/aim-logo.png" alt="ai mindset"><img class="dk" src="assets/aim-logo-light.png" alt="ai mindset">shaper <span class="bsub">· ai mindset</span></div>
+    <div class="brand"><img class="lt" src="assets/aim-logo-light.png" alt="ai mindset"><img class="dk" src="assets/aim-logo.png" alt="ai mindset">shaper <span class="bsub">· ai mindset</span></div>
     <div class="crumb">fig.1 · <b>сравнение блоков</b> · наш reel-редактор × стек <b>max postnikov</b></div>
     <div class="meta">
       <b>v1</b> · 2026-06-15<br>
@@ -376,31 +376,31 @@
 
   <!-- ============ TAB: LIVE · EDL LAYER ============ -->
   <section class="panel" id="live">
-    <h2 class="sec">живой пример — reel-edit pipeline v2 · codex-reel-v2 (по murmur)</h2>
-    <p class="lead">это не гипотеза, а <b>работающий editing state</b>. данные подтянуты <b>по murmur</b> от codex-сессии, которая прямо сейчас собирает pipeline v2 из одного дубля. переход от «сравнения инструментов» к <b>working reel OS</b>: агент и человек спорят на уровне блоков, веток и overlay lanes. <span class="muted">source · IMG_6064.MOV · проект 2026-06-15-reel-editor-v2-pipeline.</span></p>
+    <h2 class="sec">живой пример — reel-edit pipeline v2 (рабочая сессия)</h2>
+    <p class="lead">это не гипотеза, а <b>работающий editing state</b> из реальной reel-edit сессии: pipeline v2 собирается из одной записи. переход от «сравнения инструментов» к <b>working reel OS</b>: агент и человек спорят на уровне блоков, веток и overlay lanes. <span class="muted">одна запись · один источник аудио.</span></p>
 
     <h2 class="sec">branch matrix — одна запись, две ветки</h2>
     <div class="branchmx">
       <div class="branch"><h4>v02 · clean caption</h4><div class="tagline">baseline-safe</div><p>чистая caption-only версия на сильной второй попытке. публикационный baseline — one-take философия не нарушена.</p><span class="risk">baseline-safe</span></div>
-      <div class="branch exp"><h4>v03 · death-overlay · visible_flow</h4><div class="tagline">experimental remix</div><p>в сильную вторую попытку вклеен блок из первой — про смерть и ценность жизни. explicit <b>single_source_multi_take_remix</b>: тот же микрофон и комната, но склейка дублей помечена как эксперимент, baseline сохранён.</p><span class="risk">experimental-remix</span></div>
+      <div class="branch exp"><h4>v03 · cross-take · visible_flow</h4><div class="tagline">experimental remix</div><p>в сильную вторую попытку вклеен смысловой блок из первого дубля. explicit <b>single_source_multi_take_remix</b>: тот же микрофон и комната, но склейка дублей помечена как эксперимент, baseline сохранён.</p><span class="risk">experimental-remix</span></div>
     </div>
 
     <h2 class="sec">edl strip — 11 резов (монтажный план = SSOT)</h2>
     <p class="lead">каждый рез = <span class="muted">sourceStart/sourceEnd + риторический label + note</span>. весь смысл лежит в <b>edit_decision_list_v03_death_overlay.json</b>, не размазан по коду.</p>
     <div class="edlstrip">
       <div class="cut"><span class="ci">01</span><span class="cl">hook</span></div>
-      <div class="cut"><span class="ci">02</span><span class="cl">limits</span></div>
-      <div class="cut"><span class="ci">03</span><span class="cl">refusal</span></div>
-      <div class="cut death"><span class="ci">04</span><span class="cl">death-a</span></div>
-      <div class="cut death"><span class="ci">05</span><span class="cl">death-b</span></div>
-      <div class="cut"><span class="ci">06</span><span class="cl">tea</span></div>
-      <div class="cut"><span class="ci">07</span><span class="cl">wall</span></div>
-      <div class="cut"><span class="ci">08</span><span class="cl">agents</span></div>
-      <div class="cut"><span class="ci">09</span><span class="cl">biology</span></div>
-      <div class="cut"><span class="ci">10</span><span class="cl">life</span></div>
-      <div class="cut"><span class="ci">11</span><span class="cl">closer</span></div>
+      <div class="cut"><span class="ci">02</span><span class="cl">setup</span></div>
+      <div class="cut"><span class="ci">03</span><span class="cl">problem</span></div>
+      <div class="cut ins"><span class="ci">04</span><span class="cl">insert-a</span></div>
+      <div class="cut ins"><span class="ci">05</span><span class="cl">insert-b</span></div>
+      <div class="cut"><span class="ci">06</span><span class="cl">build</span></div>
+      <div class="cut"><span class="ci">07</span><span class="cl">build</span></div>
+      <div class="cut"><span class="ci">08</span><span class="cl">theme</span></div>
+      <div class="cut"><span class="ci">09</span><span class="cl">shift</span></div>
+      <div class="cut"><span class="ci">10</span><span class="cl">payoff</span></div>
+      <div class="cut"><span class="ci">11</span><span class="cl">close</span></div>
     </div>
-    <p class="lead"><span class="muted">death-a / death-b (подсвечены) = вклейка из первого дубля — единственная часть, нарушающая one-take; поэтому вся ветка помечена experimental, а чистый v02 остаётся baseline.</span></p>
+    <p class="lead"><span class="muted">insert-a / insert-b (подсвечены) = вклейка из первого дубля — единственная часть, нарушающая one-take; поэтому вся ветка помечена experimental, а чистый v02 остаётся baseline.</span></p>
 
     <h2 class="sec">overlay lanes — независимы от cut map</h2>
     <p class="lead">ключевая мысль: <b>overlay lane независим от video cut map</b>, поэтому редактор показывает «рез» и «смысловой слой» отдельно. <span class="muted">render_v2_stack.py держит несколько активных overlay одновременно — alpha fade in/out, safe-zone coordinates.</span></p>
@@ -427,7 +427,7 @@
       <article class="block"><div class="num">↓</div><h3>заимствовано у max</h3><div class="ld">монтажный план как SSOT</div><p>все решения — в EDL, не в коде. draft→final из одного плана. дисциплина source-ranges (каждый рез воспроизводим). <span class="muted">не переносим: long-form youtube chain, тяжёлый asset-pipeline, youtube api — для reels важнее branch surface и быстрый preview.</span></p></article>
       <article class="block inv"><div class="num">★</div><h3>ключевой тезис</h3><div class="ld">editor хранит не mp4, а карту</div><p>short-form редактор должен хранить <b>монтажную карту + overlay lanes + branch recipes</b>, а не только финальный mp4. тогда правка идёт на уровне блоков и веток — и агент с человеком спорят в одном editing state.</p></article>
     </div>
-    <p class="lead" style="margin-top:14px"><span class="muted">tech ·</span> ffmpeg segments → concat → overlay-pass · render_v2_stack.py (multi-overlay, alpha, safe-zone) · realself.timeline.json + edit_decision_list_v03_death_overlay.json · собрано сессией <b>codex-reel-v2</b>, передано по murmur (conversation reel-edit-v2-sync).</p>
+    <p class="lead" style="margin-top:14px"><span class="muted">tech ·</span> ffmpeg segments → concat → overlay-pass · overlay-рендерер (multi-overlay, alpha, safe-zone) · realself.timeline.json + edit_decision_list.json как SSOT · собрано в рабочей reel-edit сессии.</p>
   </section>
 
   <!-- ============ TAB 2: ADOPT ============ -->
@@ -550,7 +550,7 @@
 
   <div class="ctxbar">
     <div class="ct">{context}</div>
-    <p><b>ai mindset · shaper-инструмент.</b> не разовая картинка, а часть reels/harness-контура AI Mindset: формат <b>stack compare</b> как переиспользуемый артефакт (можно вынести в скилл) плюс живой мост к reel-edit OS — данные вкладки «живой пример» пришли по murmur от codex-сессии в реальном времени. сравнение инструментов → воспроизводимый editing state, который ведут агент и человек вместе.</p>
+    <p><b>ai mindset · shaper-инструмент.</b> не разовая картинка, а часть reels/harness-контура AI Mindset: формат <b>stack compare</b> как переиспользуемый артефакт (можно вынести в скилл) плюс живой мост к reel-edit OS — вкладка «живой пример» собрана из рабочей reel-edit сессии. сравнение инструментов → воспроизводимый editing state, который ведут агент и человек вместе.</p>
   </div>
 
   <footer class="stamp">
@@ -558,7 +558,7 @@
     <div><b>fig.1</b> · ai mindset shaper · reel-stack-compare · 2026-06-15</div>
   </footer>
   <div class="src-list">
-    ресёрч · exa mcp (8 запросов) — полный список источников в <a href="https://github.com/aPoWall/reel-stack-compare">readme репозитория</a> · вкладка «живой пример» — по murmur от codex-reel-v2.
+    ресёрч · exa mcp — полный список источников в <a href="https://github.com/aPoWall/reel-stack-compare">readme репозитория</a> · вкладка «живой пример» — из рабочей reel-edit сессии.
   </div>
 
 </div>
