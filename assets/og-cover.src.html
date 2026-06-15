@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#fff;--ink:#000;--soft:#d9d9d9;--muted:#8a8a8a;--hair:#f0f0f0;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:630px;background:var(--bg);color:var(--ink);
+    font-family:var(--mono);text-transform:lowercase;overflow:hidden}
+  body{display:grid;grid-template-rows:auto 1fr auto;padding:44px 54px}
+
+  header{display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:1px solid var(--ink);padding-bottom:16px}
+  header .b{font-size:30px;font-weight:600;letter-spacing:.22em}
+  header .b span{font-size:14px;color:var(--muted);letter-spacing:.20em;font-weight:400}
+  header .m{font-size:15px;color:var(--muted);letter-spacing:.10em;text-align:right;line-height:1.6}
+  header .m b{color:var(--ink);font-weight:600}
+
+  main{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .left .crumb{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .left h1{font-size:50px;font-weight:700;line-height:1.08;letter-spacing:-.01em;margin-bottom:18px}
+  .left h1 .inv{background:var(--ink);color:var(--bg);padding:0 10px}
+  .left .sub{font-size:18px;color:var(--ink);line-height:1.5;margin-bottom:22px}
+  .left .sub b{font-weight:600}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-size:12.5px;border:1px solid var(--ink);padding:4px 11px;letter-spacing:.04em}
+  .tag.fill{background:var(--ink);color:var(--bg)}
+
+  /* right: two-column compare glyph */
+  .glyph{display:grid;grid-template-columns:1fr 1fr;gap:14px;height:340px}
+  .col{border:1px solid var(--ink);display:flex;flex-direction:column}
+  .col .ch{padding:10px 12px;border-bottom:1px solid var(--ink);font-size:12px;font-weight:600;letter-spacing:.06em;background:var(--hair)}
+  .col .ch small{display:block;font-size:9px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-weight:400;margin-top:2px}
+  .col.ours{background:var(--ink);color:var(--bg)}
+  .col.ours .ch{background:var(--ink);border-color:var(--bg);color:var(--bg)}
+  .col.ours .ch small{color:rgba(255,255,255,.6)}
+  .st{display:flex;align-items:center;gap:9px;padding:9px 12px;border-bottom:1px dashed var(--soft);font-size:11.5px}
+  .col.ours .st{border-color:rgba(255,255,255,.22)}
+  .st:last-child{border-bottom:0}
+  .dot{width:16px;height:16px;border-radius:50%;background:var(--ink);color:var(--bg);
+    display:grid;place-items:center;font-size:9px;font-weight:600;flex:0 0 auto}
+  .col.ours .dot{background:var(--bg);color:var(--ink)}
+
+  footer{display:flex;justify-content:space-between;align-items:baseline;
+    border-top:1px solid var(--ink);padding-top:15px;font-size:14px;color:var(--muted);letter-spacing:.06em}
+  footer b{color:var(--ink);font-weight:600}
+</style>
+</head>
+<body>
+  <header>
+    <div class="b">shaper <span>· ai mindset</span></div>
+    <div class="m"><b>fig.1</b> · сравнение блоков<br>v1 · 2026-06-15</div>
+  </header>
+
+  <main>
+    <div class="left">
+      <div class="crumb">монтаж reels · стек × стек</div>
+      <h1>сравнение<br>монтажных <span class="inv">стеков</span></h1>
+      <div class="sub">наш reel-блок-редактор <b>(короткий формат)</b><br>× cut-chain <b>max postnikov</b> (длинный формат)</div>
+      <div class="tags">
+        <span class="tag">word-cut</span>
+        <span class="tag">OpenTimelineIO</span>
+        <span class="tag">draft→final</span>
+        <span class="tag fill">ElevenLabs Scribe</span>
+        <span class="tag">Remotion</span>
+        <span class="tag">Hyperframes</span>
+      </div>
+    </div>
+
+    <div class="glyph">
+      <div class="col">
+        <div class="ch">max postnikov<small>youtube · long-form</small></div>
+        <div class="st"><span class="dot">1</span>scribe transcript</div>
+        <div class="st"><span class="dot">2</span>монтажный план</div>
+        <div class="st"><span class="dot">3</span>chips / images</div>
+        <div class="st"><span class="dot">4</span>draft → 1080p</div>
+        <div class="st"><span class="dot">5</span>youtube</div>
+      </div>
+      <div class="col ours">
+        <div class="ch">наш стек<small>reels · short-form</small></div>
+        <div class="st"><span class="dot">1</span>whisper + labels</div>
+        <div class="st"><span class="dot">2</span>блок-редактор</div>
+        <div class="st"><span class="dot">3</span>режим → стиль</div>
+        <div class="st"><span class="dot">4</span>audio-first lip-sync</div>
+        <div class="st"><span class="dot">5</span>trial reels a/b</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div>apowall.github.io/<b>reel-stack-compare</b></div>
+    <div>5 вкладок · exa-researched</div>
+  </footer>
+</body>
+</html>

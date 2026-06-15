@@ -3,7 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>shaper · fig.1 · reel stack compare — block editor × youtube cut-chain</title>
+<title>AI Mindset · Shaper — сравнение блоков: reel-редактор × стек Max Postnikov</title>
+<meta name="description" content="AI Mindset Shaper: сравнение монтажных стеков. Наш reel-блок-редактор (короткий формат) против YouTube cut-chain Max Postnikov (длинный формат) — послойно, плюс EXA-ресёрч (Remotion, OpenTimelineIO, Hyperframes, X-Cut, ElevenLabs Scribe).">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Mindset · Shaper">
+<meta property="og:title" content="AI Mindset Shaper — сравнение монтажных стеков">
+<meta property="og:description" content="reel-блок-редактор (короткий формат) × YouTube cut-chain Max Postnikov (длинный формат). 5 вкладок, послойное сравнение, EXA-ресёрч.">
+<meta property="og:image" content="https://apowall.github.io/reel-stack-compare/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://apowall.github.io/reel-stack-compare/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Mindset Shaper — сравнение монтажных стеков">
+<meta name="twitter:description" content="reel-блок-редактор × YouTube cut-chain Max Postnikov. 5 вкладок, EXA-ресёрч.">
+<meta name="twitter:image" content="https://apowall.github.io/reel-stack-compare/assets/og-cover.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -35,6 +49,7 @@
     border-bottom:var(--frame) solid var(--ink);padding-bottom:16px;
   }
   header.app .brand{font-weight:600;letter-spacing:.20em;font-size:21px}
+  header.app .brand .bsub{font-size:10px;color:var(--muted);letter-spacing:.18em;font-weight:400}
   header.app .crumb{color:var(--muted);font-size:12.5px}
   header.app .crumb b{color:var(--ink);font-weight:500}
   header.app .meta{justify-self:end;color:var(--muted);font-size:11.5px;text-align:right;line-height:1.7}
@@ -190,18 +205,18 @@
 <div class="wrap">
 
   <header class="app">
-    <div class="brand">shaper</div>
-    <div class="crumb">fig.1 · <b>reel stack compare</b> · блок-редактор рилзов × youtube cut-chain</div>
+    <div class="brand">shaper <span class="bsub">· ai mindset</span></div>
+    <div class="crumb">fig.1 · <b>сравнение блоков</b> · наш reel-редактор × стек <b>max postnikov</b></div>
     <div class="meta">
       <b>v1</b> · 2026-06-15<br>
-      src · video-editing-principles.md<br>
+      src · max postnikov · video-editing pipeline<br>
       <button class="tbtn" onclick="document.documentElement.classList.toggle('dark')">◐ тема</button>
     </div>
   </header>
 
   <div class="thesis">
     <div class="tag">тезис</div>
-    <p>обе системы строят рез по <b>word-таймкодам транскрипта</b> — это общий примитив. дальше они расходятся: их пайплайн оптимизирован под <b>длинный youtube</b> (детерминированная цепочка скриптов, монтажный план = единый источник истины, draft→final), наш — под <b>короткий reels</b> (визуальный блок-редактор, библиотека режимов и стилей, audio-first lip-sync). каждая система сильнее ровно там, где другая слаба. ниже — что заимствуем, где наш ров, и куда растёт стек.</p>
+    <p><b>max postnikov</b> поделился своим стеком монтажа под длинный формат — это ответ-сравнение. обе системы строят рез по <b>word-таймкодам транскрипта</b> (общий примитив), но дальше расходятся: его пайплайн оптимизирован под <b>длинный youtube</b> (детерминированная цепочка скриптов, монтажный план = единый источник истины, draft→final), наш — под <b>короткий reels</b> (визуальный блок-редактор, библиотека режимов и стилей, audio-first lip-sync). каждая система сильнее ровно там, где другая слаба. ниже — что заимствуем, где наш ров, и куда растёт стек.</p>
   </div>
 
   <nav class="tabs" role="tablist">
@@ -220,7 +235,7 @@
 
     <div class="pipes">
       <div class="pipe">
-        <header><span class="who">их стек</span><span class="sub">youtube · long-form · cli chain</span></header>
+        <header><span class="who">стек max postnikov</span><span class="sub">youtube · long-form · cli chain</span></header>
         <div class="stage"><div class="n">1</div><div><div class="t">вход — сырое видео</div><div class="d">никакой предобработки, нативный fps камеры (50fps)</div></div></div>
         <div class="stage"><div class="n">2</div><div><div class="t">транскрипт</div><div class="d">word-level таймкоды, чанкинг длинных файлов</div><div class="tools"><span class="chip">ElevenLabs Scribe</span></div></div></div>
         <div class="stage"><div class="n">3</div><div><div class="t">удаление пауз → монтажный план</div><div class="d">двойной детектор: транскрипт (запинки) + silencedetect (тишина). рез по первому слову, не по громкости</div><div class="tools"><span class="chip">silencedetect</span><span class="chip">монтажный план = SoT</span></div></div></div>
@@ -247,18 +262,18 @@
     <h2 class="sec">послойное сравнение стека</h2>
     <p class="lead">по каждому слою: <span class="muted">кто сильнее</span> и <span class="muted">какой ход делаем.</span></p>
     <table class="cmp">
-      <thead><tr><th style="width:11%">слой</th><th style="width:24%">их стек</th><th style="width:24%">наш стек</th><th style="width:9%">сильнее</th><th style="width:32%">ход</th></tr></thead>
+      <thead><tr><th style="width:11%">слой</th><th style="width:24%">max postnikov</th><th style="width:24%">наш стек (reels)</th><th style="width:9%">сильнее</th><th style="width:32%">ход</th></tr></thead>
       <tbody>
-        <tr><td class="l">транскрипт</td><td>ElevenLabs Scribe — word-level, чанкинг</td><td>Whisper medium/small локально</td><td><span class="verdict them">они</span></td><td class="move">Scribe v2 для word-times (RU WER ~3–12% vs Whisper ~17–20%), Whisper как офлайн-fallback</td></tr>
-        <tr><td class="l">монтажный план</td><td>строгий SoT: и draft, и final из одного списка</td><td>cut_maps в manifest, но без draft-яруса и без жёсткой дисциплины</td><td><span class="verdict them">они</span></td><td class="move">формализовать realself.timeline → <b>OpenTimelineIO (.otio)</b>: frame-accurate, RationalTime, адаптеры в FCP/Resolve</td></tr>
+        <tr><td class="l">транскрипт</td><td>ElevenLabs Scribe — word-level, чанкинг</td><td>Whisper medium/small локально</td><td><span class="verdict them">max</span></td><td class="move">Scribe v2 для word-times (RU WER ~3–12% vs Whisper ~17–20%), Whisper как офлайн-fallback</td></tr>
+        <tr><td class="l">монтажный план</td><td>строгий SoT: и draft, и final из одного списка</td><td>cut_maps в manifest, но без draft-яруса и без жёсткой дисциплины</td><td><span class="verdict them">max</span></td><td class="move">формализовать realself.timeline → <b>OpenTimelineIO (.otio)</b>: frame-accurate, RationalTime, адаптеры в FCP/Resolve</td></tr>
         <tr><td class="l">паузы / филлеры</td><td>двойной детектор: транскрипт + signal</td><td>silencedetect trim + transcript labels</td><td><span class="verdict par">паритет</span></td><td class="move">слить оба детектора строго, как у них (текст ловит запинки, signal — тишину)</td></tr>
-        <tr><td class="l">оверлеи</td><td>Pillow → ProRes 4444 alpha композит</td><td>PIL-на-кадре через moviepy</td><td><span class="verdict them">они</span></td><td class="move">добавить ProRes-4444-alpha дорожку для чистой прозрачности (WebM/VP9-alpha на macOS нестабильна)</td></tr>
+        <tr><td class="l">оверлеи</td><td>Pillow → ProRes 4444 alpha композит</td><td>PIL-на-кадре через moviepy</td><td><span class="verdict them">max</span></td><td class="move">добавить ProRes-4444-alpha дорожку для чистой прозрачности (WebM/VP9-alpha на macOS нестабильна)</td></tr>
         <tr><td class="l">AI-картинки</td><td>Nano Banana Pro / GPT-Image-2</td><td>imagine (OpenRouter, те же модели)</td><td><span class="verdict par">паритет</span></td><td class="move">уже совпадает — переиспользовать skill <span class="kbd">imagine</span></td></tr>
-        <tr><td class="l">динамика / зум</td><td>OpenCV cv2 покадрово (без дрейфа)</td><td>moviepy punch-zoom</td><td><span class="verdict them">они</span></td><td class="move">взять cv2-kernel: контроль точки зума, нет рассинхрона звук↔картинка на длинных</td></tr>
+        <tr><td class="l">динамика / зум</td><td>OpenCV cv2 покадрово (без дрейфа)</td><td>moviepy punch-zoom</td><td><span class="verdict them">max</span></td><td class="move">взять cv2-kernel: контроль точки зума, нет рассинхрона звук↔картинка на длинных</td></tr>
         <tr><td class="l">звук</td><td>loudnorm + sfx mix</td><td>audio-first lip-sync, stream-copy</td><td><span class="verdict us">мы</span></td><td class="move">оставить наш lip-sync; добавить опц. loudnorm-проход в legacy-цепочке</td></tr>
-        <tr><td class="l">draft рендер</td><td>180p ultrafast, версии v01..</td><td>нет — только полные варианты</td><td><span class="verdict them">они</span></td><td class="move">внедрить <b>двухъярус draft→final</b>: дешёвый предпросмотр нарезки до hero-рендера</td></tr>
+        <tr><td class="l">draft рендер</td><td>180p ultrafast, версии v01..</td><td>нет — только полные варианты</td><td><span class="verdict them">max</span></td><td class="move">внедрить <b>двухъярус draft→final</b>: дешёвый предпросмотр нарезки до hero-рендера</td></tr>
         <tr><td class="l">финал-энкод</td><td>videotoolbox HW 1080p (минуты)</td><td>libx264 CRF 17 slow (качество)</td><td><span class="verdict par">сплит</span></td><td class="move">ролевой сплит: <b>HW → draft</b> (быстро, артефакты ок), <b>software → hero</b> (качество)</td></tr>
-        <tr><td class="l">fps</td><td>нативный 50fps, RIFE для старого &lt;50</td><td>30fps фикс</td><td><span class="verdict them">они</span></td><td class="move">RIFE как опц. для sub-native источника и slow-mo (~130fps lite на M1)</td></tr>
+        <tr><td class="l">fps</td><td>нативный 50fps, RIFE для старого &lt;50</td><td>30fps фикс</td><td><span class="verdict them">max</span></td><td class="move">RIFE как опц. для sub-native источника и slow-mo (~130fps lite на M1)</td></tr>
         <tr><td class="l">публикация</td><td>youtube api, детерминированные метаданные</td><td>instagram trial reels, генерация подписи</td><td><span class="verdict par">разные</span></td><td class="move">разные площадки — оставить обе; перенять детерминированную генерацию метаданных из данных эпизода</td></tr>
         <tr><td class="l">сборка / UI</td><td>нет — cli цепочка</td><td>визуальный блок-редактор + cross-swap</td><td><span class="verdict us">мы</span></td><td class="move">наш ров — усилить live-preview (WebCodecs)</td></tr>
         <tr><td class="l">режимы / стиль</td><td>один формат (чипсы)</td><td>6 стилей × 6 режимов, survivor pinning</td><td><span class="verdict us">мы</span></td><td class="move">наш ров — режим выбирается до стиля</td></tr>
@@ -270,10 +285,10 @@
   <!-- ============ TAB 1.5: SHORT-FORM ============ -->
   <section class="panel" id="shortform">
     <h2 class="sec">их пайплайн, портированный в короткий формат</h2>
-    <p class="lead">их стек рождён для <b>длинного youtube</b>. чтобы сделать из него reels — каждый слой надо переломить под короткую механику. колонка справа — <span class="muted">чем наш short-form-стек уже отвечает на этот перелом.</span></p>
+    <p class="lead">стек max рождён для <b>длинного youtube</b>. чтобы сделать из него reels — каждый слой надо переломить под короткую механику. колонка справа — <span class="muted">чем наш short-form-стек уже отвечает на этот перелом.</span></p>
 
     <table class="cmp">
-      <thead><tr><th style="width:11%">аспект</th><th style="width:25%">их long-form дефолт</th><th style="width:30%">что требует короткий ролик</th><th style="width:34%">наш short-form ответ</th></tr></thead>
+      <thead><tr><th style="width:11%">аспект</th><th style="width:25%">max · long-form дефолт</th><th style="width:30%">что требует короткий ролик</th><th style="width:34%">наш short-form ответ</th></tr></thead>
       <tbody>
         <tr><td class="l">длительность</td><td class="muted">минуты, нарратив дышит</td><td>7–60s, агрессивный рез до сути, петля-loop</td><td class="move">режим <b>social_short</b>: tighter cut + minimal captions; дубль-кандидат = один аудио-спайн</td></tr>
         <tr><td class="l">кадр</td><td class="muted">16:9 landscape</td><td>9:16 вертикаль 1080×1920, safe-zones под UI инсты</td><td class="move">нативная вертикаль; hook y≈270, субтитры y≈H−480, правая зона свободна под иконки</td></tr>
@@ -317,7 +332,7 @@
 
   <!-- ============ TAB 2: ADOPT ============ -->
   <section class="panel" id="adopt">
-    <h2 class="sec">шесть заимствований — что втягиваем из их стека</h2>
+    <h2 class="sec">шесть заимствований — что втягиваем из стека max</h2>
     <p class="lead">ранжировано по соотношению эффект/усилие. <span class="muted">верх ряда = самый высокий рычаг.</span></p>
     <div class="cards three">
       <article class="block inv"><div class="num">1</div><h3>наибольший рычаг</h3><div class="ld">cut-plan → OpenTimelineIO</div><p>их «монтажный план = единственный источник правды» — это ровно отраслевой стандарт <b>OTIO</b>: JSON-граф клипов, RationalTime, transitions/markers, адаптеры в FCP/Resolve/Premiere.</p><p class="why">наш realself.timeline.v1 уже близок (tracks/items, sourceStart/End). переход на .otio даёт frame-accuracy + round-trip с любым NLE + готовые рендереры.</p><div class="src">apply → realself.timeline.v1 → .otio схема</div></article>
@@ -333,7 +348,7 @@
       <article class="block"><div class="num">6</div><h3>низкий рычаг · аккуратность</h3><div class="ld">детерминированные метаданные</div><p>заголовок/описание/таймкоды генерятся из данных эпизода <b>без LLM-вызова</b> — дешевле и точнее соответствует видео.</p><p class="why">для youtube-переката нашего контента это уберёт галлюцинации в метаданных; для reels-подписей оставляем человеческий голос.</p><div class="src">apply → publish meta (youtube only)</div></article>
     </div>
 
-    <h2 class="sec">наш ров — что НЕ трогаем (и чего нет у них)</h2>
+    <h2 class="sec">наш ров — что НЕ трогаем (и чего нет у max)</h2>
     <p class="lead">это структурное преимущество reels-системы. их линейный chain этого не покрывает.</p>
     <div class="cards three">
       <article class="block"><div class="num">a</div><h3>moat</h3><div class="ld">визуальный блок-редактор</div><p>single-file html: source-блоки по категориям, cross-project swap, live source preview, overlay-дорожки. их пайплайн — только cli.</p><div class="src">keep · reel-block-edit</div></article>
