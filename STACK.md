@@ -38,7 +38,11 @@ Each layer has a **tool** and a **contract** (what it must guarantee to the next
 | 6 | **final** | ffmpeg (libx264 CRF) | 1080×1920, one continuous voice master (AAC stereo 48kHz), loudnorm; audio-first lip-sync (stream-copy, no per-segment filters) |
 | 7 | **publish** | Instagram Trial Reels (A/B) | publish two versions when goals differ; watch-time, not views; deterministic metadata |
 
-**Audio-first rule (critical):** one reel = one continuous audio source. Visual variety comes from swapping *video* in speech pauses (visual swap), never from cutting speech across takes. A/B audio alternation is the #1 cause of bad reels.
+**Audio-first rule (critical) — default + exception:**
+- *default* — one reel = one continuous voice master; visual variety comes from swapping *video* in speech pauses (visual swap), not from cutting speech.
+- *exception* — a cross-take speech splice is allowed **only as an explicit experimental branch** (`single_source_multi_take_remix_experimental`), with a clean baseline preserved and the seam checked by listening.
+
+A/B audio alternation *by default* is the #1 cause of bad reels — but a consciously-marked experimental remix (same source/mic/place) is a valid branch, not a violation.
 
 ---
 
@@ -138,7 +142,7 @@ KPI-aware (from short-form research): **seamless cuts → likes (fluency)**, **o
 |-------|------|---------|
 | **`reel-edit`** | video/EDL state: transcription, smart cut, modes/styles, presets, audio-first render, draft→final | 3.9 |
 | **`reel-block-edit`** | branch surface as a UI pattern: EDL strip, overlay lanes as first-class tracks, `realself.timeline.json` manifest (`source_blocks`, `cut_maps`, `overlay_tracks`, `branches`, `interlocks`, `renderer_adapters`), dashboard export | 1.6 |
-| **`stack-compare`** | the Shaper comparison artifact: build a B&W dashboard comparing two stacks, with a live EDL layer and research matrix; owns the public/private boundary (dashboard agent shapes/sanitizes/deploys, source agent owns the real EDL/project) | 1.4 |
+| **`stack-compare`** | the Shaper comparison artifact: build a B&W dashboard comparing two stacks, with a live EDL layer and research matrix; owns the public/private boundary (dashboard agent shapes/sanitizes/deploys, source agent owns the real EDL/project) | 1.5 |
 
 Division of labor: `reel-edit` owns the video state; `stack-compare` owns the Shaper artifact. The agent and human argue at the level of **blocks, branches, and overlay lanes** — a shared, reproducible editing state.
 
