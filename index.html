@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>shaper · fig.1 · reel stack compare — block editor × youtube cut-chain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --ink:#000000;
+    --soft:#d9d9d9; --hair:#ececec; --muted:#8a8a8a; --hi:#f4f4f4;
+    --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --frame:1px; --gutter:22px;
+    color-scheme:light;
+  }
+  :root.dark{
+    --bg:#16171b; --ink:#e8e6e2; --soft:#34343a; --hair:#222227; --muted:#938e86; --hi:#202127;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:var(--mono); font-size:13px; line-height:1.55;
+    letter-spacing:.02em; -webkit-font-smoothing:antialiased;
+    text-transform:lowercase;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:26px 26px 60px}
+
+  /* header */
+  header.app{
+    display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:baseline;
+    border-bottom:var(--frame) solid var(--ink);padding-bottom:16px;
+  }
+  header.app .brand{font-weight:600;letter-spacing:.20em;font-size:21px}
+  header.app .crumb{color:var(--muted);font-size:12.5px}
+  header.app .crumb b{color:var(--ink);font-weight:500}
+  header.app .meta{justify-self:end;color:var(--muted);font-size:11.5px;text-align:right;line-height:1.7}
+  header.app .meta b{color:var(--ink);font-weight:500;letter-spacing:.06em}
+  .tbtn{font:inherit;font-size:11px;background:var(--bg);color:var(--ink);border:1px solid var(--ink);
+    padding:4px 9px;cursor:pointer;letter-spacing:.08em}
+  .tbtn:hover{background:var(--ink);color:var(--bg)}
+
+  /* thesis */
+  .thesis{margin:18px 0 6px;border:1px solid var(--ink);padding:14px 18px;display:grid;
+    grid-template-columns:auto 1fr;gap:16px;align-items:center}
+  .thesis .tag{font-size:10px;letter-spacing:.20em;text-transform:uppercase;color:var(--muted);
+    writing-mode:vertical-rl;transform:rotate(180deg);align-self:stretch;border-right:1px solid var(--soft);padding-right:10px}
+  .thesis p{margin:0;font-size:13.5px;line-height:1.6}
+  .thesis b{font-weight:600}
+
+  /* tabs */
+  nav.tabs{display:flex;gap:0;margin:20px 0 22px;border:1px solid var(--ink);width:fit-content}
+  nav.tabs button{font:inherit;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+    background:var(--bg);color:var(--ink);border:0;border-right:1px solid var(--ink);
+    padding:9px 20px;cursor:pointer}
+  nav.tabs button:last-child{border-right:0}
+  nav.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+  .panel{display:none}
+  .panel.on{display:block;animation:fade .18s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  /* section caps */
+  h2.sec{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+    font-weight:500;margin:30px 0 14px;border-bottom:1px solid var(--soft);padding-bottom:7px}
+  h2.sec:first-child{margin-top:4px}
+  .lead{font-size:13px;color:var(--ink);margin:0 0 16px;max-width:880px}
+  .lead .muted{color:var(--muted)}
+
+  /* two-pipeline columns */
+  .pipes{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:840px){.pipes{grid-template-columns:1fr}}
+  .pipe{border:1px solid var(--ink);padding:0}
+  .pipe header{display:flex;justify-content:space-between;align-items:baseline;
+    padding:11px 14px;border-bottom:1px solid var(--ink);background:var(--hi)}
+  .pipe header .who{font-size:12px;font-weight:600;letter-spacing:.06em}
+  .pipe header .sub{font-size:10px;color:var(--muted);letter-spacing:.10em;text-transform:uppercase}
+  .pipe.ours header{background:var(--ink);color:var(--bg)}
+  .pipe.ours header .sub{color:var(--bg);opacity:.7}
+  .stage{display:grid;grid-template-columns:26px 1fr;gap:11px;padding:10px 14px;border-bottom:1px dashed var(--soft)}
+  .stage:last-child{border-bottom:0}
+  .stage .n{width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--bg);
+    display:grid;place-items:center;font-size:11px;font-weight:600}
+  .pipe.ours .stage .n{background:var(--bg);color:var(--ink);border:1px solid var(--bg)}
+  .stage .t{font-weight:500;font-size:12.5px}
+  .stage .d{color:var(--muted);font-size:11.5px;line-height:1.5}
+  .stage .tools{margin-top:5px;display:flex;flex-wrap:wrap;gap:5px}
+  .chip{font-size:10px;border:1px solid var(--soft);padding:2px 7px;letter-spacing:.04em;white-space:nowrap}
+  .pipe.ours .chip{border-color:rgba(255,255,255,.3)}
+
+  /* layer comparison table */
+  table.cmp{width:100%;border-collapse:collapse;font-size:11.8px;margin-top:4px}
+  table.cmp th{text-align:left;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+    font-weight:500;padding:8px 9px;border-bottom:1px solid var(--ink);vertical-align:bottom}
+  table.cmp td{padding:9px 9px;border-bottom:1px solid var(--soft);vertical-align:top;line-height:1.45}
+  table.cmp td.l{font-weight:600;white-space:nowrap}
+  table.cmp td.muted{color:var(--muted)}
+  .verdict{font-size:9.5px;letter-spacing:.10em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--ink);white-space:nowrap;display:inline-block}
+  .verdict.them{background:var(--ink);color:var(--bg)}
+  .verdict.us{background:var(--bg);color:var(--ink)}
+  .verdict.par{border-style:dashed;color:var(--muted);border-color:var(--muted)}
+  td.move{color:var(--ink)}
+  td.move::before{content:"→ ";color:var(--muted)}
+
+  /* numbered cards grid */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 18px;margin-top:6px}
+  @media(max-width:840px){.cards{grid-template-columns:1fr}}
+  .cards.three{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:920px){.cards.three{grid-template-columns:1fr}}
+  article.block{border:1px solid var(--ink);padding:16px 17px 15px;position:relative}
+  article.block.inv{background:var(--ink);color:var(--bg)}
+  article.block .num{position:absolute;top:-11px;left:14px;width:23px;height:23px;background:var(--ink);
+    color:var(--bg);border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:600}
+  article.block.inv .num{background:var(--bg);color:var(--ink)}
+  article.block h3{margin:3px 0 3px;font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);font-weight:500}
+  article.block.inv h3{color:rgba(255,255,255,.6)}
+  article.block .ld{font-size:14px;font-weight:600;margin:0 0 7px}
+  article.block p{margin:0 0 7px;font-size:11.8px;color:var(--ink);line-height:1.5}
+  article.block.inv p{color:rgba(255,255,255,.85)}
+  article.block p.why{color:var(--muted)}
+  article.block.inv p.why{color:rgba(255,255,255,.6)}
+  article.block .src{font-size:10px;color:var(--muted);letter-spacing:.04em;border-top:1px dashed var(--soft);padding-top:7px;margin-top:9px}
+  article.block.inv .src{color:rgba(255,255,255,.55);border-color:rgba(255,255,255,.2)}
+
+  /* evolve architecture */
+  .arch{border:1px solid var(--ink);padding:0;margin-top:6px}
+  .arch .layer{display:grid;grid-template-columns:140px 1fr;gap:0;border-bottom:1px solid var(--soft)}
+  .arch .layer:last-child{border-bottom:0}
+  .arch .layer .lh{padding:13px 15px;border-right:1px solid var(--ink);background:var(--hi);
+    font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;gap:3px;justify-content:center}
+  .arch .layer .lh b{color:var(--ink);font-size:11.5px;letter-spacing:.10em;font-weight:600}
+  .arch .layer .lb{padding:12px 15px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .node{border:1px solid var(--ink);padding:6px 11px;font-size:11px;display:flex;flex-direction:column;gap:1px;min-width:0}
+  .node b{font-weight:600;font-size:11.5px}
+  .node span{color:var(--muted);font-size:9.5px;letter-spacing:.04em;text-transform:uppercase}
+  .node.new{background:var(--ink);color:var(--bg)}
+  .node.new span{color:rgba(255,255,255,.6)}
+  .node.keep{border-style:solid}
+  .arr{color:var(--muted);font-size:14px;align-self:center}
+  .badge{font-size:8.5px;letter-spacing:.10em;text-transform:uppercase;border:1px solid currentColor;padding:1px 5px;align-self:flex-start;margin-top:2px}
+
+  /* roadmap */
+  ol.road{counter-reset:r;list-style:none;padding:0;margin:6px 0 0}
+  ol.road li{border:1px solid var(--soft);border-left:2px solid var(--ink);padding:11px 14px 11px 44px;position:relative;margin-bottom:9px}
+  ol.road li::before{counter-increment:r;content:counter(r);position:absolute;left:12px;top:11px;
+    width:20px;height:20px;background:var(--ink);color:var(--bg);border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:600}
+  ol.road li b{font-weight:600;font-size:12.5px}
+  ol.road li .eff{float:right;font-size:9.5px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);border:1px dashed var(--soft);padding:1px 7px}
+  ol.road li p{margin:4px 0 0;font-size:11.5px;color:var(--muted)}
+
+  /* tech matrix */
+  .tech{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+  @media(max-width:840px){.tech{grid-template-columns:1fr}}
+  .tcard{border:1px solid var(--ink);padding:13px 15px;display:flex;flex-direction:column;gap:6px}
+  .tcard .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .tcard .nm{font-size:13px;font-weight:600;letter-spacing:.02em}
+  .tcard .fit{font-size:13px;letter-spacing:.05em;white-space:nowrap}
+  .tcard .kind{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .tcard p{margin:0;font-size:11.5px;line-height:1.5}
+  .tcard .verd{font-size:11px;color:var(--ink);border-top:1px dashed var(--soft);padding-top:7px;margin-top:1px}
+  .tcard .verd b{font-weight:600}
+  .tcard a{color:var(--muted);font-size:10px;text-decoration:underline dotted;word-break:break-all}
+  .tcard.hero{background:var(--ink);color:var(--bg)}
+  .tcard.hero .kind,.tcard.hero a{color:rgba(255,255,255,.6)}
+  .tcard.hero .verd{border-color:rgba(255,255,255,.25)}
+
+  /* kpi strip */
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--ink);margin:4px 0 8px}
+  @media(max-width:840px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpis .k{padding:11px 13px;border-right:1px solid var(--soft);display:flex;flex-direction:column;gap:3px}
+  .kpis .k:last-child{border-right:0}
+  .kpis .k .m{font-size:16px;font-weight:700;letter-spacing:.02em}
+  .kpis .k .lb{font-size:9.5px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);line-height:1.35}
+
+  /* footer */
+  footer.stamp{margin-top:40px;border-top:1px solid var(--ink);padding-top:14px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:11px}
+  footer.stamp .seeds{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+  footer.stamp .seed{border:1px solid var(--soft);padding:2px 8px}
+  footer.stamp .seed.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  footer.stamp b{color:var(--ink);font-weight:600}
+  .src-list{font-size:10px;color:var(--muted);margin-top:8px;line-height:1.7}
+  .src-list a{color:var(--muted);text-decoration:underline dotted}
+  .kbd{border:1px solid var(--soft);padding:0 5px;font-size:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="app">
+    <div class="brand">shaper</div>
+    <div class="crumb">fig.1 · <b>reel stack compare</b> · блок-редактор рилзов × youtube cut-chain</div>
+    <div class="meta">
+      <b>v1</b> · 2026-06-15<br>
+      src · video-editing-principles.md<br>
+      <button class="tbtn" onclick="document.documentElement.classList.toggle('dark')">◐ тема</button>
+    </div>
+  </header>
+
+  <div class="thesis">
+    <div class="tag">тезис</div>
+    <p>обе системы строят рез по <b>word-таймкодам транскрипта</b> — это общий примитив. дальше они расходятся: их пайплайн оптимизирован под <b>длинный youtube</b> (детерминированная цепочка скриптов, монтажный план = единый источник истины, draft→final), наш — под <b>короткий reels</b> (визуальный блок-редактор, библиотека режимов и стилей, audio-first lip-sync). каждая система сильнее ровно там, где другая слаба. ниже — что заимствуем, где наш ров, и куда растёт стек.</p>
+  </div>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" onclick="tab('compare',this)">сравнение</button>
+    <button role="tab" aria-selected="false" onclick="tab('shortform',this)">короткий формат</button>
+    <button role="tab" aria-selected="false" onclick="tab('adopt',this)">заимствуем</button>
+    <button role="tab" aria-selected="false" onclick="tab('evolve',this)">развитие</button>
+    <button role="tab" aria-selected="false" onclick="tab('tech',this)">технологии</button>
+  </nav>
+
+  <!-- ============ TAB 1: COMPARE ============ -->
+  <section class="panel on" id="compare">
+
+    <h2 class="sec">два пайплайна, один примитив</h2>
+    <p class="lead">слева — их линейная цепочка под длинный ролик. справа — наш блок-граф под reels. <span class="muted">инверсия (чёрный блок) = наша система.</span></p>
+
+    <div class="pipes">
+      <div class="pipe">
+        <header><span class="who">их стек</span><span class="sub">youtube · long-form · cli chain</span></header>
+        <div class="stage"><div class="n">1</div><div><div class="t">вход — сырое видео</div><div class="d">никакой предобработки, нативный fps камеры (50fps)</div></div></div>
+        <div class="stage"><div class="n">2</div><div><div class="t">транскрипт</div><div class="d">word-level таймкоды, чанкинг длинных файлов</div><div class="tools"><span class="chip">ElevenLabs Scribe</span></div></div></div>
+        <div class="stage"><div class="n">3</div><div><div class="t">удаление пауз → монтажный план</div><div class="d">двойной детектор: транскрипт (запинки) + silencedetect (тишина). рез по первому слову, не по громкости</div><div class="tools"><span class="chip">silencedetect</span><span class="chip">монтажный план = SoT</span></div></div></div>
+        <div class="stage"><div class="n">4</div><div><div class="t">чипсы / картинки / зум</div><div class="d">брендовые карточки (alpha), AI-иллюстрации, покадровый push-in</div><div class="tools"><span class="chip">Pillow→ProRes 4444</span><span class="chip">Nano Banana</span><span class="chip">cv2</span></div></div></div>
+        <div class="stage"><div class="n">5</div><div><div class="t">звук</div><div class="d">loudnorm под платформу + микс sfx; точечная аудио-замена</div><div class="tools"><span class="chip">loudnorm</span></div></div></div>
+        <div class="stage"><div class="n">6</div><div><div class="t">draft 180p → петля</div><div class="d">дешёвый черновик, версии v01.., правки → назад в монтажный план</div><div class="tools"><span class="chip">ffmpeg ultrafast</span></div></div></div>
+        <div class="stage"><div class="n">7</div><div><div class="t">финал 1080p</div><div class="d">из того же плана, аппаратный энкод, нативный fps, RIFE для старого</div><div class="tools"><span class="chip">videotoolbox</span><span class="chip">RIFE</span></div></div></div>
+        <div class="stage"><div class="n">8</div><div><div class="t">публикация</div><div class="d">youtube api, метаданные детерминированно из данных эпизода (без LLM)</div><div class="tools"><span class="chip">YouTube Data API</span></div></div></div>
+      </div>
+
+      <div class="pipe ours">
+        <header><span class="who">наш стек</span><span class="sub">reels · short-form · block editor</span></header>
+        <div class="stage"><div class="n">1</div><div><div class="t">deep source analysis</div><div class="d">ffprobe, ориентация, аудио-баланс каналов, разбор кадров, source map</div><div class="tools"><span class="chip">ffprobe</span><span class="chip">frame scan</span></div></div></div>
+        <div class="stage"><div class="n">2</div><div><div class="t">транскрипт + лейблинг</div><div class="d">word_timestamps, фрагменты тегируются по риторике (hook/contrast/core…)</div><div class="tools"><span class="chip">Whisper</span><span class="chip">category labels</span></div></div></div>
+        <div class="stage"><div class="n">3</div><div><div class="t">silence trim (мандат)</div><div class="d">режем хвосты записи; re-encode аудио = 0ms дрейф lip-sync</div><div class="tools"><span class="chip">silencedetect</span></div></div></div>
+        <div class="stage"><div class="n">4</div><div><div class="t">визуальный блок-редактор</div><div class="d">single-file html: source-блоки, cross-project swap, live source preview, overlay-дорожки, branches no_cut/timeline_cut</div><div class="tools"><span class="chip">timeline-editor.html</span><span class="chip">realself.timeline.v1</span></div></div></div>
+        <div class="stage"><div class="n">5</div><div><div class="t">оверлеи + стиль</div><div class="d">6 стилей × 6 режимов; PIL-композит, viewer-facing captions</div><div class="tools"><span class="chip">moviepy + PIL</span><span class="chip">modes/styles</span></div></div></div>
+        <div class="stage"><div class="n">6</div><div><div class="t">audio-first render</div><div class="d">один аудио-спайн на рилз, lipsync_render.py = stream-copy, без фильтров</div><div class="tools"><span class="chip">lipsync_render</span><span class="chip">-c:a copy</span></div></div></div>
+        <div class="stage"><div class="n">7</div><div><div class="t">финал 1080×1920</div><div class="d">libx264 CRF 17 preset slow, последовательный рендер; survivor pinning</div><div class="tools"><span class="chip">libx264</span></div></div></div>
+        <div class="stage"><div class="n">8</div><div><div class="t">публикация + A/B</div><div class="d">instagram trial reels, 2 версии подписи, watch-time стратегия</div><div class="tools"><span class="chip">Trial Reels</span></div></div></div>
+      </div>
+    </div>
+
+    <h2 class="sec">послойное сравнение стека</h2>
+    <p class="lead">по каждому слою: <span class="muted">кто сильнее</span> и <span class="muted">какой ход делаем.</span></p>
+    <table class="cmp">
+      <thead><tr><th style="width:11%">слой</th><th style="width:24%">их стек</th><th style="width:24%">наш стек</th><th style="width:9%">сильнее</th><th style="width:32%">ход</th></tr></thead>
+      <tbody>
+        <tr><td class="l">транскрипт</td><td>ElevenLabs Scribe — word-level, чанкинг</td><td>Whisper medium/small локально</td><td><span class="verdict them">они</span></td><td class="move">Scribe v2 для word-times (RU WER ~3–12% vs Whisper ~17–20%), Whisper как офлайн-fallback</td></tr>
+        <tr><td class="l">монтажный план</td><td>строгий SoT: и draft, и final из одного списка</td><td>cut_maps в manifest, но без draft-яруса и без жёсткой дисциплины</td><td><span class="verdict them">они</span></td><td class="move">формализовать realself.timeline → <b>OpenTimelineIO (.otio)</b>: frame-accurate, RationalTime, адаптеры в FCP/Resolve</td></tr>
+        <tr><td class="l">паузы / филлеры</td><td>двойной детектор: транскрипт + signal</td><td>silencedetect trim + transcript labels</td><td><span class="verdict par">паритет</span></td><td class="move">слить оба детектора строго, как у них (текст ловит запинки, signal — тишину)</td></tr>
+        <tr><td class="l">оверлеи</td><td>Pillow → ProRes 4444 alpha композит</td><td>PIL-на-кадре через moviepy</td><td><span class="verdict them">они</span></td><td class="move">добавить ProRes-4444-alpha дорожку для чистой прозрачности (WebM/VP9-alpha на macOS нестабильна)</td></tr>
+        <tr><td class="l">AI-картинки</td><td>Nano Banana Pro / GPT-Image-2</td><td>imagine (OpenRouter, те же модели)</td><td><span class="verdict par">паритет</span></td><td class="move">уже совпадает — переиспользовать skill <span class="kbd">imagine</span></td></tr>
+        <tr><td class="l">динамика / зум</td><td>OpenCV cv2 покадрово (без дрейфа)</td><td>moviepy punch-zoom</td><td><span class="verdict them">они</span></td><td class="move">взять cv2-kernel: контроль точки зума, нет рассинхрона звук↔картинка на длинных</td></tr>
+        <tr><td class="l">звук</td><td>loudnorm + sfx mix</td><td>audio-first lip-sync, stream-copy</td><td><span class="verdict us">мы</span></td><td class="move">оставить наш lip-sync; добавить опц. loudnorm-проход в legacy-цепочке</td></tr>
+        <tr><td class="l">draft рендер</td><td>180p ultrafast, версии v01..</td><td>нет — только полные варианты</td><td><span class="verdict them">они</span></td><td class="move">внедрить <b>двухъярус draft→final</b>: дешёвый предпросмотр нарезки до hero-рендера</td></tr>
+        <tr><td class="l">финал-энкод</td><td>videotoolbox HW 1080p (минуты)</td><td>libx264 CRF 17 slow (качество)</td><td><span class="verdict par">сплит</span></td><td class="move">ролевой сплит: <b>HW → draft</b> (быстро, артефакты ок), <b>software → hero</b> (качество)</td></tr>
+        <tr><td class="l">fps</td><td>нативный 50fps, RIFE для старого &lt;50</td><td>30fps фикс</td><td><span class="verdict them">они</span></td><td class="move">RIFE как опц. для sub-native источника и slow-mo (~130fps lite на M1)</td></tr>
+        <tr><td class="l">публикация</td><td>youtube api, детерминированные метаданные</td><td>instagram trial reels, генерация подписи</td><td><span class="verdict par">разные</span></td><td class="move">разные площадки — оставить обе; перенять детерминированную генерацию метаданных из данных эпизода</td></tr>
+        <tr><td class="l">сборка / UI</td><td>нет — cli цепочка</td><td>визуальный блок-редактор + cross-swap</td><td><span class="verdict us">мы</span></td><td class="move">наш ров — усилить live-preview (WebCodecs)</td></tr>
+        <tr><td class="l">режимы / стиль</td><td>один формат (чипсы)</td><td>6 стилей × 6 режимов, survivor pinning</td><td><span class="verdict us">мы</span></td><td class="move">наш ров — режим выбирается до стиля</td></tr>
+        <tr><td class="l">оркестрация</td><td>Claude Code, линейная цепочка</td><td>Claude Code + редактор + multi-agent queue</td><td><span class="verdict us">мы</span></td><td class="move">наш ров — добавить их draft-петлю внутрь нашего queue</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ TAB 1.5: SHORT-FORM ============ -->
+  <section class="panel" id="shortform">
+    <h2 class="sec">их пайплайн, портированный в короткий формат</h2>
+    <p class="lead">их стек рождён для <b>длинного youtube</b>. чтобы сделать из него reels — каждый слой надо переломить под короткую механику. колонка справа — <span class="muted">чем наш short-form-стек уже отвечает на этот перелом.</span></p>
+
+    <table class="cmp">
+      <thead><tr><th style="width:11%">аспект</th><th style="width:25%">их long-form дефолт</th><th style="width:30%">что требует короткий ролик</th><th style="width:34%">наш short-form ответ</th></tr></thead>
+      <tbody>
+        <tr><td class="l">длительность</td><td class="muted">минуты, нарратив дышит</td><td>7–60s, агрессивный рез до сути, петля-loop</td><td class="move">режим <b>social_short</b>: tighter cut + minimal captions; дубль-кандидат = один аудио-спайн</td></tr>
+        <tr><td class="l">кадр</td><td class="muted">16:9 landscape</td><td>9:16 вертикаль 1080×1920, safe-zones под UI инсты</td><td class="move">нативная вертикаль; hook y≈270, субтитры y≈H−480, правая зона свободна под иконки</td></tr>
+        <tr><td class="l">первые 3с</td><td class="muted">спокойное интро, разогрев</td><td>pattern-interrupt + text-hook + curiosity gap, иначе скип</td><td class="move">hook-лейбл first; «engaging first 3 seconds» как мандат, хук в кадре сразу</td></tr>
+        <tr><td class="l">экранный текст</td><td class="muted">брендовые чипсы по теме</td><td>sound-off kinetic captions (35% без звука), max 2 строки, viewer-facing</td><td class="move">caption-режимы; бан тех-лейблов (render/ffmpeg/proof); подсветка только хук-слов</td></tr>
+        <tr><td class="l">темп / рез</td><td class="muted">убрать мёртвый воздух</td><td>0.08–0.18s hard/soft cuts по битам речи, punch-zoom на словах</td><td class="move">speech-synced cross-cut + beat-synced punch (2–4 за рилз), рез только в паузах</td></tr>
+        <tr><td class="l">B-roll / врезки</td><td class="muted">AI-картинки поверх кадра</td><td>врезки по речевым битам и действию, не ради «доказательства источника»</td><td class="move">visual_swap в паузах не трогая аудио; «если видео уже показывает — пусть несёт само»</td></tr>
+        <tr><td class="l">звук</td><td class="muted">loudnorm под платформу</td><td>звук = спайн ролика, sound-first; A-B чередование аудио = смерть рилза</td><td class="move">audio-first: один непрерывный источник, lipsync_render stream-copy, без фильтров</td></tr>
+        <tr><td class="l">fps</td><td class="muted">нативный 50fps</td><td>IG 30fps; slow-mo punch на ключевом действии</td><td class="move">30fps фикс; RIFE опц. для slow-mo и спасения sub-native источника</td></tr>
+        <tr><td class="l">draft-петля</td><td class="muted">180p черновик</td><td>ещё ценнее: коротких вариантов стиля/режима много, hero-рендер дорог</td><td class="move">заимствуем — draft-ярус videotoolbox перед hero libx264 (см. вкладку «развитие»)</td></tr>
+        <tr><td class="l">публикация</td><td class="muted">youtube, один шаг</td><td>мультиплекс IG/TikTok/Shorts, A/B на не-подписчиках, watch-time</td><td class="move"><b>Trial Reels</b>: 2 версии → 24–48ч тест → share to followers; ≤5 trial/день</td></tr>
+        <tr><td class="l">метаданные</td><td class="muted">детерминированные из эпизода</td><td>подпись = человеческий голос, без хэштегов (не драйвер охвата 2026)</td><td class="move">2 версии подписи, lowercase, english-якоря; детерминированную генерацию берём только для youtube-переката</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sec">метрики короткого формата (2026)</h2>
+    <p class="lead">на что смотрит алгоритм — и под что режется ролик. <span class="muted">хэштеги и частота &gt;5/нед — больше не драйверы.</span></p>
+    <div class="kpis">
+      <div class="k"><span class="m">0–3s</span><span class="lb">hook-retention · главный фильтр</span></div>
+      <div class="k"><span class="m">watch-time</span><span class="lb">досматриваемость + loops</span></div>
+      <div class="k"><span class="m">DM-shares</span><span class="lb">сильнейший сигнал</span></div>
+      <div class="k"><span class="m">saves › comments › likes</span><span class="lb">иерархия реакций</span></div>
+      <div class="k"><span class="m">9–12</span><span class="lb">постов = «тема» аккаунта</span></div>
+    </div>
+
+    <h2 class="sec">пять короткоформатных приёмов — детали, которых нет в их long-chain</h2>
+    <div class="cards three">
+      <article class="block inv"><div class="num">1</div><h3>hook-бюджет</h3><div class="ld">первые 3 секунды решают всё</div><p>их интро может разогреваться — у короткого ролика бюджета нет: pattern-interrupt + текстовый хук + curiosity gap в кадре сразу, иначе скип до досмотра.</p><p class="why">алгоритм 2026: 3s-retention — главный фильтр до того, как ролик вообще получит охват.</p><div class="src">mode · любой · hook=auto</div></article>
+
+      <article class="block inv"><div class="num">2</div><h3>микро-ритм</h3><div class="ld">0.08–0.18s резы по битам речи</div><p>длинный темп их цепочки в reels мёртв. короткий живёт на частых hard/soft-резах синхронно с речью + punch-zoom 2–4 раза на ключевых словах.</p><p class="why">cut points строго в паузах транскрипта (word-times), никогда на слове — иначе рвань.</p><div class="src">build_crosscut · beat-synced</div></article>
+
+      <article class="block inv"><div class="num">3</div><h3>sound-off дефолт</h3><div class="ld">35% смотрят без звука</div><p>kinetic captions обязательны: viewer-facing, нижняя зона, max 2 строки, подсветка только хук-слов — не субтитры всей фразы.</p><p class="why">их брендовые чипсы привязаны к теме; у нас текст добавляет смысл зрителю, не отчитывается о пайплайне.</p><div class="src">mode · caption_only · no_limits</div></article>
+
+      <article class="block"><div class="num">4</div><h3>один аудио-спайн</h3><div class="ld">A-B чередование аудио = смерть рилза</div><p>главная причина плохих reels — склейка речи из разных дублей/источников. один непрерывный аудио, картинка меняется через visual_swap не трогая звук.</p><p class="why">при нескольких дублях выбираем лучший по речи, не по картинке — речь не починить, визуал улучшается grade/оверлеями.</p><div class="src">audio-first · lipsync_render</div></article>
+
+      <article class="block"><div class="num">5</div><h3>trial-петля</h3><div class="ld">тест до полного релиза</div><p>2 версии монтажа → trial на не-подписчиках 24–48ч → смотрим watch-time, не views → залетел → share to followers + обычный пост в тему (momentum).</p><p class="why">их youtube-публикация одношаговая; короткий формат позволяет дешёвый A/B одной переменной (хук/длина/стиль).</p><div class="src">Trial Reels · ≤5/день</div></article>
+    </div>
+
+    <p class="lead" style="margin-top:18px"><span class="muted">итог короткого формата:</span> их стек даёт нам <b>дисциплину плана и draft-петлю</b>, но саму короткую механику — hook-бюджет, микро-ритм, sound-off, аудио-спайн, trial-A/B — несёт наш reels-слой. порт их пайплайна в short без этого слоя даёт «обрезанный youtube», а не рилз.</p>
+  </section>
+
+  <!-- ============ TAB 2: ADOPT ============ -->
+  <section class="panel" id="adopt">
+    <h2 class="sec">шесть заимствований — что втягиваем из их стека</h2>
+    <p class="lead">ранжировано по соотношению эффект/усилие. <span class="muted">верх ряда = самый высокий рычаг.</span></p>
+    <div class="cards three">
+      <article class="block inv"><div class="num">1</div><h3>наибольший рычаг</h3><div class="ld">cut-plan → OpenTimelineIO</div><p>их «монтажный план = единственный источник правды» — это ровно отраслевой стандарт <b>OTIO</b>: JSON-граф клипов, RationalTime, transitions/markers, адаптеры в FCP/Resolve/Premiere.</p><p class="why">наш realself.timeline.v1 уже близок (tracks/items, sourceStart/End). переход на .otio даёт frame-accuracy + round-trip с любым NLE + готовые рендереры.</p><div class="src">apply → realself.timeline.v1 → .otio схема</div></article>
+
+      <article class="block inv"><div class="num">2</div><h3>наибольший рычаг</h3><div class="ld">двухъярус draft→final</div><p>180p ultrafast черновик из того же плана → проверка нарезки/таймингов за секунды → 1080p hero только после approve. версии v01.. вместо перезаписи.</p><p class="why">сейчас мы рендерим много полных вариантов (дорого). draft-петля = быстрее итерации, дешевле compute, история итераций видна.</p><div class="src">apply → render_queue: draft-tier перед hero</div></article>
+
+      <article class="block inv"><div class="num">3</div><h3>высокий рычаг</h3><div class="ld">ElevenLabs Scribe для word-times</div><p>Scribe v2 = 3.1% WER (2-е место в бенче 2026); Scribe v1-experimental бьёт локальный Whisper на русском вдвое (11.5% vs 23%). word-таймкоды — фундамент точности реза.</p><p class="why">наш Whisper medium ~17–20% WER на RU. неточный таймкод = срезанные слова на стыках. Scribe в облаке + Whisper офлайн-fallback.</p><div class="src">apply → transcript layer, RU-приоритет</div></article>
+
+      <article class="block"><div class="num">4</div><h3>средний рычаг</h3><div class="ld">cv2 покадровый зум</div><p>push-in считается покадрово в OpenCV — контроль точки приближения, нет дрейфа звук↔картинка (нативные ffmpeg-зумы плывут на длинных).</p><p class="why">наш punch-zoom в moviepy ок для коротких, но cv2-kernel детерминированнее. чистая замена эффекта.</p><div class="src">apply → dynamics, замена punch_zoom</div></article>
+
+      <article class="block"><div class="num">5</div><h3>средний рычаг</h3><div class="ld">ProRes 4444 alpha оверлеи</div><p>карточки рисуются Pillow и композитятся как <b>ProRes 4444 .mov с альфой</b> — чистая прозрачность без артефактов краёв.</p><p class="why">мы кладём PIL-кадр поверх кадра. alpha-дорожка даёт чище края и переиспользуемый оверлей-asset.</p><div class="src">apply → overlay lane, .mov alpha export</div></article>
+
+      <article class="block"><div class="num">6</div><h3>низкий рычаг · аккуратность</h3><div class="ld">детерминированные метаданные</div><p>заголовок/описание/таймкоды генерятся из данных эпизода <b>без LLM-вызова</b> — дешевле и точнее соответствует видео.</p><p class="why">для youtube-переката нашего контента это уберёт галлюцинации в метаданных; для reels-подписей оставляем человеческий голос.</p><div class="src">apply → publish meta (youtube only)</div></article>
+    </div>
+
+    <h2 class="sec">наш ров — что НЕ трогаем (и чего нет у них)</h2>
+    <p class="lead">это структурное преимущество reels-системы. их линейный chain этого не покрывает.</p>
+    <div class="cards three">
+      <article class="block"><div class="num">a</div><h3>moat</h3><div class="ld">визуальный блок-редактор</div><p>single-file html: source-блоки по категориям, cross-project swap, live source preview, overlay-дорожки. их пайплайн — только cli.</p><div class="src">keep · reel-block-edit</div></article>
+      <article class="block"><div class="num">b</div><h3>moat</h3><div class="ld">режим → стиль</div><p>сначала редакторская задача (dry/caption/proof/flow/social), потом визуал. 6 стилей × 6 режимов vs их один формат.</p><div class="src">keep · mode-first</div></article>
+      <article class="block"><div class="num">c</div><h3>moat</h3><div class="ld">audio-first lip-sync</div><p>один аудио-спайн на рилз, stream-copy без фильтров — lip-sync структурно нельзя сломать. строже их loudnorm-цепочки.</p><div class="src">keep · lipsync_render.py</div></article>
+      <article class="block"><div class="num">d</div><h3>moat</h3><div class="ld">survivor pinning</div><p>когда вариант победил — фиксируем рецепт в manifest (survivors / rejected_patterns / next_default_route), чистим final/.</p><div class="src">keep · realself manifest</div></article>
+      <article class="block"><div class="num">e</div><h3>moat</h3><div class="ld">viewer-first captions</div><p>текст говорит зрителю, не отчитывается о пайплайне. бан на render/ffmpeg/proof в кадре. их чипсы — брендовые, не нарративные.</p><div class="src">keep · caption rules</div></article>
+      <article class="block"><div class="num">f</div><h3>moat</h3><div class="ld">trial reels A/B</div><p>тест версий на не-подписчиках, watch-time как метрика. их youtube-публикация одношаговая.</p><div class="src">keep · publish strategy</div></article>
+    </div>
+  </section>
+
+  <!-- ============ TAB 3: EVOLVE ============ -->
+  <section class="panel" id="evolve">
+    <h2 class="sec">целевая архитектура — слитый стек</h2>
+    <p class="lead">слои читаются сверху вниз. <span class="muted">чёрные узлы = новое/заимствованное, контурные = наше текущее, что остаётся.</span></p>
+
+    <div class="arch">
+      <div class="layer"><div class="lh"><b>transcript</b>слой 0</div><div class="lb">
+        <div class="node new"><b>ElevenLabs Scribe v2</b><span>word-times · RU-приоритет</span></div><span class="arr">+</span>
+        <div class="node keep"><b>Whisper</b><span>офлайн fallback</span></div>
+      </div></div>
+
+      <div class="layer"><div class="lh"><b>cut plan</b>слой 1 · SoT</div><div class="lb">
+        <div class="node new"><b>OpenTimelineIO .otio</b><span>frame-accurate · единый источник истины</span></div><span class="arr">→</span>
+        <div class="node"><b>dual silence detect</b><span>transcript + signal</span></div><span class="arr">→</span>
+        <div class="node"><b>category labels</b><span>hook/core/closer</span></div>
+      </div></div>
+
+      <div class="layer"><div class="lh"><b>assemble</b>слой 2 · ров</div><div class="lb">
+        <div class="node keep"><b>block editor</b><span>наш single-file html</span></div><span class="arr">+</span>
+        <div class="node new"><b>WebCodecs live preview</b><span>Mediabunny · scrub без сервера</span></div><span class="badge">browser</span>
+      </div></div>
+
+      <div class="layer"><div class="lh"><b>enrich</b>слой 3</div><div class="lb">
+        <div class="node new"><b>ProRes 4444 alpha lane</b><span>чистые оверлеи</span></div><span class="arr">·</span>
+        <div class="node new"><b>cv2 push-in</b><span>зум без дрейфа</span></div><span class="arr">·</span>
+        <div class="node keep"><b>imagine</b><span>Nano Banana / GPT-Image</span></div><span class="arr">·</span>
+        <div class="node keep"><b>6 стилей × 6 режимов</b><span>наш ров</span></div>
+      </div></div>
+
+      <div class="layer"><div class="lh"><b>render</b>слой 4 · ярусы</div><div class="lb">
+        <div class="node new"><b>draft · videotoolbox 180p</b><span>петля итерации</span></div><span class="arr">→</span>
+        <div class="node keep"><b>hero local · libx264 CRF</b><span>audio-first lip-sync</span></div><span class="arr">→</span>
+        <div class="node new"><b>scale · Remotion Lambda / Hyperframes</b><span>облако · детерминированно</span></div>
+      </div></div>
+
+      <div class="layer"><div class="lh"><b>qa</b>слой 5</div><div class="lb">
+        <div class="node keep"><b>ffprobe + contact strip</b><span>баланс каналов · peak check</span></div><span class="arr">→</span>
+        <div class="node"><b>viewer-perspective watch</b><span>«поймёт ли незнакомец»</span></div>
+      </div></div>
+
+      <div class="layer"><div class="lh"><b>publish</b>слой 6</div><div class="lb">
+        <div class="node keep"><b>Trial Reels A/B</b><span>instagram · watch-time</span></div><span class="arr">·</span>
+        <div class="node new"><b>YouTube API · детерм. метаданные</b><span>для long-form переката</span></div>
+      </div></div>
+    </div>
+
+    <h2 class="sec">три горизонта развития</h2>
+    <p class="lead">research-backed. что строим первым, что — потом.</p>
+    <ol class="road">
+      <li><span class="eff">1–2 дня · высокий рычаг</span><b>горизонт 1 — дисциплина плана</b><p>realself.timeline.v1 → <b>OpenTimelineIO</b>; внедрить draft→final двухъярус (videotoolbox draft / libx264 hero); подключить Scribe-транскрипт. ноль новых зависимостей-фреймворков, чистый выигрыш точности и скорости итераций.</p></li>
+      <li><span class="eff">3–5 дней · средний рычаг</span><b>горизонт 2 — live-preview в браузере</b><p>встроить <b>WebCodecs + Mediabunny</b> в блок-редактор: реальный scrub по source-диапазонам без сервер-рендера. редактор перестаёт быть галереей mp4, становится настоящим NLE. ProRes-alpha + cv2-зум как новые дорожки/эффекты.</p></li>
+      <li><span class="eff">1–2 недели · стратегический</span><b>горизонт 3 — agent × cloud render</b><p>render-адаптер в облако: <b>Remotion Lambda</b> (наш manifest = его inputProps) или <b>Hyperframes</b> (overlays уже html, без React-переписи). изучить <b>X-Cut</b> как референс agent×timeline×Remotion. цель — рилз из контекста одним проходом агента, рендер вне локальной машины.</p></li>
+    </ol>
+  </section>
+
+  <!-- ============ TAB 4: TECH ============ -->
+  <section class="panel" id="tech">
+    <h2 class="sec">матрица технологий — fit для нашего стека</h2>
+    <p class="lead">★★★ = взять в ядро · ★★ = взять в слой/опцию · ★ = референс/инспирация. <span class="muted">чёрные карточки = прямые кандидаты в стек.</span></p>
+    <div class="tech">
+
+      <div class="tcard hero"><div class="top"><span class="nm">OpenTimelineIO (OTIO)</span><span class="fit">★★★</span></div><span class="kind">interchange / cut-plan стандарт · ASWF</span><p>«современный EDL»: JSON-граф клипов, RationalTime, tracks/clips/gaps/transitions/markers, медиа по ссылке. адаптеры: FCP XML, AAF, CMX3600 EDL, Resolve.</p><div class="verd"><b>fit:</b> формат для нашего монтажного плана. realself.timeline.v1 → .otio = frame-accuracy + round-trip с любым NLE.</div><a href="https://github.com/AcademySoftwareFoundation/OpenTimelineIO">github.com/AcademySoftwareFoundation/OpenTimelineIO</a></div>
+
+      <div class="tcard hero"><div class="top"><span class="nm">Remotion</span><span class="fit">★★★</span></div><span class="kind">programmatic video · react · cloud render</span><p>видео как react-компоненты. <b>tracks[]→items[]</b>, <b>Player inputProps</b> (JSON-serializable), <b>renderMediaOnLambda</b>, Editor Starter, Timeline-компонент. ~60k weekly downloads.</p><div class="verd"><b>fit:</b> наш manifest уже зеркалит его модель. облачный рендер-адаптер при масштабе. лицензия Business Source (бесплатно &lt;$1M).</div><a href="https://www.remotion.dev/docs/building-a-timeline">remotion.dev/docs/building-a-timeline</a></div>
+
+      <div class="tcard hero"><div class="top"><span class="nm">Hyperframes (HeyGen)</span><span class="fit">★★★</span></div><span class="kind">html→video · agent-first · open source</span><p>«write html, render video, built for agents». композиции = html с data-атрибутами (без react), детерминированный рендер, seekable Puppeteer+FFmpeg capture, Frame Adapter (GSAP/Lottie/CSS), 50+ social-блоков, skills.</p><div class="verd"><b>fit:</b> самый естественный адаптер — наши оверлеи уже html/PIL. ноль React-переписи. agent-CLI non-interactive = под наш harness.</div><a href="https://github.com/heygen-com/hyperframes">github.com/heygen-com/hyperframes</a></div>
+
+      <div class="tcard hero"><div class="top"><span class="nm">X-Cut (MeiGen-AI)</span><span class="fit">★★★</span></div><span class="kind">video editing agent · референс-архитектура</span><p>опиши идею в чате → агент правит multi-track timeline, рендер в реальном времени на <b>Remotion</b>. skill-архитектура (entry/scenes/operations/tools), «pluggable into Claude». drag-and-drop поверх agent-edit.</p><div class="verd"><b>fit:</b> ровно наша связка блок-редактор + агент + Remotion, уже собранная. изучить как эталон, не как зависимость.</div><a href="https://github.com/MeiGen-AI/X-Cut">github.com/MeiGen-AI/X-Cut</a></div>
+
+      <div class="tcard"><div class="top"><span class="nm">ElevenLabs Scribe v2</span><span class="fit">★★★</span></div><span class="kind">speech-to-text · word timestamps</span><p>3.1% WER (2-е в бенче Coval 2026), 90+ языков, keyterm prompting (до 1000 терминов), entity detection. v1-experimental: RU 11.5% vs Whisper-medium ~17–20%.</p><div class="verd"><b>fit:</b> транскрипт-слой, особенно русский контент. word-times = фундамент точности реза. Whisper остаётся офлайн.</div><a href="https://gradium.ai/content/stt-api-benchmark-2026-latency-accuracy">stt benchmark 2026</a></div>
+
+      <div class="tcard"><div class="top"><span class="nm">Diffusion Studio Core + Mediabunny</span><span class="fit">★★</span></div><span class="kind">browser video engine · webcodecs</span><p>browser-движок композитинга на WebCodecs (decode/encode на железе). declarative timeline, captions, silence removal, realtime playback. Mediabunny = «ffmpeg для веба», Remotion спонсирует.</p><div class="verd"><b>fit:</b> live in-browser preview + клиентский экспорт в блок-редакторе без сервера. редактор → настоящий NLE.</div><a href="https://github.com/diffusionstudio/core">github.com/diffusionstudio/core</a></div>
+
+      <div class="tcard"><div class="top"><span class="nm">WebCodecs + FFmpeg.wasm</span><span class="fit">★★</span></div><span class="kind">browser rendering паттерн</span><p>разделение: WebCodecs (HW-decode) для scrub/playback в 16мс, FFmpeg.wasm для финального энкода (тоньше bitrate, любые форматы). так устроены все browser-NLE 2026.</p><div class="verd"><b>fit:</b> live source preview по sourceStart/End в нашем редакторе — то, что SKILL уже хочет, но без сервера.</div><a href="https://vidstudio.app/blog/webcodecs-vs-ffmpeg-wasm">webcodecs vs ffmpeg.wasm</a></div>
+
+      <div class="tcard"><div class="top"><span class="nm">videotoolbox vs libx264</span><span class="fit">★★</span></div><span class="kind">энкодинг · ролевой сплит</span><p>HW videotoolbox: быстро (100–1000fps), но артефакты ниже ~5Mbit (нет CRF, только -b:v/-q:v), плохо на градиентах/блюре. libx264 CRF = качество, медленнее.</p><div class="verd"><b>fit:</b> <b>HW → draft</b> (скорость, артефакты не важны), <b>software CRF → hero</b>. не «или-или», а роли.</div><a href="https://ffmpeg-cookbook.com/en/articles/hardware-encode-videotoolbox/">ffmpeg videotoolbox</a></div>
+
+      <div class="tcard"><div class="top"><span class="nm">RIFE (frame interpolation)</span><span class="fit">★★</span></div><span class="kind">fps · slow-mo · rescue</span><p>real-time intermediate flow estimation: ~130fps lite / 125fps full на M1 (7–8мс/кадр 1080p). FILM качественнее на сложном движении, но 5–10× медленнее. SG-RIFE (2026) тянет diffusion-качество.</p><div class="verd"><b>fit:</b> опц. слой — slow-mo ключевого действия и спасение sub-native fps источника. не для нативной записи.</div><a href="https://github.com/MoneelPatel/AIFI-Benchmark">aifi-benchmark (m1)</a></div>
+
+      <div class="tcard"><div class="top"><span class="nm">Revideo / Motion Canvas</span><span class="fit">★★</span></div><span class="kind">code-driven canvas анимация · MIT</span><p>generator-based анимация (тgoverning, scene-graph). Motion Canvas — explainer'ы; Revideo — форк с server-render API (renderVideo() из Express/queue/cron). MIT, бесплатно.</p><div class="verd"><b>fit:</b> для motion-graphic оверлеев и анимированных схем (а-ля shaper-диаграммы в видео), не для полного пайплайна.</div><a href="https://github.com/midrender/revideo">github.com/midrender/revideo</a></div>
+
+      <div class="tcard"><div class="top"><span class="nm">Submagic / Opus / Gling / Descript</span><span class="fit">★</span></div><span class="kind">saas auto-cut · бенчмарк</span><p>edit-by-transcript как индустриальный дефолт: авто-удаление пауз/филлеров, B-roll по транскрипту, magic-zoom, styled captions, virality-score. Descript — «правишь видео как текст».</p><div class="verd"><b>fit:</b> не инфра, а подтверждение направления + источник UX-идей (zoom-по-транскрипту, B-roll-слайдер). наш ров — стиль/режимы, которых у них нет.</div><a href="https://www.submagic.co/features/auto-video-editor">submagic auto edit</a></div>
+
+      <div class="tcard"><div class="top"><span class="nm">FFCreator / editly</span><span class="fit">★</span></div><span class="kind">node json-video · легаси-опция</span><p>declarative JSON → видео (editly), node-движок коротких роликов (FFCreator). оба MIT, но активность падает (последние коммиты ~год назад).</p><div class="verd"><b>fit:</b> референс декларативного JSON-видео; для нас перекрыт Remotion/Hyperframes. не брать.</div><a href="https://github.com/mifi/editly">github.com/mifi/editly</a></div>
+
+    </div>
+  </section>
+
+  <footer class="stamp">
+    <div class="seeds"><span class="seed">compare</span><span class="seed">adopt</span><span class="seed">evolve</span><span class="seed active">tech</span></div>
+    <div><b>fig.1</b> · schematic · reel-stack-compare · 2026-06-15 · exa-researched</div>
+  </footer>
+  <div class="src-list">
+    источники ресёрча (exa mcp, 8 запросов): remotion.dev/docs · github/AcademySoftwareFoundation/OpenTimelineIO · github/heygen-com/hyperframes · github/MeiGen-AI/X-Cut · github/diffusionstudio/core · github/Vanilagy/mediabunny · gradium.ai stt-benchmark-2026 · github/Smolevich/stt-benchmarks · ffmpeg-cookbook videotoolbox · apatero rife-vs-film · vidstudio webcodecs-vs-ffmpeg-wasm · trybuildpilot remotion-vs-motion-canvas-vs-revideo
+  </div>
+
+</div>
+
+<script>
+  function tab(id, btn){
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+    document.getElementById(id).classList.add('on');
+    document.querySelectorAll('nav.tabs button').forEach(b=>b.setAttribute('aria-selected','false'));
+    btn.setAttribute('aria-selected','true');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  // keyboard 1-5
+  document.addEventListener('keydown',e=>{
+    const order=['compare','shortform','adopt','evolve','tech'];
+    const map={'1':'compare','2':'shortform','3':'adopt','4':'evolve','5':'tech'};
+    if(map[e.key]){
+      const btns=[...document.querySelectorAll('nav.tabs button')];
+      tab(map[e.key], btns[order.indexOf(map[e.key])]);
+    }
+    if(e.key==='d') document.documentElement.classList.toggle('dark');
+  });
+</script>
+</body>
+</html>
