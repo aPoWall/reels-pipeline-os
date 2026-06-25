@@ -1,0 +1,162 @@
+{
+  "schema": "reels.edl.v2",
+  "branch": "creator-collab-challenge",
+  "publicSafe": true,
+  "strategy": {
+    "mode": "collab_challenge",
+    "style": "minimal_yellow_text_motif",
+    "audio_policy": "single_source_with_marked_collab_insert",
+    "privacy": "mechanics_only"
+  },
+  "challenge": {
+    "goal": "first_to_10000_followers",
+    "paid_ads_allowed": false,
+    "stake": "loser_publishes_short_public_post_or_reel_marketing_winner_product",
+    "metrics": [
+      "followers_start",
+      "followers_current",
+      "followers_delta",
+      "content_count",
+      "prep_minutes",
+      "publish_window",
+      "trial_results"
+    ]
+  },
+  "cuts": [
+    {
+      "id": "c01",
+      "label": "motif_hook",
+      "sourceStart": 0.0,
+      "sourceEnd": 2.2,
+      "outStart": 0.0,
+      "outEnd": 2.2,
+      "risk": "baseline",
+      "note": "full-screen motif object or scene action"
+    },
+    {
+      "id": "c02",
+      "label": "guest_setup",
+      "sourceStart": 2.2,
+      "sourceEnd": 8.0,
+      "outStart": 2.2,
+      "outEnd": 8.0,
+      "risk": "baseline",
+      "note": "first creator sets the premise"
+    },
+    {
+      "id": "c03",
+      "label": "host_reply",
+      "sourceStart": 8.0,
+      "sourceEnd": 15.0,
+      "outStart": 8.0,
+      "outEnd": 15.0,
+      "risk": "insert",
+      "note": "second creator replies without flattening the live handoff"
+    },
+    {
+      "id": "c04",
+      "label": "interruption_handoff",
+      "sourceStart": 15.0,
+      "sourceEnd": 19.0,
+      "outStart": 15.0,
+      "outEnd": 19.0,
+      "risk": "safe-zone-watch",
+      "preserve_reason": "the overlap proves the collab is alive"
+    },
+    {
+      "id": "c05",
+      "label": "challenge_commit",
+      "sourceStart": 19.0,
+      "sourceEnd": 25.0,
+      "outStart": 19.0,
+      "outEnd": 25.0,
+      "risk": "baseline",
+      "note": "state the public challenge in viewer-facing language"
+    },
+    {
+      "id": "c06",
+      "label": "closer",
+      "sourceStart": 25.0,
+      "sourceEnd": 31.0,
+      "outStart": 25.0,
+      "outEnd": 31.0,
+      "risk": "baseline",
+      "note": "leave room for the public commit / next episode"
+    }
+  ],
+  "collabBeats": [
+    {
+      "label": "handoff",
+      "range": "c03-c04",
+      "preserve_reason": "speaker overlap and reaction are part of the story"
+    },
+    {
+      "label": "scene_insert",
+      "range": "c01",
+      "preserve_reason": "motif object gives the reel a memorable start"
+    }
+  ],
+  "overlay_tracks": [
+    {
+      "id": "title",
+      "type": "caption",
+      "items": [
+        {
+          "start": 0.4,
+          "end": 2.0,
+          "text": "caption",
+          "safeZone": "center",
+          "style": "white_large_one_yellow_word"
+        }
+      ]
+    },
+    {
+      "id": "keywords",
+      "type": "caption",
+      "items": [
+        {
+          "start": 8.0,
+          "end": 15.0,
+          "text": "highlight",
+          "safeZone": "lower-third",
+          "style": "unboxed_yellow_keyword"
+        }
+      ]
+    },
+    {
+      "id": "challenge_rail",
+      "type": "rail",
+      "items": [
+        {
+          "start": 19.0,
+          "end": 31.0,
+          "text": "challenge",
+          "safeZone": "bottom-safe",
+          "style": "thin_bw"
+        }
+      ]
+    },
+    {
+      "id": "stars",
+      "type": "stamp",
+      "items": [
+        {
+          "start": 0.2,
+          "end": 31.0,
+          "text": "accent",
+          "safeZone": "corners",
+          "style": "tiny_yellow_star"
+        }
+      ]
+    }
+  ],
+  "qa": [
+    "no_real_names_or_handles",
+    "no_private_screenshots",
+    "no_raw_transcript_text",
+    "no_local_paths_or_source_filenames",
+    "no_provider_keys",
+    "interruptions_checked_at_1x",
+    "faces_and_motif_clear"
+  ]
+}

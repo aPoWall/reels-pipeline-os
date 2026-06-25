@@ -3,24 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Mindset Reels Pipeline — открытый community-стек монтажа reels</title>
-<meta name="description" content="AI Mindset Reels Pipeline — открытый community-стек агентного монтажа reels: блок-редактор, EDL как SSOT, overlay lanes, draft→final, audio-first lip-sync. Сравнение со стеком Max Postnikov, живой рецепт-пример, ветки сообщества. Форкай и присылай свою ветку.">
+<title>AI Mindset Reels Pipeline OS – открытый community-стек монтажа reels</title>
+<meta name="description" content="AI Mindset Reels Pipeline OS – открытый community-стек агентного монтажа reels: блок-редактор, EDL как SSOT, overlay lanes, portable iPhone kit, draft→final, audio-first lip-sync, collab challenge branch. Форкай и конфигурируй свою ветку.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="AI Mindset Reels Pipeline">
-<meta property="og:title" content="AI Mindset Reels Pipeline — открытый community-стек монтажа reels">
-<meta property="og:description" content="Открытый стек агентного монтажа reels: блок-редактор, EDL-SSOT, overlay lanes, draft→final. Сравнение, живой рецепт, ветки сообщества. Форкай и контрибьють свою ветку.">
-<meta property="og:image" content="https://apowall.github.io/reel-stack-compare/assets/og-cover.png">
+<meta property="og:site_name" content="AI Mindset Reels Pipeline OS">
+<meta property="og:title" content="AI Mindset Reels Pipeline OS – открытый community-стек монтажа reels">
+<meta property="og:description" content="Открытый стек агентного монтажа reels: EDL-SSOT, overlay lanes, portable iPhone kit, draft→final, collab challenge. Форкай и конфигурируй свою ветку.">
+<meta property="og:image" content="https://apowall.github.io/reels-pipeline-os/assets/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://apowall.github.io/reel-stack-compare/">
+<meta property="og:url" content="https://apowall.github.io/reels-pipeline-os/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Mindset Reels Pipeline — открытый community-стек">
-<meta name="twitter:description" content="Открытый стек агентного монтажа reels. Сравнение, живой рецепт, ветки сообщества. Форкай и контрибьють.">
-<meta name="twitter:image" content="https://apowall.github.io/reel-stack-compare/assets/og-cover.png">
+<meta name="twitter:title" content="AI Mindset Reels Pipeline OS – открытый community-стек">
+<meta name="twitter:description" content="Открытый стек агентного монтажа reels: конфигуратор, живой рецепт, portable iPhone kit, collab challenge. Форкай и контрибьють.">
+<meta name="twitter:image" content="https://apowall.github.io/reels-pipeline-os/assets/og-cover.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#ffffff; --ink:#000000;
@@ -280,7 +280,7 @@
   /* kill browser-default blue links everywhere */
   .wrap a{color:var(--ink)}
 
-  /* community CTAs — download stack (hero) / contribute / repo */
+  /* community CTAs – download stack (hero) / contribute / repo */
   .ctas{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:12px;margin:16px 0 0}
   @media(max-width:760px){.ctas{grid-template-columns:1fr}}
   .cta{border:1.5px solid var(--ink);border-radius:10px;padding:15px 18px;display:flex;flex-direction:column;gap:2px;
@@ -337,30 +337,30 @@
 <div class="wrap">
 
   <header class="app">
-    <div class="brand"><img class="lt" src="assets/aim-logo-light.png" alt="ai mindset"><img class="dk" src="assets/aim-logo.png" alt="ai mindset">reels pipeline <span class="bsub">· ai mindset</span></div>
-    <div class="crumb"><b>открытый community-стек</b> агентного монтажа reels · сравнение · живой рецепт · ветки сообщества</div>
+    <div class="brand"><img class="lt" src="assets/aim-logo-light.png" alt="ai mindset"><img class="dk" src="assets/aim-logo.png" alt="ai mindset">reels pipeline os <span class="bsub">· ai mindset</span></div>
+    <div class="crumb"><b>открытый community-стек</b> агентного монтажа reels · конфигуратор · живой рецепт · portable kit</div>
     <div class="meta">
-      <b>v2</b> · 2026-06-15 · open<br>
-      <a href="https://github.com/aPoWall/reel-stack-compare" style="color:var(--muted);text-decoration:underline dotted">github · форкай и контрибьють</a><br>
+      <b>v3.0</b> · 2026-06-25 · open<br>
+      <a href="https://github.com/aPoWall/reels-pipeline-os" style="color:var(--muted);text-decoration:underline dotted">github · форкай и контрибьють</a><br>
       <button class="tbtn" onclick="document.documentElement.classList.toggle('dark')">◐ тема</button>
     </div>
   </header>
 
   <div class="thesis">
     <div class="tag">тезис</div>
-    <p><b>открытый стек агентного монтажа reels.</b> родился в <b>ai mindset {space}</b>: формат <b>stack compare</b> — сравни свой монтажный контур с чужим, забери лучшее. первой сравнили цепочку <b>max postnikov</b> (длинный youtube), потом — наш reels блок-редактор, живой рецепт-пример и ветки сообщества. идея не в «единственно верном» пайплайне, а в <b>стеке, который форкаешь под себя</b> и присылаешь свою ветку. ниже — сравнение, живой рецепт, что заимствуем, куда растёт, как сконтрибьютить и где скачать весь стек.</p>
+    <p><b>открытая reels pipeline os.</b> публичный пакет вокруг твоего <b>reel-edit</b>: блок-эдитор, EDL, overlay lanes, answer-card рецепт, collab challenge, portable iphone kit по мотивам `Voronik1801/reel_pipline` и research по open-source video agents. рабочая единица – <b>рецепт</b>: source blocks + EDL + overlay lanes + QA/audio. его можно форкнуть, сконфигурировать под свой аккаунт и прислать обратно как ветку.</p>
   </div>
 
   <div class="ctas">
     <a class="cta hero" href="STACK.md" download="ai-mindset-reels-pipeline-STACK.md">
       <span class="ctaTop"><span class="g">↓</span> скачать весь стек</span>
-      <span class="ctaSub">STACK.md · пайплайн по слоям + EDL-схема + контракты + skill</span>
+      <span class="ctaSub">STACK.md · пайплайн по слоям + EDL-схема + конфигуратор + skill</span>
     </a>
-    <a class="cta" href="https://github.com/aPoWall/reel-stack-compare/blob/main/CONTRIBUTING.md">
+    <a class="cta" href="https://github.com/aPoWall/reels-pipeline-os/blob/main/CONTRIBUTING.md">
       <span class="ctaTop"><span class="g">+</span> сконтрибьютить ветку</span>
       <span class="ctaSub">пришли свой EDL / пример / правку слоя</span>
     </a>
-    <a class="cta" href="https://github.com/aPoWall/reel-stack-compare">
+    <a class="cta" href="https://github.com/aPoWall/reels-pipeline-os">
       <span class="ctaTop"><span class="g">◆</span> open repo</span>
       <span class="ctaSub">github · форкай и присылай PR</span>
     </a>
@@ -368,8 +368,9 @@
 
   <nav class="tabs" role="tablist">
     <button role="tab" aria-selected="true" onclick="tab('how',this)">как работает</button>
+    <button role="tab" aria-selected="false" onclick="tab('config',this)">конфигуратор</button>
     <button role="tab" aria-selected="false" onclick="tab('live',this)">живой пример</button>
-    <button role="tab" aria-selected="false" onclick="tab('compare',this)">сравнение</button>
+    <button role="tab" aria-selected="false" onclick="tab('compare',this)">подходы</button>
     <button role="tab" aria-selected="false" onclick="tab('shortform',this)">короткий формат</button>
     <button role="tab" aria-selected="false" onclick="tab('adopt',this)">заимствуем</button>
     <button role="tab" aria-selected="false" onclick="tab('evolve',this)">развитие</button>
@@ -378,8 +379,8 @@
 
   <!-- ============ TAB: HOW IT WORKS ============ -->
   <section class="panel on" id="how">
-    <h2 class="sec">как работает — pipeline за 30 секунд</h2>
-    <p class="lead">короткий рилз собирает <b>агент из одной записи</b>: транскрипт даёт word-таймкоды → агент режет на смысловые блоки → решения пишутся в <b>EDL</b> (единый источник истины) → overlay-дорожки кладутся независимо → дешёвый draft на проверку → QA → финал 1080×1920. <span class="muted">весь рецепт хранится как данные, не как один mp4 — поэтому стиль можно закрепить, повторить и форкнуть.</span></p>
+    <h2 class="sec">как работает – pipeline за 30 секунд</h2>
+    <p class="lead">короткий рилз собирает <b>агент из одной записи</b>: транскрипт даёт word-таймкоды → агент режет на смысловые блоки → решения пишутся в <b>EDL</b> (единый источник истины) → overlay-дорожки кладутся независимо → дешёвый draft на проверку → QA → финал 1080×1920. <span class="muted">рецепт хранится как данные: стиль можно закрепить, повторить и форкнуть.</span></p>
     <div class="pipeflow">
       <span class="pf">запись</span><span class="pa">→</span>
       <span class="pf">transcript</span><span class="pa">→</span>
@@ -391,8 +392,8 @@
       <span class="pf final">final 1080×1920</span>
     </div>
 
-    <h2 class="sec">блок-эдитор — как это водится руками</h2>
-    <p class="lead">блок-эдитор (skill <b>reel-block-edit</b>) — single-file HTML поверх стека. он превращает хороший дубль в <b>переиспользуемый cut map + overlay-дорожки</b>, а не в галерею mp4. собираешь рилз визуально, экспортируешь EDL+manifest, рендерер собирает финал.</p>
+    <h2 class="sec">блок-эдитор – как это водится руками</h2>
+    <p class="lead">блок-эдитор (skill <b>reel-block-edit</b>) – single-file HTML поверх стека. хороший дубль становится <b>переиспользуемым cut map + overlay-дорожками</b>. собираешь рилз визуально, экспортируешь EDL+manifest, рендерер собирает финал.</p>
     <div class="lanes">
       <div class="lname">source blocks</div><div class="ldesc">фразы из транскрипта тегируются по роли (hook/tension/turn/…); каждый блок самодостаточен и переставляем</div>
       <div class="lname">branch surface</div><div class="ldesc">одна cut-карта → много веток (clean/captions/micro/low-rail/soft-card); baseline никогда не перезаписывается</div>
@@ -401,15 +402,15 @@
       <div class="lname">export</div><div class="ldesc">manifest <b>realself.timeline.json</b> + EDL → рендерер (moviepy/ffmpeg сейчас, Remotion/OTIO дальше)</div>
     </div>
 
-    <h2 class="sec">механика скиллов — как агент водит пайплайн</h2>
+    <h2 class="sec">механика скиллов – как агент водит пайплайн</h2>
     <div class="cards three">
       <article class="block"><div class="num">1</div><h3>reel-edit</h3><div class="ld">video / EDL state</div><p>транскрипт, умный рез, режим→стиль, presets, audio-first рендер, draft→final. владеет реальным editing-state.</p></article>
       <article class="block"><div class="num">2</div><h3>reel-block-edit</h3><div class="ld">branch surface UI</div><p>EDL strip, overlay lanes как first-class дорожки, manifest realself.timeline.json, dashboard export.</p></article>
-      <article class="block inv"><div class="num">3</div><h3>stack-compare</h3><div class="ld">shaper artifact</div><p>строит этот дашборд, держит public/private boundary и no-personal-data правило. package должен быть usable, не just readable.</p></article>
+      <article class="block inv"><div class="num">3</div><h3>public-dashboard</h3><div class="ld">shaper artifact</div><p>skill `stack-compare` здесь работает как legacy-name: строит этот дашборд, держит public/private boundary и no-personal-data правило. package должен быть usable, не just readable.</p></article>
     </div>
 
-    <h2 class="sec">что такое «блок» — generic пример EDL</h2>
-    <p class="lead">минимальный кусок монтажного плана — так выглядит один блок внутри EDL:</p>
+    <h2 class="sec">что такое «блок» – generic пример EDL</h2>
+    <p class="lead">минимальный кусок монтажного плана – так выглядит один блок внутри EDL:</p>
     <pre class="code">{ "id": "c01", "label": "hook",
   "sourceStart": 0.0, "sourceEnd": 3.7,
   "risk": "baseline", "note": "generic public-safe note" }</pre>
@@ -419,25 +420,68 @@
 
     <h2 class="sec">развернуть у себя</h2>
     <ol class="road">
-      <li><span class="eff">инструменты</span><b>возьми базу</b><p>ffmpeg (с libx264), python (opencv, pillow), транскрипт — ElevenLabs Scribe или локальный Whisper.</p></li>
-      <li><span class="eff">skills</span><b>поставь скиллы</b><p>reel-edit / reel-block-edit / stack-compare в свой Claude Code или Codex (skill-каталог) — они и водят пайплайн.</p></li>
-      <li><span class="eff">stack</span><b>скачай стек</b><p><a href="STACK.md" download="ai-mindset-reels-pipeline-STACK.md">STACK.md</a> — слои, контракты, EDL-схема. форкни дашборд как свой шаблон сравнения.</p></li>
-      <li><span class="eff">go</span><b>собери первый рилз</b><p>одна запись → агент режет по блокам → EDL → overlay lanes → draft → final. победил вариант — закрепи рецепт веткой.</p></li>
+      <li><span class="eff">инструменты</span><b>возьми базу</b><p>ffmpeg (с libx264), python (opencv, pillow), транскрипт – ElevenLabs Scribe или локальный Whisper.</p></li>
+      <li><span class="eff">skills</span><b>поставь скиллы</b><p>reel-edit / reel-block-edit / stack-compare в свой Claude Code или Codex (skill-каталог). `stack-compare` сейчас legacy-name для public-dashboard слоя.</p></li>
+      <li><span class="eff">stack</span><b>скачай стек</b><p><a href="STACK.md" download="ai-mindset-reels-pipeline-STACK.md">STACK.md</a> – слои, контракты, EDL-схема. форкни дашборд как свой Pipeline OS шаблон.</p></li>
+      <li><span class="eff">go</span><b>собери первый рилз</b><p>одна запись → агент режет по блокам → EDL → overlay lanes → draft → final. победил вариант – закрепи рецепт веткой.</p></li>
     </ol>
 
-    <p class="lead" style="margin-top:14px"><span class="muted">подробнее — в <a href="https://github.com/aPoWall/reel-stack-compare/blob/main/STACK.md">STACK.md</a> (полный стек по слоям) и <a href="https://github.com/aPoWall/reel-stack-compare/blob/main/CONTRIBUTING.md">CONTRIBUTING</a> (как прислать свою ветку).</span></p>
+    <p class="lead" style="margin-top:14px"><span class="muted">подробнее – в <a href="https://github.com/aPoWall/reels-pipeline-os/blob/main/STACK.md">STACK.md</a> (полный стек по слоям) и <a href="https://github.com/aPoWall/reels-pipeline-os/blob/main/CONTRIBUTING.md">CONTRIBUTING</a> (как прислать свою ветку).</span></p>
   </section>
 
-  <!-- ============ TAB 1: COMPARE ============ -->
+  <!-- ============ TAB: CONFIGURATOR ============ -->
+  <section class="panel" id="config">
+    <h2 class="sec">конфигуратор – собери свой branch pack</h2>
+    <p class="lead">выбери задачу до монтажа. pack = набор скиллов, контрактов и QA-гейтов. <span class="muted">чужие подходы разбираются на слои: preflight, цвет, EDL, overlays, QA, publish loop.</span></p>
+
+    <div class="cards three">
+      <article class="block inv"><div class="num">1</div><h3>personal reel</h3><div class="ld">one creator / one take</div><p><b>включи:</b> reel-edit + portable-iphone-kit. если это Alex – добавь inside-insanity для визуального DNA и caption grammar.</p><p class="why">результат: iPhone color hygiene, transcript, cuts, sparse captions, QA, publish candidate.</p><div class="src">best first run</div></article>
+      <article class="block"><div class="num">2</div><h3>reusable timeline</h3><div class="ld">blocks / lanes / branches</div><p><b>включи:</b> reel-edit + reel-block-edit. сохраняй source blocks, cut map, overlay tracks и branch surface.</p><p class="why">результат: редактируемый рецепт, который можно повторить на следующем рилсе.</p><div class="src">edl-block-editor</div></article>
+      <article class="block"><div class="num">3</div><h3>public repo</h3><div class="ld">open mechanics only</div><p><b>включи:</b> public-dashboard слой (`stack-compare` skill). публикуй STACK.md, CONTRIBUTING.md и sanitized branches. raw footage, handles, paths, real captions остаются снаружи.</p><p class="why">результат: форкаемый пакет с чистой границей private/public.</p><div class="src">public-dashboard</div></article>
+    </div>
+
+    <h2 class="sec">branch packs</h2>
+    <table class="cmp">
+      <thead><tr><th>pack</th><th>когда нужен</th><th>что включает</th><th>что не тащит</th></tr></thead>
+      <tbody>
+        <tr><td class="l">portable-iphone-kit</td><td>создателю нужен переносимый iPhone workflow</td><td>preflight, avconvert HDR→SDR, templates, stutter/dead-air review, cover/finale slots</td><td>приватные маскоты, реальный текст, account-specific финал</td></tr>
+        <tr><td class="l">inside-insanity</td><td>личный аккаунт @_inside_insanity</td><td>raw Lisbon/Fuji/iPhone look, lowercase captions, `_inside_insanity`, color-return/kitchen/object patterns</td><td>AI Mindset team voice, публичный канал, автопостинг</td></tr>
+        <tr><td class="l">edl-block-editor</td><td>нужна ручная правка блоков и overlay lanes</td><td>source blocks, branch surface, live preview, realself.timeline.json, Remotion/OTIO bridge</td><td>галерею несвязанных mp4</td></tr>
+        <tr><td class="l">creator-collab-challenge</td><td>collab становится публичным ростовым экспериментом</td><td>aggregate metrics, preserved interruptions, generic challenge EDL, no-paid-ads flag</td><td>реальные имена, приватные скрины, raw transcripts</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sec">copy-paste first run</h2>
+    <pre class="code">brew install ffmpeg
+python3 -m pip install pillow numpy opencv-python
+command -v avconvert   # macOS/iPhone pack only
+
+# agent prompt
+read STACK.md and the selected branch README.
+run the preflight checks.
+build a public-safe EDL/branch recipe.
+keep private media, names, paths, transcripts, and keys out of public artifacts.</pre>
+
+    <h2 class="sec">что именно забираем из public Voronik pipeline</h2>
+    <div class="lanes">
+      <div class="lname">preflight</div><div class="ldesc">`pipeline_check.sh` как обязательный старт: инструменты, fonts, folders, avconvert, whisper</div>
+      <div class="lname">iphone color</div><div class="ldesc">HDR/HLG → SDR через Apple `avconvert`; цвет – слой нормализации, не художественный grade</div>
+      <div class="lname">templates</div><div class="ldesc">copy-and-fill `build_*` / `make_reel_*`: агенту проще водить новый shoot без приватных файлов в repo</div>
+      <div class="lname">qa detectors</div><div class="ldesc">long words / near repeats / RMS drops / ZCR spikes как review hints, затем проверка ухом</div>
+      <div class="lname">identity slots</div><div class="ldesc">cover, finale, music, sticker/motif – replaceable config; чужие motif assets и endings остаются у автора</div>
+    </div>
+  </section>
+
+  <!-- ============ TAB: APPROACHES ============ -->
   <section class="panel" id="compare">
 
-    <h2 class="sec">два пайплайна, один примитив</h2>
-    <p class="lead">слева — их линейная цепочка под длинный ролик. справа — наш блок-граф под reels. <span class="muted">инверсия (чёрный блок) = наша система.</span></p>
+    <h2 class="sec">три подхода, один примитив</h2>
+    <p class="lead">каждый подход даёт полезный слой: long-form discipline даёт SSOT/draft, portable iPhone kit даёт handoff/preflight/color, наш Reels OS держит EDL/branches/style memory. <span class="muted">инверсия (чёрный блок) = наша система.</span></p>
 
     <div class="pipes">
       <div class="pipe">
-        <header><span class="who">стек max postnikov</span><span class="sub">youtube · long-form · cli chain</span></header>
-        <div class="stage"><div class="n">1</div><div><div class="t">вход — сырое видео</div><div class="d">никакой предобработки, нативный fps камеры (50fps)</div></div></div>
+        <header><span class="who">long-form discipline</span><span class="sub">youtube · long-form · cli chain</span></header>
+        <div class="stage"><div class="n">1</div><div><div class="t">вход – сырое видео</div><div class="d">никакой предобработки, нативный fps камеры (50fps)</div></div></div>
         <div class="stage"><div class="n">2</div><div><div class="t">транскрипт</div><div class="d">word-level таймкоды, чанкинг длинных файлов</div><div class="tools"><span class="chip">ElevenLabs Scribe</span></div></div></div>
         <div class="stage"><div class="n">3</div><div><div class="t">удаление пауз → монтажный план</div><div class="d">двойной детектор: транскрипт (запинки) + silencedetect (тишина). рез по первому слову, не по громкости</div><div class="tools"><span class="chip">silencedetect</span><span class="chip">монтажный план = SoT</span></div></div></div>
         <div class="stage"><div class="n">4</div><div><div class="t">чипсы / картинки / зум</div><div class="d">брендовые карточки (alpha), AI-иллюстрации, покадровый push-in</div><div class="tools"><span class="chip">Pillow→ProRes 4444</span><span class="chip">Nano Banana</span><span class="chip">cv2</span></div></div></div>
@@ -460,53 +504,64 @@
       </div>
     </div>
 
-    <h2 class="sec">послойное сравнение стека</h2>
+    <h2 class="sec">portable iphone kit – handoff layer</h2>
+    <p class="lead">третья ветка закрывает переносимость: как новый creator или агент запускает пайплайн на iPhone footage без вечера в редакторе.</p>
+    <div class="cards three">
+      <article class="block"><div class="num">1</div><h3>preflight</h3><div class="ld">проверка среды</div><p>ffmpeg, ffprobe, whisper, avconvert, fonts, folders. монтаж начинается только после зелёного healthcheck.</p><div class="src">borrow · pipeline_check</div></article>
+      <article class="block"><div class="num">2</div><h3>normalize</h3><div class="ld">iphone hdr → sdr</div><p>HLG/HDR цвет переводится через Apple avconvert и bt709 tags. это production hygiene, не aesthetic LUT.</p><div class="src">borrow · color layer</div></article>
+      <article class="block"><div class="num">3</div><h3>templates</h3><div class="ld">copy-fill-run</div><p>новый shoot = скопировать build/make templates, заполнить SOURCES/REELS/FINALE/COVER, сохранить приватные файлы вне repo.</p><div class="src">borrow · handoff</div></article>
+      <article class="block inv"><div class="num">4</div><h3>qa</h3><div class="ld">stutter + deadair</div><p>long words, near repeats, RMS drops и ZCR spikes становятся review hints. финальное решение принимает ухо.</p><div class="src">borrow · detectors</div></article>
+      <article class="block inv"><div class="num">5</div><h3>identity slots</h3><div class="ld">cover / finale / music</div><p>account identity лежит в конфиге. чужие motif assets, endings и тексты остаются снаружи public branch.</p><div class="src">keep · privacy</div></article>
+      <article class="block inv"><div class="num">6</div><h3>merge</h3><div class="ld">into reels os</div><p>portable kit даёт стартовый рельс; reels os добавляет EDL, overlay lanes, branch surface, skill memory и Trial loop.</p><div class="src">target · combined</div></article>
+    </div>
+
+    <h2 class="sec">послойная карта подходов</h2>
     <p class="lead">по каждому слою: <span class="muted">кто сильнее</span> и <span class="muted">какой ход делаем.</span></p>
     <table class="cmp">
-      <thead><tr><th style="width:11%">слой</th><th style="width:24%">max postnikov</th><th style="width:24%">наш стек (reels)</th><th style="width:9%">сильнее</th><th style="width:32%">ход</th></tr></thead>
+      <thead><tr><th style="width:11%">слой</th><th style="width:24%">long-form discipline</th><th style="width:24%">наш стек (reels)</th><th style="width:9%">вывод</th><th style="width:32%">ход</th></tr></thead>
       <tbody>
-        <tr><td class="l">транскрипт</td><td>ElevenLabs Scribe — word-level, чанкинг</td><td>Whisper medium/small локально</td><td><span class="verdict them">max</span></td><td class="move">Scribe v2 для word-times (RU WER ~3–12% vs Whisper ~17–20%), Whisper как офлайн-fallback</td></tr>
-        <tr><td class="l">монтажный план</td><td>строгий SoT: и draft, и final из одного списка</td><td>cut_maps в manifest, но без draft-яруса и без жёсткой дисциплины</td><td><span class="verdict them">max</span></td><td class="move">формализовать realself.timeline → <b>OpenTimelineIO (.otio)</b>: frame-accurate, RationalTime, адаптеры в FCP/Resolve</td></tr>
-        <tr><td class="l">паузы / филлеры</td><td>двойной детектор: транскрипт + signal</td><td>silencedetect trim + transcript labels</td><td><span class="verdict par">паритет</span></td><td class="move">слить оба детектора строго, как у них (текст ловит запинки, signal — тишину)</td></tr>
-        <tr><td class="l">оверлеи</td><td>Pillow → ProRes 4444 alpha композит</td><td>PIL-на-кадре через moviepy</td><td><span class="verdict them">max</span></td><td class="move">добавить ProRes-4444-alpha дорожку для чистой прозрачности (WebM/VP9-alpha на macOS нестабильна)</td></tr>
-        <tr><td class="l">AI-картинки</td><td>Nano Banana Pro / GPT-Image-2</td><td>imagine (OpenRouter, те же модели)</td><td><span class="verdict par">паритет</span></td><td class="move">уже совпадает — переиспользовать skill <span class="kbd">imagine</span></td></tr>
-        <tr><td class="l">динамика / зум</td><td>OpenCV cv2 покадрово (без дрейфа)</td><td>moviepy punch-zoom</td><td><span class="verdict them">max</span></td><td class="move">взять cv2-kernel: контроль точки зума, нет рассинхрона звук↔картинка на длинных</td></tr>
+        <tr><td class="l">транскрипт</td><td>ElevenLabs Scribe – word-level, чанкинг</td><td>Whisper medium/small локально</td><td><span class="verdict them">берём</span></td><td class="move">Scribe v2 для word-times (RU WER ~3–12% vs Whisper ~17–20%), Whisper как офлайн-fallback</td></tr>
+        <tr><td class="l">монтажный план</td><td>строгий SoT: и draft, и final из одного списка</td><td>cut_maps в manifest, но без draft-яруса и без жёсткой дисциплины</td><td><span class="verdict them">берём</span></td><td class="move">формализовать realself.timeline → <b>OpenTimelineIO (.otio)</b>: frame-accurate, RationalTime, адаптеры в FCP/Resolve</td></tr>
+        <tr><td class="l">паузы / филлеры</td><td>двойной детектор: транскрипт + signal</td><td>silencedetect trim + transcript labels</td><td><span class="verdict par">сливаем</span></td><td class="move">слить оба детектора: текст ловит запинки, signal – тишину</td></tr>
+        <tr><td class="l">оверлеи</td><td>Pillow → ProRes 4444 alpha композит</td><td>PIL-на-кадре через moviepy</td><td><span class="verdict them">берём</span></td><td class="move">добавить ProRes-4444-alpha дорожку для чистой прозрачности (WebM/VP9-alpha на macOS нестабильна)</td></tr>
+        <tr><td class="l">AI-картинки</td><td>Nano Banana Pro / GPT-Image-2</td><td>imagine (OpenRouter, те же модели)</td><td><span class="verdict par">паритет</span></td><td class="move">уже совпадает – переиспользовать skill <span class="kbd">imagine</span></td></tr>
+        <tr><td class="l">динамика / зум</td><td>OpenCV cv2 покадрово (без дрейфа)</td><td>moviepy punch-zoom</td><td><span class="verdict them">берём</span></td><td class="move">взять cv2-kernel: контроль точки зума, нет рассинхрона звук↔картинка на длинных</td></tr>
         <tr><td class="l">звук</td><td>loudnorm + sfx mix</td><td>audio-first lip-sync, stream-copy</td><td><span class="verdict us">мы</span></td><td class="move">оставить наш lip-sync; добавить опц. loudnorm-проход в legacy-цепочке</td></tr>
-        <tr><td class="l">draft рендер</td><td>180p ultrafast, версии v01..</td><td>нет — только полные варианты</td><td><span class="verdict them">max</span></td><td class="move">внедрить <b>двухъярус draft→final</b>: дешёвый предпросмотр нарезки до hero-рендера</td></tr>
+        <tr><td class="l">draft рендер</td><td>180p ultrafast, версии v01..</td><td>нет – только полные варианты</td><td><span class="verdict them">берём</span></td><td class="move">внедрить <b>двухъярус draft→final</b>: дешёвый предпросмотр нарезки до hero-рендера</td></tr>
         <tr><td class="l">финал-энкод</td><td>videotoolbox HW 1080p (минуты)</td><td>libx264 CRF 17 slow (качество)</td><td><span class="verdict par">сплит</span></td><td class="move">ролевой сплит: <b>HW → draft</b> (быстро, артефакты ок), <b>software → hero</b> (качество)</td></tr>
-        <tr><td class="l">fps</td><td>нативный 50fps, RIFE для старого &lt;50</td><td>30fps фикс</td><td><span class="verdict them">max</span></td><td class="move">RIFE как опц. для sub-native источника и slow-mo (~130fps lite на M1)</td></tr>
-        <tr><td class="l">публикация</td><td>youtube api, детерминированные метаданные</td><td>instagram trial reels, генерация подписи</td><td><span class="verdict par">разные</span></td><td class="move">разные площадки — оставить обе; перенять детерминированную генерацию метаданных из данных эпизода</td></tr>
-        <tr><td class="l">сборка / UI</td><td>нет — cli цепочка</td><td>визуальный блок-редактор + cross-swap</td><td><span class="verdict us">мы</span></td><td class="move">наш ров — усилить live-preview (WebCodecs)</td></tr>
-        <tr><td class="l">режимы / стиль</td><td>один формат (чипсы)</td><td>6 стилей × 6 режимов, survivor pinning</td><td><span class="verdict us">мы</span></td><td class="move">наш ров — режим выбирается до стиля</td></tr>
-        <tr><td class="l">оркестрация</td><td>Claude Code, линейная цепочка</td><td>Claude Code + редактор + multi-agent queue</td><td><span class="verdict us">мы</span></td><td class="move">наш ров — добавить их draft-петлю внутрь нашего queue</td></tr>
+        <tr><td class="l">fps</td><td>нативный 50fps, RIFE для старого &lt;50</td><td>30fps фикс</td><td><span class="verdict them">опция</span></td><td class="move">RIFE как опц. для sub-native источника и slow-mo (~130fps lite на M1)</td></tr>
+        <tr><td class="l">публикация</td><td>youtube api, детерминированные метаданные</td><td>instagram trial reels, генерация подписи</td><td><span class="verdict par">разные</span></td><td class="move">разные площадки – оставить обе; перенять детерминированную генерацию метаданных из данных эпизода</td></tr>
+        <tr><td class="l">сборка / UI</td><td>нет – cli цепочка</td><td>визуальный блок-редактор + cross-swap</td><td><span class="verdict us">мы</span></td><td class="move">наш ров – усилить live-preview (WebCodecs)</td></tr>
+        <tr><td class="l">режимы / стиль</td><td>один формат (чипсы)</td><td>6 стилей × 6 режимов, survivor pinning</td><td><span class="verdict us">мы</span></td><td class="move">наш ров – режим выбирается до стиля</td></tr>
+        <tr><td class="l">оркестрация</td><td>Claude Code, линейная цепочка</td><td>Claude Code + редактор + multi-agent queue</td><td><span class="verdict us">мы</span></td><td class="move">наш ров – добавить их draft-петлю внутрь нашего queue</td></tr>
       </tbody>
     </table>
   </section>
 
   <!-- ============ TAB 1.5: SHORT-FORM ============ -->
   <section class="panel" id="shortform">
-    <h2 class="sec">их пайплайн, портированный в короткий формат</h2>
-    <p class="lead">стек max рождён для <b>длинного youtube</b>. чтобы сделать из него reels — каждый слой надо переломить под короткую механику. колонка справа — <span class="muted">чем наш short-form-стек уже отвечает на этот перелом.</span></p>
+    <h2 class="sec">длинный и переносимый пайплайны в коротком формате</h2>
+    <p class="lead">long-form chain и portable iPhone kit полезны, но reels требует другой режим: hook-бюджет, 9:16 safe zones, один voice master, sparse captions и Trial A/B. колонка справа – <span class="muted">чем наш short-form слой закрывает этот перелом.</span></p>
 
     <table class="cmp">
-      <thead><tr><th style="width:11%">аспект</th><th style="width:25%">max · long-form дефолт</th><th style="width:30%">что требует короткий ролик</th><th style="width:34%">наш short-form ответ</th></tr></thead>
+      <thead><tr><th style="width:11%">аспект</th><th style="width:25%">long-form дефолт</th><th style="width:30%">что требует короткий ролик</th><th style="width:34%">наш short-form ответ</th></tr></thead>
       <tbody>
         <tr><td class="l">длительность</td><td class="muted">минуты, нарратив дышит</td><td>7–60s, агрессивный рез до сути, петля-loop</td><td class="move">режим <b>social_short</b>: tighter cut + minimal captions; дубль-кандидат = один аудио-спайн</td></tr>
         <tr><td class="l">кадр</td><td class="muted">16:9 landscape</td><td>9:16 вертикаль 1080×1920, safe-zones под UI инсты</td><td class="move">нативная вертикаль; hook y≈270, субтитры y≈H−480, правая зона свободна под иконки</td></tr>
         <tr><td class="l">первые 3с</td><td class="muted">спокойное интро, разогрев</td><td>pattern-interrupt + text-hook + curiosity gap, иначе скип</td><td class="move">hook-лейбл first; «engaging first 3 seconds» как мандат, хук в кадре сразу</td></tr>
         <tr><td class="l">экранный текст</td><td class="muted">брендовые чипсы по теме</td><td>sound-off kinetic captions (35% без звука), max 2 строки, viewer-facing</td><td class="move">caption-режимы; бан тех-лейблов (render/ffmpeg/proof); подсветка только хук-слов</td></tr>
         <tr><td class="l">темп / рез</td><td class="muted">убрать мёртвый воздух</td><td>0.08–0.18s hard/soft cuts по битам речи, punch-zoom на словах</td><td class="move">speech-synced cross-cut + beat-synced punch (2–4 за рилз), рез только в паузах</td></tr>
-        <tr><td class="l">B-roll / врезки</td><td class="muted">AI-картинки поверх кадра</td><td>врезки по речевым битам и действию, не ради «доказательства источника»</td><td class="move">visual_swap в паузах не трогая аудио; «если видео уже показывает — пусть несёт само»</td></tr>
+        <tr><td class="l">B-roll / врезки</td><td class="muted">AI-картинки поверх кадра</td><td>врезки по речевым битам и действию, не ради «доказательства источника»</td><td class="move">visual_swap в паузах не трогая аудио; «если видео уже показывает – пусть несёт само»</td></tr>
         <tr><td class="l">звук</td><td class="muted">loudnorm под платформу</td><td>звук = спайн ролика, sound-first; A-B чередование аудио = смерть рилза</td><td class="move">audio-first: один непрерывный источник, lipsync_render stream-copy, без фильтров</td></tr>
         <tr><td class="l">fps</td><td class="muted">нативный 50fps</td><td>IG 30fps; slow-mo punch на ключевом действии</td><td class="move">30fps фикс; RIFE опц. для slow-mo и спасения sub-native источника</td></tr>
-        <tr><td class="l">draft-петля</td><td class="muted">180p черновик</td><td>ещё ценнее: коротких вариантов стиля/режима много, hero-рендер дорог</td><td class="move">заимствуем — draft-ярус videotoolbox перед hero libx264 (см. вкладку «развитие»)</td></tr>
+        <tr><td class="l">draft-петля</td><td class="muted">180p черновик</td><td>ещё ценнее: коротких вариантов стиля/режима много, hero-рендер дорог</td><td class="move">заимствуем – draft-ярус videotoolbox перед hero libx264 (см. вкладку «развитие»)</td></tr>
         <tr><td class="l">публикация</td><td class="muted">youtube, один шаг</td><td>мультиплекс IG/TikTok/Shorts, A/B на не-подписчиках, watch-time</td><td class="move"><b>Trial Reels</b>: 2 версии → 24–48ч тест → share to followers; ≤5 trial/день</td></tr>
         <tr><td class="l">метаданные</td><td class="muted">детерминированные из эпизода</td><td>подпись = человеческий голос, без хэштегов (не драйвер охвата 2026)</td><td class="move">2 версии подписи, lowercase, english-якоря; детерминированную генерацию берём только для youtube-переката</td></tr>
       </tbody>
     </table>
 
     <h2 class="sec">метрики короткого формата (2026)</h2>
-    <p class="lead">на что смотрит алгоритм — и под что режется ролик. <span class="muted">хэштеги и частота &gt;5/нед — больше не драйверы.</span></p>
+    <p class="lead">на что смотрит алгоритм – и под что режется ролик. <span class="muted">хэштеги и частота &gt;5/нед – больше не драйверы.</span></p>
     <div class="kpis">
       <div class="k"><span class="m">0–3s</span><span class="lb">hook-retention · главный фильтр</span></div>
       <div class="k"><span class="m">watch-time</span><span class="lb">досматриваемость + loops</span></div>
@@ -515,26 +570,26 @@
       <div class="k"><span class="m">9–12</span><span class="lb">постов = «тема» аккаунта</span></div>
     </div>
 
-    <h2 class="sec">пять короткоформатных приёмов — детали, которых нет в их long-chain</h2>
+    <h2 class="sec">пять короткоформатных приёмов – детали поверх linear long-chain</h2>
     <div class="cards three">
-      <article class="block inv"><div class="num">1</div><h3>hook-бюджет</h3><div class="ld">первые 3 секунды решают всё</div><p>их интро может разогреваться — у короткого ролика бюджета нет: pattern-interrupt + текстовый хук + curiosity gap в кадре сразу, иначе скип до досмотра.</p><p class="why">алгоритм 2026: 3s-retention — главный фильтр до того, как ролик вообще получит охват.</p><div class="src">mode · любой · hook=auto</div></article>
+      <article class="block inv"><div class="num">1</div><h3>hook-бюджет</h3><div class="ld">первые 3 секунды решают всё</div><p>длинный формат может разогреваться – у короткого ролика бюджета нет: pattern-interrupt + текстовый хук + curiosity gap в кадре сразу, иначе скип до досмотра.</p><p class="why">алгоритм 2026: 3s-retention – главный фильтр до того, как ролик вообще получит охват.</p><div class="src">mode · любой · hook=auto</div></article>
 
-      <article class="block inv"><div class="num">2</div><h3>микро-ритм</h3><div class="ld">0.08–0.18s резы по битам речи</div><p>длинный темп их цепочки в reels мёртв. короткий живёт на частых hard/soft-резах синхронно с речью + punch-zoom 2–4 раза на ключевых словах.</p><p class="why">cut points строго в паузах транскрипта (word-times), никогда на слове — иначе рвань.</p><div class="src">build_crosscut · beat-synced</div></article>
+      <article class="block inv"><div class="num">2</div><h3>микро-ритм</h3><div class="ld">0.08–0.18s резы по битам речи</div><p>длинный темп линейной цепочки в reels мёртв. короткий живёт на частых hard/soft-резах синхронно с речью + punch-zoom 2–4 раза на ключевых словах.</p><p class="why">cut points строго в паузах транскрипта (word-times), никогда на слове – иначе рвань.</p><div class="src">build_crosscut · beat-synced</div></article>
 
-      <article class="block inv"><div class="num">3</div><h3>sound-off дефолт</h3><div class="ld">35% смотрят без звука</div><p>kinetic captions обязательны: viewer-facing, нижняя зона, max 2 строки, подсветка только хук-слов — не субтитры всей фразы.</p><p class="why">их брендовые чипсы привязаны к теме; у нас текст добавляет смысл зрителю, не отчитывается о пайплайне.</p><div class="src">mode · caption_only · no_limits</div></article>
+      <article class="block inv"><div class="num">3</div><h3>sound-off дефолт</h3><div class="ld">35% смотрят без звука</div><p>kinetic captions обязательны: viewer-facing, нижняя зона, max 2 строки, подсветка только хук-слов.</p><p class="why">текст добавляет смысл зрителю, служебные labels остаются вне кадра.</p><div class="src">mode · caption_only · no_limits</div></article>
 
-      <article class="block"><div class="num">4</div><h3>один аудио-спайн</h3><div class="ld">A-B чередование аудио = смерть рилза</div><p>главная причина плохих reels — склейка речи из разных дублей/источников. один непрерывный аудио, картинка меняется через visual_swap не трогая звук.</p><p class="why">при нескольких дублях выбираем лучший по речи, не по картинке — речь не починить, визуал улучшается grade/оверлеями.</p><div class="src">audio-first · lipsync_render</div></article>
+      <article class="block"><div class="num">4</div><h3>один аудио-спайн</h3><div class="ld">A-B чередование аудио = смерть рилза</div><p>главная причина плохих reels – склейка речи из разных дублей/источников. один непрерывный аудио, картинка меняется через visual_swap не трогая звук.</p><p class="why">при нескольких дублях выбираем лучший по речи, не по картинке – речь не починить, визуал улучшается grade/оверлеями.</p><div class="src">audio-first · lipsync_render</div></article>
 
-      <article class="block"><div class="num">5</div><h3>trial-петля</h3><div class="ld">тест до полного релиза</div><p>2 версии монтажа → trial на не-подписчиках 24–48ч → смотрим watch-time, не views → залетел → share to followers + обычный пост в тему (momentum).</p><p class="why">их youtube-публикация одношаговая; короткий формат позволяет дешёвый A/B одной переменной (хук/длина/стиль).</p><div class="src">Trial Reels · ≤5/день</div></article>
+      <article class="block"><div class="num">5</div><h3>trial-петля</h3><div class="ld">тест до полного релиза</div><p>2 версии монтажа → trial на не-подписчиках 24–48ч → смотрим watch-time, не views → залетел → share to followers + обычный пост в тему (momentum).</p><p class="why">короткий формат позволяет дешёвый A/B одной переменной (хук/длина/стиль).</p><div class="src">Trial Reels · ≤5/день</div></article>
     </div>
 
-    <p class="lead" style="margin-top:18px"><span class="muted">итог короткого формата:</span> их стек даёт нам <b>дисциплину плана и draft-петлю</b>, но саму короткую механику — hook-бюджет, микро-ритм, sound-off, аудио-спайн, trial-A/B — несёт наш reels-слой. порт их пайплайна в short без этого слоя даёт «обрезанный youtube», а не рилз.</p>
+    <p class="lead" style="margin-top:18px"><span class="muted">итог короткого формата:</span> long-form discipline даёт <b>план и draft-петлю</b>, portable kit даёт <b>preflight и handoff</b>, но короткую механику – hook-бюджет, микро-ритм, sound-off, аудио-спайн, trial-A/B – несёт наш reels-слой.</p>
   </section>
 
   <!-- ============ TAB: LIVE · EDL LAYER ============ -->
   <section class="panel" id="live">
-    <h2 class="sec">живой пример — pinned answer-card style</h2>
-    <p class="lead">worked example стиля <b>answer_card_terminal_caption</b>: не mp4-галерея, а рецепт ветки. в одном месте — source blocks, монтажная карта, overlay lanes, QA/audio. <span class="muted">экранный текст ролика остаётся viewer-facing (hook, caption, terminal, answer card) — без служебных proof/render/EDL-лейблов в кадре. реальный контент скрыт, показана структура.</span></p>
+    <h2 class="sec">живой пример – pinned answer-card style</h2>
+    <p class="lead">worked example стиля <b>answer_card_terminal_caption</b>: рецепт ветки в одном месте – source blocks, монтажная карта, overlay lanes, QA/audio. <span class="muted">экранный текст ролика остаётся viewer-facing (hook, caption, terminal, answer card); служебные proof/render/EDL-лейблы остаются вне кадра. реальный контент скрыт, показана структура.</span></p>
 
     <div class="livegrid">
       <aside class="videoPanel">
@@ -555,11 +610,11 @@
       </div>
     </div>
 
-    <h2 class="sec">как это собрано — коллаборация двух агентов</h2>
+    <h2 class="sec">как это собрано – коллаборация двух агентов</h2>
     <p class="lead">этот рецепт собрали <b>два агента в связке</b>, не один. <b>Codex-сессия</b> держит приватный editing-state (реальный EDL / проект / рендеры), а <b>дашборд-агент</b> (Claude Code) публикует только generic-механику. они общаются <b>напрямую по murmur</b> (agent-to-agent): Codex режет и собирает ветки → отдаёт generic-дельту (слои, EDL-схема, контракты) → дашборд-агент санитизирует и кладёт в публичный стек. <span class="muted">так личный контент остаётся приватным, а в open-репо едет только воспроизводимая структура. границу владения и правило no-personal-data держат обе стороны (skill stack-compare + CONTRIBUTING).</span></p>
 
-    <h2 class="sec">source blocks — one take, reordered by intent</h2>
-    <p class="lead">source — один iPhone MOV. EDL берёт семь фраз из одной записи и собирает арку: cold open → tension → turn → setting → one-liner → theme → sign-off. <span class="muted">(содержание блоков скрыто — показана только структура.)</span></p>
+    <h2 class="sec">source blocks – one take, reordered by intent</h2>
+    <p class="lead">source – один iPhone MOV. EDL берёт семь фраз из одной записи и собирает арку: cold open → tension → turn → setting → one-liner → theme → sign-off. <span class="muted">(содержание блоков скрыто – показана только структура.)</span></p>
     <div class="sourcegrid">
       <div class="srcblock"><div class="sid">blk 01</div><div class="st">hook</div><div class="sd">cold open</div></div>
       <div class="srcblock"><div class="sid">blk 02</div><div class="st">tension</div><div class="sd">setup</div></div>
@@ -570,7 +625,7 @@
       <div class="srcblock"><div class="sid">blk 07</div><div class="st">closer</div><div class="sd">sign-off</div></div>
     </div>
 
-    <h2 class="sec">edl strip — семь резов, один SSOT</h2>
+    <h2 class="sec">edl strip – семь резов, один SSOT</h2>
     <p class="lead">монтажные решения лежат в <b>edit_decision_list.json</b>. renderer читает карту и собирает тот же final из source ranges, overlay lanes и audio policy.</p>
     <div class="edlstrip">
       <div class="cut"><span class="ci">01 · 3.7s</span><span class="cl">hook</span></div>
@@ -582,8 +637,8 @@
       <div class="cut"><span class="ci">07 · 1.6s</span><span class="cl">closer</span></div>
     </div>
 
-    <h2 class="sec">overlay lanes — screen copy stays viewer-facing</h2>
-    <p class="lead">здесь, в dashboard, видна только раскладка дорожек. <span class="muted">реальный текст ролика скрыт — служебные слова всегда остаются снаружи кадра, copy говорит зрителю.</span></p>
+    <h2 class="sec">overlay lanes – screen copy stays viewer-facing</h2>
+    <p class="lead">здесь, в dashboard, видна только раскладка дорожек. <span class="muted">реальный текст ролика скрыт – служебные слова всегда остаются снаружи кадра, copy говорит зрителю.</span></p>
     <div class="laneviz">
       <div class="lname">hook card</div><div class="track"><div class="bar"><span class="seg" style="left:.6%;width:11.6%">card</span></div></div>
       <div class="lname">captions</div><div class="track"><div class="bar">
@@ -605,7 +660,7 @@
       <div class="q"><span class="m">contact</span><span class="lb">1620×480 · frame-strip sanity check</span></div>
     </div>
 
-    <h2 class="sec">branch flow — what the dashboard preserves</h2>
+    <h2 class="sec">branch flow – what the dashboard preserves</h2>
     <div class="pipeflow">
       <span class="pf">source blocks</span><span class="pa">→</span>
       <span class="pf">EDL json · SSOT</span><span class="pa">→</span>
@@ -614,57 +669,82 @@
       <span class="pf final">final video</span>
     </div>
 
-    <h2 class="sec">branch surface — лесенка плотности оверлеев</h2>
-    <p class="lead">тот же подход масштабируется на семейство веток поверх одной soft cut-карты — от чистой до карточки. <span class="muted">один рез, много смысловых слоёв, выбираешь под цель.</span></p>
+    <h2 class="sec">branch surface – лесенка плотности оверлеев</h2>
+    <p class="lead">тот же подход масштабируется на семейство веток поверх одной soft cut-карты – от чистой до карточки. <span class="muted">один рез, много смысловых слоёв, выбираешь под цель.</span></p>
     <div class="lanes">
-      <div class="lname">v04 clean</div><div class="ldesc">без оверлеев, мягкие phrase-level резы, stereo master — baseline</div>
+      <div class="lname">v04 clean</div><div class="ldesc">без оверлеев, мягкие phrase-level резы, stereo master – baseline</div>
       <div class="lname">v05 captions</div><div class="ldesc">только субтитры, та же soft-карта</div>
       <div class="lname">v06 micro</div><div class="ldesc">крошечный stamp + редкие captions</div>
       <div class="lname">v07 low-rail</div><div class="ldesc">низкоконтрастная rail + редкие captions</div>
       <div class="lname">v08 soft card</div><div class="ldesc">компактная полупрозрачная карточка</div>
     </div>
 
-    <h2 class="sec">что взяли у max + ключевой тезис</h2>
+    <h2 class="sec">creator-collab challenge – public branch recipe</h2>
+    <p class="lead">челлендж-ветка хранит <b>публичную механику</b>: кто быстрее доходит до 10k, без paid targeting, с открытым tracking по росту, частоте публикаций и времени подготовки. <span class="muted">реальные имена, переписки, исходники и приватная статистика остаются в private CRM; в репо едет только schema + EDL pattern.</span></p>
+    <div class="cards three">
+      <article class="block inv"><div class="num">1</div><h3>commit</h3><div class="ld">first to 10k</div><p>два creator-а фиксируют baseline, sprint window и правило <b>paid_ads_allowed=false</b>. stake: проигравший публикует короткий публичный пост/рилз про продукт победителя.</p><div class="src">branch · creator-collab-challenge</div></article>
+      <article class="block"><div class="num">2</div><h3>tracking</h3><div class="ld">followers + prep time</div><p>метрики: followers_start/current/delta, content_count, prep_minutes, publish_window, trial_results. без приватных скринов insights.</p><div class="src">schema · aggregate only</div></article>
+      <article class="block"><div class="num">3</div><h3>visual</h3><div class="ld">motif + minimal yellow text</div><p>full-screen motif в начале, текст буквами поверх видео, один жёлтый keyword, tiny star accents. большие карточки только как осознанная soft-card ветка.</p><div class="src">style · no sloppy cards</div></article>
+    </div>
+
+    <div class="laneviz" style="margin-top:14px">
+      <div class="lname">challenge</div><div class="track"><div class="bar"><span class="seg" style="left:0;width:100%">goal · no paid ads · stake</span></div></div>
+      <div class="lname">metrics</div><div class="track"><div class="bar">
+        <span class="seg alt" style="left:0;width:26%">followers</span>
+        <span class="seg alt" style="left:28%;width:22%">content</span>
+        <span class="seg alt" style="left:52%;width:24%">prep</span>
+        <span class="seg alt" style="left:78%;width:22%">trial</span>
+      </div></div>
+      <div class="lname">collab beats</div><div class="track"><div class="bar">
+        <span class="seg" style="left:5%;width:20%">motif</span>
+        <span class="seg" style="left:30%;width:18%">setup</span>
+        <span class="seg" style="left:52%;width:22%">handoff</span>
+        <span class="seg" style="left:79%;width:16%">commit</span>
+      </div></div>
+      <div class="lname">privacy</div><div class="track"><div class="bar"><span class="seg alt" style="left:0;width:100%">mechanics only · no names · no handles · no paths</span></div></div>
+    </div>
+
+    <h2 class="sec">что взяли из других подходов + ключевой тезис</h2>
     <div class="cards">
-      <article class="block"><div class="num">↓</div><h3>заимствовано у max</h3><div class="ld">монтажный план как SSOT</div><p>все решения — в EDL, не в коде. один renderer может пересобрать тот же branch из source ranges, overlay lanes и audio policy. это переносит дисциплину long-chain в короткий формат.</p></article>
-      <article class="block inv"><div class="num">★</div><h3>ключевой тезис</h3><div class="ld">editor хранит рецепт, не только mp4</div><p>финальный ролик нужен для просмотра, но рабочая единица — branch recipe: source blocks + EDL strip + overlay lanes + QA/audio. так стиль можно закрепить и повторить на следующем reel.</p></article>
+      <article class="block"><div class="num">↓</div><h3>заимствовано</h3><div class="ld">план + preflight</div><p>все решения – в EDL, не в коде; окружение проверяется до монтажа; цвет нормализуется как слой. renderer может пересобрать тот же branch из source ranges, overlay lanes и audio policy.</p></article>
+      <article class="block inv"><div class="num">★</div><h3>ключевой тезис</h3><div class="ld">editor хранит recipe-first state</div><p>финальный ролик нужен для просмотра. рабочая единица – branch recipe: source blocks + EDL strip + overlay lanes + QA/audio. так стиль можно закрепить и повторить на следующем reel.</p></article>
     </div>
     <p class="lead" style="margin-top:14px"><span class="muted">tech ·</span> overlay renderer (ffmpeg + opencv/pillow) · edit_decision_list.json · realself.timeline.json. финальный mp4 не публикуется.</p>
   </section>
 
   <!-- ============ TAB 2: ADOPT ============ -->
   <section class="panel" id="adopt">
-    <h2 class="sec">шесть заимствований — что втягиваем из стека max</h2>
-    <p class="lead">ранжировано по соотношению эффект/усилие. <span class="muted">верх ряда = самый высокий рычаг.</span></p>
+    <h2 class="sec">шесть заимствований – что втягиваем в Pipeline OS</h2>
+    <p class="lead">механики из long-form discipline, portable kit и open-source video agents. ранжировано по соотношению эффект/усилие. <span class="muted">верх ряда = самый высокий рычаг.</span></p>
     <div class="cards three">
-      <article class="block inv"><div class="num">1</div><h3>наибольший рычаг</h3><div class="ld">cut-plan → OpenTimelineIO</div><p>их «монтажный план = единственный источник правды» — это ровно отраслевой стандарт <b>OTIO</b>: JSON-граф клипов, RationalTime, transitions/markers, адаптеры в FCP/Resolve/Premiere.</p><p class="why">наш realself.timeline.v1 уже близок (tracks/items, sourceStart/End). переход на .otio даёт frame-accuracy + round-trip с любым NLE + готовые рендереры.</p><div class="src">apply → realself.timeline.v1 → .otio схема</div></article>
+      <article class="block inv"><div class="num">1</div><h3>наибольший рычаг</h3><div class="ld">cut-plan → OpenTimelineIO</div><p>монтажный план как единый источник правды совпадает с отраслевым стандартом <b>OTIO</b>: JSON-граф клипов, RationalTime, transitions/markers, адаптеры в FCP/Resolve/Premiere.</p><p class="why">наш realself.timeline.v1 уже близок (tracks/items, sourceStart/End). переход на .otio даёт frame-accuracy + round-trip с любым NLE + готовые рендереры.</p><div class="src">apply → realself.timeline.v1 → .otio схема</div></article>
 
       <article class="block inv"><div class="num">2</div><h3>наибольший рычаг</h3><div class="ld">двухъярус draft→final</div><p>180p ultrafast черновик из того же плана → проверка нарезки/таймингов за секунды → 1080p hero только после approve. версии v01.. вместо перезаписи.</p><p class="why">сейчас мы рендерим много полных вариантов (дорого). draft-петля = быстрее итерации, дешевле compute, история итераций видна.</p><div class="src">apply → render_queue: draft-tier перед hero</div></article>
 
-      <article class="block inv"><div class="num">3</div><h3>высокий рычаг</h3><div class="ld">ElevenLabs Scribe для word-times</div><p>Scribe v2 = 3.1% WER (2-е место в бенче 2026); Scribe v1-experimental бьёт локальный Whisper на русском вдвое (11.5% vs 23%). word-таймкоды — фундамент точности реза.</p><p class="why">наш Whisper medium ~17–20% WER на RU. неточный таймкод = срезанные слова на стыках. Scribe в облаке + Whisper офлайн-fallback.</p><div class="src">apply → transcript layer, RU-приоритет</div></article>
+      <article class="block inv"><div class="num">3</div><h3>высокий рычаг</h3><div class="ld">ElevenLabs Scribe для word-times</div><p>Scribe v2 = 3.1% WER (2-е место в бенче 2026); Scribe v1-experimental бьёт локальный Whisper на русском вдвое (11.5% vs 23%). word-таймкоды – фундамент точности реза.</p><p class="why">наш Whisper medium ~17–20% WER на RU. неточный таймкод = срезанные слова на стыках. Scribe в облаке + Whisper офлайн-fallback.</p><div class="src">apply → transcript layer, RU-приоритет</div></article>
 
-      <article class="block"><div class="num">4</div><h3>средний рычаг</h3><div class="ld">cv2 покадровый зум</div><p>push-in считается покадрово в OpenCV — контроль точки приближения, нет дрейфа звук↔картинка (нативные ffmpeg-зумы плывут на длинных).</p><p class="why">наш punch-zoom в moviepy ок для коротких, но cv2-kernel детерминированнее. чистая замена эффекта.</p><div class="src">apply → dynamics, замена punch_zoom</div></article>
+      <article class="block"><div class="num">4</div><h3>средний рычаг</h3><div class="ld">cv2 покадровый зум</div><p>push-in считается покадрово в OpenCV – контроль точки приближения, нет дрейфа звук↔картинка (нативные ffmpeg-зумы плывут на длинных).</p><p class="why">наш punch-zoom в moviepy ок для коротких, но cv2-kernel детерминированнее. чистая замена эффекта.</p><div class="src">apply → dynamics, замена punch_zoom</div></article>
 
-      <article class="block"><div class="num">5</div><h3>средний рычаг</h3><div class="ld">ProRes 4444 alpha оверлеи</div><p>карточки рисуются Pillow и композитятся как <b>ProRes 4444 .mov с альфой</b> — чистая прозрачность без артефактов краёв.</p><p class="why">мы кладём PIL-кадр поверх кадра. alpha-дорожка даёт чище края и переиспользуемый оверлей-asset.</p><div class="src">apply → overlay lane, .mov alpha export</div></article>
+      <article class="block"><div class="num">5</div><h3>средний рычаг</h3><div class="ld">ProRes 4444 alpha оверлеи</div><p>карточки рисуются Pillow и композитятся как <b>ProRes 4444 .mov с альфой</b> – чистая прозрачность без артефактов краёв.</p><p class="why">мы кладём PIL-кадр поверх кадра. alpha-дорожка даёт чище края и переиспользуемый оверлей-asset.</p><div class="src">apply → overlay lane, .mov alpha export</div></article>
 
-      <article class="block"><div class="num">6</div><h3>низкий рычаг · аккуратность</h3><div class="ld">детерминированные метаданные</div><p>заголовок/описание/таймкоды генерятся из данных эпизода <b>без LLM-вызова</b> — дешевле и точнее соответствует видео.</p><p class="why">для youtube-переката нашего контента это уберёт галлюцинации в метаданных; для reels-подписей оставляем человеческий голос.</p><div class="src">apply → publish meta (youtube only)</div></article>
+      <article class="block"><div class="num">6</div><h3>низкий рычаг · аккуратность</h3><div class="ld">детерминированные метаданные</div><p>заголовок/описание/таймкоды генерятся из данных эпизода <b>без LLM-вызова</b> – дешевле и точнее соответствует видео.</p><p class="why">для youtube-переката нашего контента это уберёт галлюцинации в метаданных; для reels-подписей оставляем человеческий голос.</p><div class="src">apply → publish meta (youtube only)</div></article>
     </div>
 
-    <h2 class="sec">наш ров — что НЕ трогаем (и чего нет у max)</h2>
-    <p class="lead">это структурное преимущество reels-системы. их линейный chain этого не покрывает.</p>
+    <h2 class="sec">наш ров – что не трогаем</h2>
+    <p class="lead">это структурное преимущество reels-системы. линейный chain и portable kit этого не покрывают.</p>
     <div class="cards three">
-      <article class="block"><div class="num">a</div><h3>moat</h3><div class="ld">визуальный блок-редактор</div><p>single-file html: source-блоки по категориям, cross-project swap, live source preview, overlay-дорожки. их пайплайн — только cli.</p><div class="src">keep · reel-block-edit</div></article>
-      <article class="block"><div class="num">b</div><h3>moat</h3><div class="ld">режим → стиль</div><p>сначала редакторская задача (dry/caption/proof/flow/social), потом визуал. 6 стилей × 6 режимов vs их один формат.</p><div class="src">keep · mode-first</div></article>
-      <article class="block"><div class="num">c</div><h3>moat</h3><div class="ld">audio-first lip-sync</div><p>один аудио-спайн на рилз, stream-copy без фильтров — lip-sync структурно нельзя сломать. строже их loudnorm-цепочки.</p><div class="src">keep · lipsync_render.py</div></article>
-      <article class="block"><div class="num">d</div><h3>moat</h3><div class="ld">survivor pinning</div><p>когда вариант победил — фиксируем рецепт в manifest (survivors / rejected_patterns / next_default_route), чистим final/.</p><div class="src">keep · realself manifest</div></article>
-      <article class="block"><div class="num">e</div><h3>moat</h3><div class="ld">viewer-first captions</div><p>текст говорит зрителю, не отчитывается о пайплайне. бан на render/ffmpeg/proof в кадре. их чипсы — брендовые, не нарративные.</p><div class="src">keep · caption rules</div></article>
-      <article class="block"><div class="num">f</div><h3>moat</h3><div class="ld">trial reels A/B</div><p>тест версий на не-подписчиках, watch-time как метрика. их youtube-публикация одношаговая.</p><div class="src">keep · publish strategy</div></article>
+      <article class="block"><div class="num">a</div><h3>moat</h3><div class="ld">визуальный блок-редактор</div><p>single-file html: source-блоки по категориям, cross-project swap, live source preview, overlay-дорожки. агент получает ручную поверхность редактирования.</p><div class="src">keep · reel-block-edit</div></article>
+      <article class="block"><div class="num">b</div><h3>moat</h3><div class="ld">режим → стиль</div><p>сначала редакторская задача (dry/caption/proof/flow/social), потом визуал. стиль становится branch recipe, а не разовым эффектом.</p><div class="src">keep · mode-first</div></article>
+      <article class="block"><div class="num">c</div><h3>moat</h3><div class="ld">audio-first lip-sync</div><p>один аудио-спайн на рилз, stream-copy без фильтров – lip-sync структурно нельзя сломать. loudnorm остаётся опцией, не главным монтажным принципом.</p><div class="src">keep · lipsync_render.py</div></article>
+      <article class="block"><div class="num">d</div><h3>moat</h3><div class="ld">survivor pinning</div><p>когда вариант победил – фиксируем рецепт в manifest (survivors / rejected_patterns / next_default_route), чистим final/.</p><div class="src">keep · realself manifest</div></article>
+      <article class="block"><div class="num">e</div><h3>moat</h3><div class="ld">viewer-first captions</div><p>текст говорит зрителю, не отчитывается о пайплайне. бан на render/ffmpeg/proof в кадре. visible copy остаётся человеческой.</p><div class="src">keep · caption rules</div></article>
+      <article class="block"><div class="num">f</div><h3>moat</h3><div class="ld">trial reels A/B</div><p>тест версий на не-подписчиках, watch-time как метрика. публикация становится feedback loop, а не финальным шагом.</p><div class="src">keep · publish strategy</div></article>
     </div>
   </section>
 
   <!-- ============ TAB 3: EVOLVE ============ -->
   <section class="panel" id="evolve">
-    <h2 class="sec">целевая архитектура — слитый стек</h2>
+    <h2 class="sec">целевая архитектура – слитый стек</h2>
     <p class="lead">слои читаются сверху вниз. <span class="muted">чёрные узлы = новое/заимствованное, контурные = наше текущее, что остаётся.</span></p>
 
     <div class="arch">
@@ -709,17 +789,17 @@
     </div>
 
     <h2 class="sec">три горизонта развития</h2>
-    <p class="lead">research-backed. что строим первым, что — потом.</p>
+    <p class="lead">research-backed. что строим первым, что – потом.</p>
     <ol class="road">
-      <li><span class="eff">1–2 дня · высокий рычаг</span><b>горизонт 1 — дисциплина плана</b><p>realself.timeline.v1 → <b>OpenTimelineIO</b>; внедрить draft→final двухъярус (videotoolbox draft / libx264 hero); подключить Scribe-транскрипт. ноль новых зависимостей-фреймворков, чистый выигрыш точности и скорости итераций.</p></li>
-      <li><span class="eff">3–5 дней · средний рычаг</span><b>горизонт 2 — live-preview в браузере</b><p>встроить <b>WebCodecs + Mediabunny</b> в блок-редактор: реальный scrub по source-диапазонам без сервер-рендера. редактор перестаёт быть галереей mp4, становится настоящим NLE. ProRes-alpha + cv2-зум как новые дорожки/эффекты.</p></li>
-      <li><span class="eff">1–2 недели · стратегический</span><b>горизонт 3 — agent × cloud render</b><p>render-адаптер в облако: <b>Remotion Lambda</b> (наш manifest = его inputProps) или <b>Hyperframes</b> (overlays уже html, без React-переписи). изучить <b>X-Cut</b> как референс agent×timeline×Remotion. цель — рилз из контекста одним проходом агента, рендер вне локальной машины.</p></li>
+      <li><span class="eff">1–2 дня · высокий рычаг</span><b>горизонт 1 – дисциплина плана</b><p>realself.timeline.v1 → <b>OpenTimelineIO</b>; внедрить draft→final двухъярус (videotoolbox draft / libx264 hero); подключить Scribe-транскрипт. ноль новых зависимостей-фреймворков, чистый выигрыш точности и скорости итераций.</p></li>
+      <li><span class="eff">3–5 дней · средний рычаг</span><b>горизонт 2 – live-preview в браузере</b><p>встроить <b>WebCodecs + Mediabunny</b> в блок-редактор: реальный scrub по source-диапазонам без сервер-рендера. редактор перестаёт быть галереей mp4, становится настоящим NLE. ProRes-alpha + cv2-зум как новые дорожки/эффекты.</p></li>
+      <li><span class="eff">1–2 недели · стратегический</span><b>горизонт 3 – agent × cloud render</b><p>render-адаптер в облако: <b>Remotion Lambda</b> (наш manifest = его inputProps) или <b>Hyperframes</b> (overlays уже html, без React-переписи). изучить <b>X-Cut</b> как референс agent×timeline×Remotion. цель – рилз из контекста одним проходом агента, рендер вне локальной машины.</p></li>
     </ol>
   </section>
 
   <!-- ============ TAB 4: TECH ============ -->
   <section class="panel" id="tech">
-    <h2 class="sec">матрица технологий — fit для нашего стека</h2>
+    <h2 class="sec">матрица технологий – fit для нашего стека</h2>
     <p class="lead">★★★ = взять в ядро · ★★ = взять в слой/опцию · ★ = референс/инспирация. <span class="muted">чёрные карточки = прямые кандидаты в стек.</span></p>
     <div class="tech">
 
@@ -727,51 +807,57 @@
 
       <div class="tcard hero"><div class="top"><span class="nm">Remotion</span><span class="fit">★★★</span></div><span class="kind">programmatic video · react · cloud render</span><p>видео как react-компоненты. <b>tracks[]→items[]</b>, <b>Player inputProps</b> (JSON-serializable), <b>renderMediaOnLambda</b>, Editor Starter, Timeline-компонент. ~60k weekly downloads.</p><div class="verd"><b>fit:</b> наш manifest уже зеркалит его модель. облачный рендер-адаптер при масштабе. лицензия Business Source (бесплатно &lt;$1M).</div><a href="https://www.remotion.dev/docs/building-a-timeline">remotion.dev/docs/building-a-timeline</a></div>
 
-      <div class="tcard hero"><div class="top"><span class="nm">Hyperframes (HeyGen)</span><span class="fit">★★★</span></div><span class="kind">html→video · agent-first · open source</span><p>«write html, render video, built for agents». композиции = html с data-атрибутами (без react), детерминированный рендер, seekable Puppeteer+FFmpeg capture, Frame Adapter (GSAP/Lottie/CSS), 50+ social-блоков, skills.</p><div class="verd"><b>fit:</b> самый естественный адаптер — наши оверлеи уже html/PIL. ноль React-переписи. agent-CLI non-interactive = под наш harness.</div><a href="https://github.com/heygen-com/hyperframes">github.com/heygen-com/hyperframes</a></div>
+      <div class="tcard hero"><div class="top"><span class="nm">Hyperframes (HeyGen)</span><span class="fit">★★★</span></div><span class="kind">html→video · agent-first · open source</span><p>«write html, render video, built for agents». композиции = html с data-атрибутами (без react), детерминированный рендер, seekable Puppeteer+FFmpeg capture, Frame Adapter (GSAP/Lottie/CSS), 50+ social-блоков, skills.</p><div class="verd"><b>fit:</b> самый естественный адаптер – наши оверлеи уже html/PIL. ноль React-переписи. agent-CLI non-interactive = под наш harness.</div><a href="https://github.com/heygen-com/hyperframes">github.com/heygen-com/hyperframes</a></div>
 
       <div class="tcard hero"><div class="top"><span class="nm">X-Cut (MeiGen-AI)</span><span class="fit">★★★</span></div><span class="kind">video editing agent · референс-архитектура</span><p>опиши идею в чате → агент правит multi-track timeline, рендер в реальном времени на <b>Remotion</b>. skill-архитектура (entry/scenes/operations/tools), «pluggable into Claude». drag-and-drop поверх agent-edit.</p><div class="verd"><b>fit:</b> ровно наша связка блок-редактор + агент + Remotion, уже собранная. изучить как эталон, не как зависимость.</div><a href="https://github.com/MeiGen-AI/X-Cut">github.com/MeiGen-AI/X-Cut</a></div>
+
+      <div class="tcard hero"><div class="top"><span class="nm">OpenScript</span><span class="fit">★★★</span></div><span class="kind">mcp video pipeline · edl v2 · rust/typescript</span><p>сырой ролик → transcribe → analyze → edit decision list → multi-track timeline → render. MCP tools дают агенту управлять b-roll, voiceover, captions, music, sfx и финальным рендером.</p><div class="verd"><b>fit:</b> подтверждает направление: EDL+tracks как интерфейс для агента. смотреть как внешний эталон tool surface.</div><a href="https://github.com/birchrust/openscript">github.com/birchrust/openscript</a></div>
+
+      <div class="tcard"><div class="top"><span class="nm">claude-shorts / OpenCut / ReelForge</span><span class="fit">★★</span></div><span class="kind">open-source short-form wave · 2026</span><p>общий паттерн: faster-whisper/Whisper word-times, candidate scoring, boundary snapping, silence removal, Remotion render, kinetic captions, 1080×1920 exports.</p><div class="verd"><b>fit:</b> брать не как зависимость, а как market proof. наш пакет должен быть более переносимым: branch packs + public/private split + config.</div><a href="https://github.com/AgriciDaniel/claude-shorts">claude-shorts</a> · <a href="https://github.com/floomhq/opencut">opencut</a> · <a href="https://github.com/pedro199288/reelforge">reelforge</a></div>
 
       <div class="tcard"><div class="top"><span class="nm">ElevenLabs Scribe v2</span><span class="fit">★★★</span></div><span class="kind">speech-to-text · word timestamps</span><p>3.1% WER (2-е в бенче Coval 2026), 90+ языков, keyterm prompting (до 1000 терминов), entity detection. v1-experimental: RU 11.5% vs Whisper-medium ~17–20%.</p><div class="verd"><b>fit:</b> транскрипт-слой, особенно русский контент. word-times = фундамент точности реза. Whisper остаётся офлайн.</div><a href="https://gradium.ai/content/stt-api-benchmark-2026-latency-accuracy">stt benchmark 2026</a></div>
 
       <div class="tcard"><div class="top"><span class="nm">Diffusion Studio Core + Mediabunny</span><span class="fit">★★</span></div><span class="kind">browser video engine · webcodecs</span><p>browser-движок композитинга на WebCodecs (decode/encode на железе). declarative timeline, captions, silence removal, realtime playback. Mediabunny = «ffmpeg для веба», Remotion спонсирует.</p><div class="verd"><b>fit:</b> live in-browser preview + клиентский экспорт в блок-редакторе без сервера. редактор → настоящий NLE.</div><a href="https://github.com/diffusionstudio/core">github.com/diffusionstudio/core</a></div>
 
-      <div class="tcard"><div class="top"><span class="nm">WebCodecs + FFmpeg.wasm</span><span class="fit">★★</span></div><span class="kind">browser rendering паттерн</span><p>разделение: WebCodecs (HW-decode) для scrub/playback в 16мс, FFmpeg.wasm для финального энкода (тоньше bitrate, любые форматы). так устроены все browser-NLE 2026.</p><div class="verd"><b>fit:</b> live source preview по sourceStart/End в нашем редакторе — то, что SKILL уже хочет, но без сервера.</div><a href="https://vidstudio.app/blog/webcodecs-vs-ffmpeg-wasm">webcodecs vs ffmpeg.wasm</a></div>
+      <div class="tcard"><div class="top"><span class="nm">WebCodecs + FFmpeg.wasm</span><span class="fit">★★</span></div><span class="kind">browser rendering паттерн</span><p>разделение: WebCodecs (HW-decode) для scrub/playback в 16мс, FFmpeg.wasm для финального энкода (тоньше bitrate, любые форматы). так устроены все browser-NLE 2026.</p><div class="verd"><b>fit:</b> live source preview по sourceStart/End в нашем редакторе – то, что SKILL уже хочет, но без сервера.</div><a href="https://vidstudio.app/blog/webcodecs-vs-ffmpeg-wasm">webcodecs vs ffmpeg.wasm</a></div>
 
       <div class="tcard"><div class="top"><span class="nm">videotoolbox vs libx264</span><span class="fit">★★</span></div><span class="kind">энкодинг · ролевой сплит</span><p>HW videotoolbox: быстро (100–1000fps), но артефакты ниже ~5Mbit (нет CRF, только -b:v/-q:v), плохо на градиентах/блюре. libx264 CRF = качество, медленнее.</p><div class="verd"><b>fit:</b> <b>HW → draft</b> (скорость, артефакты не важны), <b>software CRF → hero</b>. не «или-или», а роли.</div><a href="https://ffmpeg-cookbook.com/en/articles/hardware-encode-videotoolbox/">ffmpeg videotoolbox</a></div>
 
-      <div class="tcard"><div class="top"><span class="nm">RIFE (frame interpolation)</span><span class="fit">★★</span></div><span class="kind">fps · slow-mo · rescue</span><p>real-time intermediate flow estimation: ~130fps lite / 125fps full на M1 (7–8мс/кадр 1080p). FILM качественнее на сложном движении, но 5–10× медленнее. SG-RIFE (2026) тянет diffusion-качество.</p><div class="verd"><b>fit:</b> опц. слой — slow-mo ключевого действия и спасение sub-native fps источника. не для нативной записи.</div><a href="https://github.com/MoneelPatel/AIFI-Benchmark">aifi-benchmark (m1)</a></div>
+      <div class="tcard"><div class="top"><span class="nm">RIFE (frame interpolation)</span><span class="fit">★★</span></div><span class="kind">fps · slow-mo · rescue</span><p>real-time intermediate flow estimation: ~130fps lite / 125fps full на M1 (7–8мс/кадр 1080p). FILM качественнее на сложном движении, но 5–10× медленнее. SG-RIFE (2026) тянет diffusion-качество.</p><div class="verd"><b>fit:</b> опц. слой – slow-mo ключевого действия и спасение sub-native fps источника. не для нативной записи.</div><a href="https://github.com/MoneelPatel/AIFI-Benchmark">aifi-benchmark (m1)</a></div>
 
-      <div class="tcard"><div class="top"><span class="nm">Revideo / Motion Canvas</span><span class="fit">★★</span></div><span class="kind">code-driven canvas анимация · MIT</span><p>generator-based анимация (тgoverning, scene-graph). Motion Canvas — explainer'ы; Revideo — форк с server-render API (renderVideo() из Express/queue/cron). MIT, бесплатно.</p><div class="verd"><b>fit:</b> для motion-graphic оверлеев и анимированных схем (а-ля shaper-диаграммы в видео), не для полного пайплайна.</div><a href="https://github.com/midrender/revideo">github.com/midrender/revideo</a></div>
+      <div class="tcard"><div class="top"><span class="nm">Revideo / Motion Canvas</span><span class="fit">★★</span></div><span class="kind">code-driven canvas анимация · MIT</span><p>generator-based анимация (тgoverning, scene-graph). Motion Canvas – explainer'ы; Revideo – форк с server-render API (renderVideo() из Express/queue/cron). MIT, бесплатно.</p><div class="verd"><b>fit:</b> для motion-graphic оверлеев и анимированных схем (а-ля shaper-диаграммы в видео), не для полного пайплайна.</div><a href="https://github.com/midrender/revideo">github.com/midrender/revideo</a></div>
 
-      <div class="tcard"><div class="top"><span class="nm">Submagic / Opus / Gling / Descript</span><span class="fit">★</span></div><span class="kind">saas auto-cut · бенчмарк</span><p>edit-by-transcript как индустриальный дефолт: авто-удаление пауз/филлеров, B-roll по транскрипту, magic-zoom, styled captions, virality-score. Descript — «правишь видео как текст».</p><div class="verd"><b>fit:</b> не инфра, а подтверждение направления + источник UX-идей (zoom-по-транскрипту, B-roll-слайдер). наш ров — стиль/режимы, которых у них нет.</div><a href="https://www.submagic.co/features/auto-video-editor">submagic auto edit</a></div>
+      <div class="tcard"><div class="top"><span class="nm">Submagic / Opus / Gling / Descript</span><span class="fit">★</span></div><span class="kind">saas auto-cut · бенчмарк</span><p>edit-by-transcript как индустриальный дефолт: авто-удаление пауз/филлеров, B-roll по транскрипту, magic-zoom, styled captions, virality-score. Descript – «правишь видео как текст».</p><div class="verd"><b>fit:</b> подтверждение направления + источник UX-идей (zoom-по-транскрипту, B-roll-слайдер). наш ров – стиль/режимы, public/private split и branch packs.</div><a href="https://www.submagic.co/features/auto-video-editor">submagic auto edit</a></div>
 
       <div class="tcard"><div class="top"><span class="nm">FFCreator / editly</span><span class="fit">★</span></div><span class="kind">node json-video · легаси-опция</span><p>declarative JSON → видео (editly), node-движок коротких роликов (FFCreator). оба MIT, но активность падает (последние коммиты ~год назад).</p><div class="verd"><b>fit:</b> референс декларативного JSON-видео; для нас перекрыт Remotion/Hyperframes. не брать.</div><a href="https://github.com/mifi/editly">github.com/mifi/editly</a></div>
 
     </div>
   </section>
 
-  <h2 class="sec" style="margin-top:30px">библиотека примеров — ветки стека</h2>
-  <p class="lead">каждая ветка = воспроизводимый рецепт. форкни любую, поменяй слой, пришли свою. <span class="muted">нюансы каждой — в <a href="https://github.com/aPoWall/reel-stack-compare/blob/main/STACK.md">STACK.md</a> и <a href="https://github.com/aPoWall/reel-stack-compare/blob/main/CONTRIBUTING.md">CONTRIBUTING</a>.</span></p>
+  <h2 class="sec" style="margin-top:30px">библиотека примеров – ветки стека</h2>
+  <p class="lead">каждая ветка = воспроизводимый рецепт. форкни любую, поменяй слой, пришли свою. <span class="muted">нюансы каждой – в <a href="https://github.com/aPoWall/reels-pipeline-os/blob/main/STACK.md">STACK.md</a> и <a href="https://github.com/aPoWall/reels-pipeline-os/blob/main/CONTRIBUTING.md">CONTRIBUTING</a>.</span></p>
   <div class="exlib">
-    <div class="exo"><div class="et">long-form</div><div class="eh">max postnikov</div><p>детерминированная youtube cut-chain: монтажный план = SSOT, draft→final, Scribe, videotoolbox.</p><div class="en">нюанс: исток заимствований — план как единственный источник истины.</div></div>
-    <div class="exo"><div class="et">short-form · наш</div><div class="eh">reels block editor</div><p>визуальный блок-редактор, режим→стиль, audio-first lip-sync, Trial Reels A/B.</p><div class="en">нюанс: editor хранит рецепт (карта + lanes + branches), не mp4.</div></div>
+    <div class="exo"><div class="et">long-form</div><div class="eh">plan discipline</div><p>детерминированная youtube cut-chain: монтажный план = SSOT, draft→final, Scribe, videotoolbox.</p><div class="en">нюанс: исток заимствований – план как единственный источник истины.</div></div>
+    <div class="exo"><div class="et">portable</div><div class="eh">iphone kit</div><p>public-safe ветка по мотивам Voronik pipeline: preflight, avconvert HDR→SDR, templates, stutter/dead-air QA.</p><div class="en">нюанс: берём механику handoff; account style остаётся у автора.</div></div>
+    <div class="exo"><div class="et">short-form · наш</div><div class="eh">reels block editor</div><p>визуальный блок-редактор, режим→стиль, audio-first lip-sync, Trial Reels A/B.</p><div class="en">нюанс: editor хранит recipe state: карта + lanes + branches.</div></div>
     <div class="exo"><div class="et">recipe</div><div class="eh">answer-card</div><p>ответный reel из одной записи: 7 source-блоков, 3 overlay-слоя (hook card / captions / terminal + answer card).</p><div class="en">нюанс: overlay lanes независимы от cut map; copy всегда viewer-facing.</div></div>
-    <div class="exo"><div class="et">density ladder</div><div class="eh">soft v04–v08</div><p>одна soft cut-карта, пять веток по плотности: clean → captions → micro → low-rail → soft card.</p><div class="en">нюанс: один рез — много смысловых слоёв, выбираешь под цель/KPI.</div></div>
-    <div class="exo"><div class="et">policy</div><div class="eh">audio · default + exception</div><p>default = один voice master; cross-take splice только как explicit experimental branch с сохранённым baseline.</p><div class="en">нюанс: осознанный remix — это ветка, а не нарушение.</div></div>
-    <div class="exo you"><div class="et">open slot</div><div class="eh">твоя ветка</div><p>форкни репо, добавь свой generic EDL / пример / правку слоя, пришли PR.</p><div class="en"><a href="https://github.com/aPoWall/reel-stack-compare/blob/main/CONTRIBUTING.md">CONTRIBUTING →</a></div></div>
+    <div class="exo"><div class="et">challenge</div><div class="eh">creator-collab</div><p>публичный ростовой челлендж: first to 10k, no paid ads, stake-post, metrics schema + collab handoff EDL.</p><div class="en">нюанс: real accounts stay private; public branch stores mechanics only.</div></div>
+    <div class="exo"><div class="et">density ladder</div><div class="eh">soft v04–v08</div><p>одна soft cut-карта, пять веток по плотности: clean → captions → micro → low-rail → soft card.</p><div class="en">нюанс: один рез – много смысловых слоёв, выбираешь под цель/KPI.</div></div>
+    <div class="exo"><div class="et">policy</div><div class="eh">audio · default + exception</div><p>default = один voice master; cross-take splice только как explicit experimental branch с сохранённым baseline.</p><div class="en">нюанс: осознанный remix хранится отдельной веткой.</div></div>
+    <div class="exo you"><div class="et">open slot</div><div class="eh">твоя ветка</div><p>форкни репо, добавь свой generic EDL / пример / правку слоя, пришли PR.</p><div class="en"><a href="https://github.com/aPoWall/reels-pipeline-os/blob/main/CONTRIBUTING.md">CONTRIBUTING →</a></div></div>
   </div>
 
   <div class="ctxbar">
     <div class="ct">community</div>
-    <p><b>это открытый стек, а не один «правильный» пайплайн.</b> ветки сейчас: <b>max postnikov</b> (длинный youtube), <b>наш reels</b> блок-редактор, <b>answer-card</b> рецепт-пример. твоя ветка — следующая: форкни репо, добавь свой EDL / пример / правку слоя и пришли PR. формат веток — в <a href="https://github.com/aPoWall/reel-stack-compare/blob/main/CONTRIBUTING.md">CONTRIBUTING</a>, весь стек — в <a href="https://github.com/aPoWall/reel-stack-compare/blob/main/STACK.md">STACK.md</a>. родилось в ai mindset {space}; агент и человек ведут стек вместе.</p>
+    <p><b>открытый Pipeline OS для Reels.</b> ветки сейчас: <b>plan discipline</b>, <b>portable iphone kit</b>, <b>наш reels</b> блок-редактор, <b>answer-card</b> рецепт-пример, <b>creator-collab challenge</b> для публичных ростовых экспериментов. твоя ветка – следующая: форкни репо, добавь свой EDL / пример / правку слоя и пришли PR. формат веток – в <a href="https://github.com/aPoWall/reels-pipeline-os/blob/main/CONTRIBUTING.md">CONTRIBUTING</a>, весь стек – в <a href="https://github.com/aPoWall/reels-pipeline-os/blob/main/STACK.md">STACK.md</a>. родилось в ai mindset {space}; агент и человек ведут стек вместе.</p>
   </div>
 
   <footer class="stamp">
-    <div class="seeds"><span class="seed">compare</span><span class="seed">short</span><span class="seed active">live</span><span class="seed">adopt</span><span class="seed">evolve</span><span class="seed">tech</span></div>
-    <div><b>fig.1</b> · ai mindset shaper · reel-stack-compare · 2026-06-15</div>
+    <div class="seeds"><span class="seed">approaches</span><span class="seed">short</span><span class="seed active">live</span><span class="seed">challenge</span><span class="seed">adopt</span><span class="seed">evolve</span><span class="seed">tech</span></div>
+    <div><b>fig.1</b> · ai mindset shaper · reels-pipeline-os · 2026-06-25</div>
   </footer>
   <div class="src-list">
-    ресёрч · exa mcp — полный список источников в <a href="https://github.com/aPoWall/reel-stack-compare">readme репозитория</a> · вкладка «живой пример» — из рабочей reel-edit сессии.
+    ресёрч · exa mcp – полный список источников в <a href="https://github.com/aPoWall/reels-pipeline-os">readme репозитория</a> · вкладка «живой пример» – из рабочей reel-edit сессии.
   </div>
 
 </div>
@@ -784,10 +870,10 @@
     btn.setAttribute('aria-selected','true');
     window.scrollTo({top:0,behavior:'smooth'});
   }
-  // keyboard 1-6
+  // keyboard 1-8
   document.addEventListener('keydown',e=>{
-    const order=['how','live','compare','shortform','adopt','evolve','tech'];
-    const map={'1':'how','2':'live','3':'compare','4':'shortform','5':'adopt','6':'evolve','7':'tech'};
+    const order=['how','config','live','compare','shortform','adopt','evolve','tech'];
+    const map={'1':'how','2':'config','3':'live','4':'compare','5':'shortform','6':'adopt','7':'evolve','8':'tech'};
     if(map[e.key]){
       const btns=[...document.querySelectorAll('nav.tabs button')];
       tab(map[e.key], btns[order.indexOf(map[e.key])]);

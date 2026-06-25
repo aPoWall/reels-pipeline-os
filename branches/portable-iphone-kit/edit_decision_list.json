@@ -1,0 +1,106 @@
+{
+  "schema": "reels.edl.v2",
+  "branch": "portable-iphone-kit",
+  "publicSafe": true,
+  "source": "public-repo-mechanics-only",
+  "inspiredBy": "https://github.com/Voronik1801/reel_pipline",
+  "strategy": {
+    "mode": "portable_single_creator_pipeline",
+    "style": "iphone_sdr_shadow_captions_replaceable_identity",
+    "audio_policy": "single_source_with_explicit_stutter_and_deadair_review",
+    "privacy": "mechanics_only"
+  },
+  "pipeline": [
+    {
+      "id": "p00",
+      "label": "preflight",
+      "contract": "check tools, fonts, folders, and platform assumptions before edit"
+    },
+    {
+      "id": "p01",
+      "label": "iphone_sdr",
+      "contract": "convert HLG/HDR iPhone footage to SDR bt709 with native macOS tooling"
+    },
+    {
+      "id": "p02",
+      "label": "word_transcript",
+      "contract": "create word-level transcript, but mark unreliable windows for manual repair"
+    },
+    {
+      "id": "p03",
+      "label": "template_plan",
+      "contract": "copy a shoot template and fill source ranges plus transcript corrections"
+    },
+    {
+      "id": "p04",
+      "label": "stutter_review",
+      "contract": "detect long-word hidden false starts, near repeats, and intra-piece pauses"
+    },
+    {
+      "id": "p05",
+      "label": "render_body",
+      "contract": "scale/crop 1080x1920, add word-highlight captions as PNG overlay states"
+    },
+    {
+      "id": "p06",
+      "label": "identity_slots",
+      "contract": "cover, finale, music, and sticker/motif are replaceable config, not private defaults"
+    },
+    {
+      "id": "p07",
+      "label": "qa",
+      "contract": "review frames, color tags, subtitles, final audio, and retranscribe if needed"
+    }
+  ],
+  "overlay_tracks": [
+    {
+      "id": "shadow_captions",
+      "type": "caption",
+      "items": [
+        {
+          "start": 0.0,
+          "end": 31.0,
+          "text": "caption",
+          "safeZone": "upper-or-lower-third-by-account",
+          "style": "white_text_yellow_active_word_png_overlay"
+        }
+      ]
+    },
+    {
+      "id": "cover_hook",
+      "type": "card",
+      "items": [
+        {
+          "start": 0.0,
+          "end": 2.2,
+          "text": "hook",
+          "safeZone": "center",
+          "style": "replaceable_account_cover"
+        }
+      ]
+    },
+    {
+      "id": "finale",
+      "type": "stamp",
+      "items": [
+        {
+          "start": 28.0,
+          "end": 31.0,
+          "text": "identity",
+          "safeZone": "ending",
+          "style": "replaceable_account_signature"
+        }
+      ]
+    }
+  ],
+  "qa": [
+    "environment_check_passed",
+    "iphone_hdr_to_sdr_checked",
+    "rotation_checked",
+    "word_timestamps_reviewed_by_audio_energy",
+    "stutters_reviewed",
+    "deadair_reviewed",
+    "bt709_tags_present",
+    "no_private_media_or_paths"
+  ]
+}
