@@ -20,6 +20,15 @@ source audit -> ingest/color -> transcript/timing -> source blocks -> EDL state 
 
 The MP4 is an output. The durable artifact is the recipe: source blocks, cut map, overlay tracks, QA decisions and branch status.
 
+For Alex's personal account, one layer sits before the editing contract:
+
+```text
+visual references -> personal visual board -> editing contract -> render state
+```
+
+See [PERSONAL-LAYER.md](PERSONAL-LAYER.md) for the public-safe analysis of that
+upstream visual-board layer.
+
 ## 2. Decision Order
 
 ### 2.1 Source

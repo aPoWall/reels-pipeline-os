@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Mindset Reels Pipeline OS - public atlas + builder</title>
-<meta name="description" content="Public atlas for AI Mindset reel-edit: how the stack works, author approaches, technology map, EDL as source of truth, overlay lanes, branch packs, QA and a prompt builder.">
+<meta name="description" content="Public atlas for AI Mindset reel-edit: how the stack works, personal visual board, author approaches, technology map, EDL as source of truth, overlay lanes, branch packs, QA and a prompt builder.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI Mindset Reels Pipeline OS">
 <meta property="og:title" content="AI Mindset Reels Pipeline OS">
-<meta property="og:description" content="Public atlas of reel-edit: how the stack works, author approaches, technology map, timeline state, branch packs and prompt builder.">
+<meta property="og:description" content="Public atlas of reel-edit: personal visual board, author approaches, technology map, timeline state, branch packs and prompt builder.">
 <meta property="og:image" content="https://apowall.github.io/reels-pipeline-os/assets/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -409,9 +409,9 @@
 
   <header class="app">
     <div class="brand"><img class="lt" src="assets/aim-logo-light.png" alt="ai mindset"><img class="dk" src="assets/aim-logo.png" alt="ai mindset">reels pipeline os <span class="bsub">· ai mindset</span></div>
-    <div class="crumb"><b>public atlas</b> как работает reel-edit · подходы авторов · technology map · stack builder</div>
+    <div class="crumb"><b>public atlas</b> как работает reel-edit · personal style board · подходы авторов · stack builder</div>
     <div class="meta">
-      <b>v3.2</b> · 2026-06-26 · public<br>
+      <b>v3.3</b> · 2026-06-26 · public<br>
       <a href="https://github.com/aPoWall/reels-pipeline-os">github · repo</a> · <a href="https://apowall.github.io/reels-pipeline-os/">pages</a><br>
       <button class="tbtn" onclick="document.documentElement.classList.toggle('dark')">◐ тема</button>
     </div>
@@ -419,7 +419,7 @@
 
   <div class="thesis">
     <div class="tag">тезис</div>
-    <p><b>reels pipeline os</b> показывает публичную механику короткого монтажа: запись проходит source audit, transcript, source blocks, EDL, overlay lanes, render route и QA. в центре стоит <b>мой reel-edit 3.17</b>, вокруг него разложены подходы авторов, открытые технологии и простой builder, который собирает branch pack и готовый prompt для агента.</p>
+    <p><b>reels pipeline os</b> показывает публичную механику короткого монтажа: запись проходит source audit, transcript, source blocks, EDL, overlay lanes, render route и QA. в центре стоит <b>мой reel-edit 3.17</b>, перед ним лежит <b>personal visual board</b>, вокруг него разложены подходы авторов, открытые технологии и builder, который собирает branch pack и готовый prompt для агента.</p>
   </div>
 
   <div class="ctas">
@@ -431,6 +431,7 @@
   <nav class="tabs" role="tablist">
     <button role="tab" aria-selected="true" onclick="tab('map',this)">карта</button>
     <button role="tab" aria-selected="false" onclick="tab('skill',this)">мой стек</button>
+    <button role="tab" aria-selected="false" onclick="tab('style',this)">визуал</button>
     <button role="tab" aria-selected="false" onclick="tab('approaches',this)">авторы</button>
     <button role="tab" aria-selected="false" onclick="tab('tech',this)">технологии</button>
     <button role="tab" aria-selected="false" onclick="tab('config',this)">собрать</button>
@@ -586,6 +587,41 @@
       <div class="lname">collab interruption</div><div class="ldesc">interruptions and handoffs как сюжетные beat-ы. turn_map и collabBeats[] обязательны.</div>
       <div class="lname">cover set</div><div class="ldesc">10 cover options: identity references + motif object + clean no-text bases + Pillow caption layer.</div>
     </div>
+  </section>
+
+  <section class="panel" id="style">
+    <h2 class="sec">личный visual board - слой перед pipeline</h2>
+    <p class="lead">главный вывод из публичного atlas: <b>личный reel-stack начинается с visual board</b>. pipeline режет, хранит EDL и рендерит, но для @_inside_insanity сначала выбираются референсы, тон, эстетика, caption grammar и мотив дня.</p>
+
+    <div class="stackLayers">
+      <div class="layerName">reference intake</div><div class="layerBody">фото дня, screenshots, raw videos, внешние refs, телесный объект, mood phrase. Это вход для вкуса, еще не монтажный config.</div>
+      <div class="layerName">style bible</div><div class="layerBody">личная aesthetic DNA: свет, texture, palette, typography, materiality, recurring clusters and reference artists.</div>
+      <div class="layerName">inside-insanity board</div><div class="layerBody">account-level decisions: Lisbon raw-iPhone x Fuji, shaper/noir, color-return, kitchen OS, mono plashka, lowercase caption grammar.</div>
+      <div class="layerName">reel-edit pipeline</div><div class="layerBody">mode, audio spine, source audit, transcript, EDL, overlay lanes, render outputs and QA.</div>
+      <div class="layerName">public package</div><div class="layerBody">sanitized mechanics only: no raw media, private transcript text, handles, local paths or private source names.</div>
+    </div>
+
+    <h2 class="sec">как это ложится на один рилс</h2>
+    <div class="techGrid">
+      <article class="techCard core"><h3>visual premise</h3><b>что сегодня увиделось</b><p>один объект, состояние или reference: лампа, кухня, balcony, terminal-face, цвет возвращается, system fatigue.</p></article>
+      <article class="techCard"><h3>tone</h3><b>как это звучит</b><p>lowercase, dry, personal, sometimes profane in raw audio, screen copy softened and viewer-facing.</p></article>
+      <article class="techCard"><h3>aesthetic</h3><b>как это выглядит</b><p>raw iPhone/Fuji, moody dark account, mono plashka, thin frame, gold semantic chips, natural image alive.</p></article>
+      <article class="techCard"><h3>pipeline</h3><b>как это собирается</b><p>source audit, transcript, word-safe cuts, branch matrix, EDL, overlay lanes, text-free base, review MP4.</p></article>
+      <article class="techCard"><h3>feedback</h3><b>как стиль учится</b><p>Trial Reels, contact sheet, survivor/failure pair, skill patch note, updated visual board.</p></article>
+      <article class="techCard"><h3>public artifact</h3><b>как это отдать наружу</b><p>объяснить mechanics and stack without private media, real names, transcripts or local project state.</p></article>
+    </div>
+
+    <h2 class="sec">что это меняет в skills</h2>
+    <table class="cmp">
+      <thead><tr><th>skill</th><th>роль</th><th>обновление</th></tr></thead>
+      <tbody>
+        <tr><td class="l">style-bible</td><td>хранит внешний и личный вкус</td><td>пополнять refs, clusters, palette, light and texture language.</td></tr>
+        <tr><td class="l">visual-pipeline</td><td>превращает refs в Design DNA</td><td>давать brief/code для визуального борда, covers and page artifacts.</td></tr>
+        <tr><td class="l">inside-insanity</td><td>решает account voice and look</td><td>добавить visual board contract перед reel-edit route.</td></tr>
+        <tr><td class="l">reel-edit</td><td>исполняет render-grade spine</td><td>принимать `visualPipeline` metadata in EDL and keep style decisions data-driven.</td></tr>
+        <tr><td class="l">stack-compare</td><td>упаковывает публичную механику</td><td>показывать only sanitized stack, sources, builder prompt and branch recipes.</td></tr>
+      </tbody>
+    </table>
   </section>
 
   <section class="panel" id="approaches">
@@ -799,7 +835,7 @@
 
   <footer class="stamp">
     <div><b>fig.1</b> · reels-pipeline-os · visual atlas · 2026-06-26</div>
-    <div>shortcuts: <span class="kbd">1</span> map · <span class="kbd">2</span> skill · <span class="kbd">3</span> authors · <span class="kbd">4</span> tech · <span class="kbd">5</span> builder · <span class="kbd">d</span> theme</div>
+    <div>shortcuts: <span class="kbd">1</span> map · <span class="kbd">2</span> skill · <span class="kbd">3</span> visual · <span class="kbd">4</span> authors · <span class="kbd">5</span> tech · <span class="kbd">6</span> builder · <span class="kbd">d</span> theme</div>
   </footer>
 </div>
 
@@ -968,12 +1004,12 @@ Return:
     window.scrollTo({top:0,behavior:"smooth"});
   }
   function openTab(id){
-    const order = ["map","skill","approaches","tech","config","branches","sources"];
+    const order = ["map","skill","style","approaches","tech","config","branches","sources"];
     const btn = document.querySelectorAll("nav.tabs button")[order.indexOf(id)];
     if(btn) tab(id, btn);
   }
   document.addEventListener("keydown",e=>{
-    const map = {"1":"map","2":"skill","3":"approaches","4":"tech","5":"config","6":"branches","7":"sources"};
+    const map = {"1":"map","2":"skill","3":"style","4":"approaches","5":"tech","6":"config","7":"branches","8":"sources"};
     if(map[e.key]) openTab(map[e.key]);
     if(e.key === "d") document.documentElement.classList.toggle("dark");
   });

@@ -15,6 +15,7 @@ It is built from our real Codex/Claude Code reel sessions, the `reel-edit` skill
 |------|------|
 | **[index.html](index.html)** | public atlas, author map, technology map and live stack builder |
 | **[STACK.md](STACK.md)** | stack spec: packs, contracts, EDL schema, QA gates, source research, agent prompt |
+| **[PERSONAL-LAYER.md](PERSONAL-LAYER.md)** | public-safe analysis of the personal visual-board layer before `reel-edit` |
 | **[CONTRIBUTING.md](CONTRIBUTING.md)** | how to contribute a branch without leaking private data |
 | **[branches/](branches/)** | public-safe branch recipes and sample EDLs |
 
@@ -25,9 +26,10 @@ The current version leads with the **public montage atlas**:
 1. see how different editing approaches become one `editing state`;
 2. inspect how Alex's `reel-edit 3.17` skill is configured now;
 3. review the author/source map: Dasha/Voronik, X-Cut, OpenScript, HyperFrames, ReelStack, OpenReels, OpenCut;
-4. inspect the technology map: ffmpeg, ffprobe, avconvert, Whisper/Scribe, Pillow, OTIO, Remotion, HyperFrames, WebCodecs, MCP;
-5. choose `source`, `goal` and `mode` in the builder;
-6. copy the generated JSON config and agent prompt.
+4. inspect the personal layer: Style Bible → inside-insanity visual board → `reel-edit`;
+5. inspect the technology map: ffmpeg, ffprobe, avconvert, Whisper/Scribe, Pillow, OTIO, Remotion, HyperFrames, WebCodecs, MCP;
+6. choose `source`, `goal` and `mode` in the builder;
+7. copy the generated JSON config and agent prompt.
 
 ## Branch Packs
 
