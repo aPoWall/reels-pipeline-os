@@ -3,70 +3,69 @@
 <head>
 <meta charset="utf-8">
 <style>
-  :root{--bg:#f5f4ee;--paper:#fff;--ink:#080808;--muted:#77746c;--soft:#d8d5cc;--accent:#ffd84d;--blue:#b8dff5;--green:#caedcf;--mono:"JetBrains Mono",ui-monospace,Menlo,Monaco,Consolas,monospace}
+  :root{--bg:#fffef9;--paper:#fff;--ink:#050505;--muted:#8b887f;--soft:#dad6ca;--hi:#f6f3ea;--accent:#f4c83f;--mono:"JetBrains Mono",ui-monospace,Menlo,Monaco,Consolas,monospace}
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{width:1200px;height:630px;background:var(--bg);color:var(--ink);font-family:var(--mono);overflow:hidden}
-  body{padding:42px 52px;display:grid;grid-template-rows:auto 1fr auto;gap:28px}
+  html,body{width:1200px;height:630px;background:var(--bg);color:var(--ink);font-family:var(--mono);overflow:hidden;text-transform:lowercase}
+  body{padding:42px 52px;display:grid;grid-template-rows:auto 1fr auto;gap:26px}
   header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--ink);padding-bottom:18px}
-  .brand{font-size:30px;font-weight:800;letter-spacing:.18em;text-transform:lowercase}
+  .brand{font-size:32px;font-weight:800;letter-spacing:.17em;line-height:1.08}
   .brand span{display:block;color:var(--muted);font-size:13px;letter-spacing:.16em;margin-top:8px;font-weight:500;text-transform:uppercase}
   .meta{text-align:right;color:var(--muted);font-size:14px;line-height:1.55;letter-spacing:.08em}
   .meta b{color:var(--ink)}
-  main{display:grid;grid-template-columns:1fr 430px;gap:34px;align-items:center}
+  main{display:grid;grid-template-columns:1.1fr 460px;gap:34px;align-items:center}
   .eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.22em;color:var(--muted);margin-bottom:15px}
-  h1{font-size:58px;line-height:1.02;letter-spacing:.02em;text-transform:lowercase;margin-bottom:18px}
+  h1{font-size:58px;line-height:1.02;letter-spacing:.01em;margin-bottom:18px}
   h1 span{background:var(--ink);color:var(--bg);padding:0 12px}
   .sub{font-size:20px;line-height:1.45;max-width:680px}
   .sub b{font-weight:800}
   .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-  .tag{border:1px solid var(--ink);padding:7px 11px;border-radius:999px;font-size:12px;color:var(--muted);background:var(--paper)}
-  .tag.hot{background:var(--accent);color:#111;font-weight:800}
-  .board{border:2px solid var(--ink);background:var(--paper);border-radius:8px;overflow:hidden}
+  .tag{border:1px solid var(--ink);padding:7px 11px;font-size:12px;color:var(--muted);background:var(--paper)}
+  .tag.hot{background:var(--ink);color:var(--bg);font-weight:800}
+  .board{border:2px solid var(--ink);background:var(--paper);overflow:hidden}
   .board h2{font-size:13px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);padding:14px 16px;border-bottom:2px solid var(--ink)}
-  .row{display:grid;grid-template-columns:34px 1fr;border-bottom:1px solid var(--soft);min-height:54px}
+  .row{display:grid;grid-template-columns:42px 1fr;border-bottom:1px solid var(--soft);min-height:54px}
   .row:last-child{border-bottom:0}
   .n{display:grid;place-items:center;border-right:1px solid var(--ink);font-size:12px;font-weight:900}
   .r{display:flex;align-items:center;padding:10px 14px;font-size:15px;line-height:1.25}
-  .row:nth-child(3) .n,.row:nth-child(3) .r{background:var(--accent);color:#111}
-  .row:nth-child(5) .n,.row:nth-child(5) .r{background:var(--green)}
-  .row:nth-child(7) .n,.row:nth-child(7) .r{background:var(--blue)}
+  .row.core .n,.row.core .r{background:var(--ink);color:var(--bg)}
+  .row.gold .n,.row.gold .r{background:var(--accent);color:#111}
   footer{display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--ink);padding-top:16px;color:var(--muted);font-size:14px;letter-spacing:.05em}
   footer b{color:var(--ink)}
 </style>
 </head>
 <body>
   <header>
-    <div class="brand">reels stack configurator<span>ai mindset pipeline os</span></div>
-    <div class="meta"><b>v3.0</b> · 2026-06-25<br>public · forkable · config-first</div>
+    <div class="brand">reels pipeline os<span>ai mindset · visual atlas</span></div>
+    <div class="meta"><b>v3.1</b> · 2026-06-26<br>reel-edit 3.17 · public branch packs</div>
   </header>
   <main>
     <section>
-      <div class="eyebrow">source · goal · mode · pack</div>
-      <h1>choose the stack<br><span>before render</span></h1>
-      <div class="sub">iPhone ingestion, <b>EDL as SSOT</b>, overlay lanes, block editor direction, collab challenge metrics, QA and public branch packs.</div>
+      <div class="eyebrow">approaches · timeline state · skill config</div>
+      <h1>montage map<br><span>before config</span></h1>
+      <div class="sub">different editing approaches become one <b>reel-edit OS</b>: source audit, transcript, EDL as SSOT, overlay lanes, render route, QA and Trial loop.</div>
       <div class="tags">
-        <span class="tag hot">avconvert</span>
-        <span class="tag">EDL v3</span>
+        <span class="tag hot">reel-edit 3.17</span>
+        <span class="tag">EDL</span>
         <span class="tag">overlay lanes</span>
-        <span class="tag">Remotion</span>
+        <span class="tag">audio-first</span>
         <span class="tag">OTIO</span>
-        <span class="tag">public-safe branches</span>
+        <span class="tag">Remotion</span>
       </div>
     </section>
     <section class="board">
-      <h2>config route</h2>
+      <h2>editing state route</h2>
       <div class="row"><div class="n">1</div><div class="r">source audit</div></div>
-      <div class="row"><div class="n">2</div><div class="r">iPhone SDR / ingest</div></div>
-      <div class="row"><div class="n">3</div><div class="r">transcript + audio energy</div></div>
-      <div class="row"><div class="n">4</div><div class="r">source blocks</div></div>
-      <div class="row"><div class="n">5</div><div class="r">EDL + overlay lanes</div></div>
-      <div class="row"><div class="n">6</div><div class="r">render route + QA</div></div>
-      <div class="row"><div class="n">7</div><div class="r">Trial + skill update</div></div>
+      <div class="row"><div class="n">2</div><div class="r">transcript + word times</div></div>
+      <div class="row"><div class="n">3</div><div class="r">source blocks</div></div>
+      <div class="row core"><div class="n">4</div><div class="r">EDL as SSOT</div></div>
+      <div class="row"><div class="n">5</div><div class="r">overlay lanes</div></div>
+      <div class="row gold"><div class="n">6</div><div class="r">branch pack config</div></div>
+      <div class="row"><div class="n">7</div><div class="r">render + QA + publish</div></div>
     </section>
   </main>
   <footer>
     <div>apowall.github.io/<b>reels-pipeline-os</b></div>
-    <div>dashboard · stack spec · branch packs</div>
+    <div>visual dashboard · stack spec · public-safe recipes</div>
   </footer>
 </body>
 </html>

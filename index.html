@@ -1,1051 +1,750 @@
 <!doctype html>
-<html lang="ru" data-theme="light">
+<html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Reels Stack Configurator – AI Mindset Pipeline OS</title>
-  <meta name="description" content="Visual dashboard and configurator for agentic Reels editing stacks: iPhone ingestion, EDL, overlay lanes, block editor, render routes, QA and public branch packs." />
-  <meta property="og:title" content="Reels Stack Configurator" />
-  <meta property="og:description" content="Choose a montage stack, copy the contracts, ship a reproducible Reels pipeline." />
-  <meta property="og:image" content="assets/og-cover.png" />
-  <link rel="icon" href="favicon.svg" />
-  <style>
-    :root {
-      --bg: #f5f4ee;
-      --paper: #ffffff;
-      --ink: #080808;
-      --muted: #77746c;
-      --soft: #d8d5cc;
-      --faint: #edeae1;
-      --accent: #ffd84d;
-      --blue: #b8dff5;
-      --green: #caedcf;
-      --red: #efc6c0;
-      --line: #111111;
-      --shadow: 0 10px 30px rgba(0,0,0,.08);
-      --radius: 8px;
-      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    html[data-theme="dark"] {
-      --bg: #0c0c0b;
-      --paper: #151514;
-      --ink: #f4f1e8;
-      --muted: #aaa59b;
-      --soft: #393734;
-      --faint: #201f1d;
-      --accent: #ffe06b;
-      --blue: #264f62;
-      --green: #31583b;
-      --red: #684037;
-      --line: #f4f1e8;
-      --shadow: none;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: var(--mono);
-      letter-spacing: 0;
-    }
-    a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-    button { font: inherit; color: inherit; }
-    .shell {
-      width: min(1760px, calc(100vw - 56px));
-      margin: 0 auto;
-      padding: 28px 0 54px;
-    }
-    .topbar {
-      display: grid;
-      grid-template-columns: minmax(260px, 1fr) minmax(320px, 1.25fr) auto;
-      gap: 24px;
-      align-items: start;
-      padding: 22px 0 28px;
-      border-bottom: 2px solid var(--line);
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      min-width: 0;
-    }
-    .brand img {
-      width: 34px;
-      height: 34px;
-      object-fit: contain;
-      image-rendering: auto;
-    }
-    .brand h1 {
-      margin: 0;
-      font-size: clamp(28px, 3vw, 56px);
-      line-height: .98;
-      letter-spacing: .08em;
-      text-transform: lowercase;
-      font-weight: 800;
-    }
-    .brand small {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      line-height: 1.35;
-    }
-    .thesis {
-      border-left: 2px solid var(--soft);
-      padding-left: 22px;
-      font-family: var(--sans);
-      font-size: clamp(18px, 1.55vw, 28px);
-      line-height: 1.28;
-      font-weight: 560;
-    }
-    .thesis strong { font-weight: 820; }
-    .meta {
-      text-align: right;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.8;
-      white-space: nowrap;
-    }
-    .theme {
-      margin-top: 8px;
-      border: 2px solid var(--line);
-      background: var(--paper);
-      padding: 9px 13px;
-      cursor: pointer;
-      border-radius: var(--radius);
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(620px, 1.45fr) minmax(380px, .85fr);
-      gap: 18px;
-      margin-top: 26px;
-      align-items: start;
-    }
-    .panel {
-      border: 2px solid var(--line);
-      background: var(--paper);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .panel-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 15px 18px;
-      border-bottom: 2px solid var(--line);
-      text-transform: uppercase;
-      letter-spacing: .14em;
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .panel-head b { color: var(--ink); }
-    .panel-body { padding: 18px; }
-    .selector-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-    .selector h3 {
-      margin: 0 0 10px;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .15em;
-      color: var(--muted);
-    }
-    .seg {
-      display: grid;
-      gap: 7px;
-    }
-    .seg button {
-      border: 1px solid var(--line);
-      background: transparent;
-      min-height: 46px;
-      border-radius: var(--radius);
-      padding: 8px 11px;
-      cursor: pointer;
-      text-align: left;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      transition: transform .12s ease, background .12s ease;
-    }
-    .seg button:hover { transform: translateY(-1px); background: var(--faint); }
-    .seg button.active { background: var(--ink); color: var(--bg); }
-    .seg .label {
-      font-weight: 800;
-      line-height: 1.15;
-      font-size: 13px;
-    }
-    .seg .hint {
-      color: var(--muted);
-      font-size: 10px;
-      line-height: 1.2;
-      text-align: right;
-    }
-    .seg button.active .hint { color: color-mix(in srgb, var(--bg) 70%, transparent); }
-    .recommendation {
-      display: grid;
-      gap: 16px;
-      min-height: 100%;
-    }
-    .rec-title {
-      display: flex;
-      align-items: start;
-      justify-content: space-between;
-      gap: 14px;
-    }
-    .rec-title h2 {
-      margin: 0;
-      font-size: clamp(24px, 2vw, 38px);
-      line-height: 1.02;
-      letter-spacing: .02em;
-      max-width: 760px;
-    }
-    .score {
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      padding: 9px 11px;
-      min-width: 94px;
-      text-align: center;
-      background: var(--accent);
-      color: #111;
-      font-weight: 900;
-    }
-    .score span {
-      display: block;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      font-weight: 700;
-    }
-    .rec-copy {
-      margin: 0;
-      color: var(--muted);
-      font-family: var(--sans);
-      font-size: 17px;
-      line-height: 1.42;
-      font-weight: 560;
-    }
-    .rec-lists {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .mini {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--faint);
-      padding: 14px;
-    }
-    .mini h4 {
-      margin: 0 0 9px;
-      font-size: 11px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .mini ul {
-      margin: 0;
-      padding-left: 18px;
-      line-height: 1.62;
-      font-size: 13px;
-    }
-    .config-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      align-items: stretch;
-    }
-    pre {
-      margin: 0;
-      white-space: pre-wrap;
-      word-break: break-word;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 13px;
-      background: #090909;
-      color: #f7f2e8;
-      line-height: 1.45;
-      font-size: 12px;
-      min-height: 132px;
-      max-height: 430px;
-      overflow: auto;
-    }
-    .copy-btn {
-      border: 2px solid var(--line);
-      background: var(--ink);
-      color: var(--bg);
-      border-radius: var(--radius);
-      padding: 10px 14px;
-      min-width: 132px;
-      cursor: pointer;
-      font-weight: 800;
-      justify-self: end;
-    }
-    .pipeline-strip {
-      margin-top: 18px;
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--paper);
-      padding: 14px;
-      overflow-x: auto;
-    }
-    .pipe {
-      display: grid;
-      grid-template-columns: repeat(9, minmax(136px, 1fr));
-      gap: 8px;
-      min-width: 1180px;
-    }
-    .pipe-step {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      min-height: 76px;
-      padding: 11px;
-      background: var(--faint);
-      position: relative;
-    }
-    .pipe-step:after {
-      content: ">";
-      position: absolute;
-      right: -12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-      font-weight: 900;
-    }
-    .pipe-step:last-child:after { content: ""; }
-    .pipe-step b {
-      display: block;
-      font-size: 12px;
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-    .pipe-step span {
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.25;
-    }
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: 24px;
-      border: 2px solid var(--line);
-      width: fit-content;
-      max-width: 100%;
-      background: var(--paper);
-    }
-    .tabs button {
-      border: 0;
-      border-right: 1px solid var(--line);
-      background: transparent;
-      padding: 14px 22px;
-      min-height: 52px;
-      text-transform: uppercase;
-      letter-spacing: .17em;
-      font-size: 12px;
-      cursor: pointer;
-    }
-    .tabs button:last-child { border-right: 0; }
-    .tabs button[aria-selected="true"] {
-      background: var(--ink);
-      color: var(--bg);
-    }
-    .tab {
-      display: none;
-      padding-top: 30px;
-    }
-    .tab.active { display: block; }
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: end;
-      margin-bottom: 18px;
-      border-bottom: 1px solid var(--soft);
-      padding-bottom: 12px;
-    }
-    .section-title h2 {
-      margin: 0;
-      font-size: clamp(24px, 2.2vw, 42px);
-      line-height: 1;
-      letter-spacing: .06em;
-      text-transform: lowercase;
-    }
-    .section-title p {
-      margin: 0;
-      max-width: 760px;
-      color: var(--muted);
-      font-family: var(--sans);
-      font-size: 16px;
-      line-height: 1.45;
-      font-weight: 560;
-    }
-    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-    .card {
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--paper);
-      padding: 17px;
-      min-height: 100%;
-    }
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      line-height: 1.16;
-    }
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      font-family: var(--sans);
-      line-height: 1.43;
-      font-weight: 540;
-    }
-    .card ul {
-      margin: 12px 0 0;
-      padding-left: 18px;
-      line-height: 1.55;
-      color: var(--muted);
-      font-family: var(--sans);
-      font-weight: 540;
-    }
-    .tagline {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 14px;
-    }
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 11px;
-      background: var(--faint);
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .tag.hot { background: var(--accent); color: #111; font-weight: 800; }
-    .tag.blue { background: var(--blue); color: var(--ink); }
-    .tag.green { background: var(--green); color: var(--ink); }
-    .matrix {
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--paper);
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-    th, td {
-      border-bottom: 1px solid var(--soft);
-      border-right: 1px solid var(--soft);
-      padding: 13px 12px;
-      text-align: left;
-      vertical-align: top;
-      line-height: 1.42;
-    }
-    th:last-child, td:last-child { border-right: 0; }
-    tr:last-child td { border-bottom: 0; }
-    th {
-      background: var(--faint);
-      text-transform: uppercase;
-      letter-spacing: .13em;
-      color: var(--muted);
-      font-size: 11px;
-    }
-    .timeline {
-      display: grid;
-      gap: 12px;
-    }
-    .event {
-      display: grid;
-      grid-template-columns: 142px 1fr minmax(180px, .34fr);
-      gap: 12px;
-      align-items: stretch;
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--paper);
-    }
-    .event .date {
-      padding: 16px;
-      border-right: 1px solid var(--line);
-      font-size: 12px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .14em;
-    }
-    .event .body { padding: 16px; }
-    .event h3 { margin: 0 0 8px; font-size: 18px; }
-    .event p { margin: 0; color: var(--muted); font-family: var(--sans); line-height: 1.44; font-weight: 540; }
-    .event .artifact {
-      border-left: 1px solid var(--line);
-      padding: 16px;
-      background: var(--faint);
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.45;
-    }
-    .big-number {
-      font-size: clamp(38px, 4vw, 84px);
-      line-height: .9;
-      font-weight: 900;
-      letter-spacing: .02em;
-    }
-    .source-list {
-      display: grid;
-      gap: 10px;
-    }
-    .source {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 16px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 13px;
-      background: var(--paper);
-    }
-    .source b { text-transform: uppercase; letter-spacing: .12em; font-size: 11px; color: var(--muted); }
-    footer {
-      margin-top: 38px;
-      border-top: 2px solid var(--line);
-      padding-top: 16px;
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-    }
-    @media (max-width: 1180px) {
-      .topbar, .hero-grid, .selector-grid, .grid-4 { grid-template-columns: 1fr; }
-      .meta { text-align: left; }
-      .rec-lists, .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .event { grid-template-columns: 1fr; }
-      .event .date, .event .artifact { border: 0; border-bottom: 1px solid var(--line); }
-      .event .artifact { border-bottom: 0; border-top: 1px solid var(--line); }
-    }
-    @media (max-width: 720px) {
-      .shell { width: min(100vw - 24px, 1760px); padding-top: 12px; }
-      .topbar { gap: 16px; padding-top: 12px; }
-      .brand h1 { font-size: 29px; }
-      .thesis { padding-left: 14px; font-size: 18px; }
-      .tabs { width: 100%; }
-      .tabs button { flex: 1 1 50%; border-bottom: 1px solid var(--line); font-size: 11px; padding: 12px 10px; }
-      .tabs button:nth-child(2n) { border-right: 0; }
-      .config-row { grid-template-columns: 1fr; }
-      footer { flex-direction: column; }
-      .source { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Mindset Reels Pipeline OS - visual atlas + configurator</title>
+<meta name="description" content="Visual atlas and configurator for AI Mindset reel-edit: montage approaches, EDL as source of truth, overlay lanes, branch packs, QA and public-safe stack recipes.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Mindset Reels Pipeline OS">
+<meta property="og:title" content="AI Mindset Reels Pipeline OS">
+<meta property="og:description" content="Visual atlas of reel-edit: approaches, timeline state, overlay lanes, branch packs and stack configurator.">
+<meta property="og:image" content="https://apowall.github.io/reels-pipeline-os/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://apowall.github.io/reels-pipeline-os/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Mindset Reels Pipeline OS">
+<meta name="twitter:description" content="Visual atlas + configurator for agentic Reels editing.">
+<meta name="twitter:image" content="https://apowall.github.io/reels-pipeline-os/assets/og-cover.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fffef9;
+    --ink:#050505;
+    --muted:#8b887f;
+    --soft:#dad6ca;
+    --hair:#eeeeea;
+    --hi:#f6f3ea;
+    --paper:#ffffff;
+    --accent:#f4c83f;
+    --red:#d94b3d;
+    --green:#87b77c;
+    --blue:#8ab6ce;
+    --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color-scheme:light;
+  }
+  :root.dark{
+    --bg:#11110f;
+    --ink:#efeee8;
+    --muted:#9d978c;
+    --soft:#383630;
+    --hair:#23221f;
+    --hi:#191817;
+    --paper:#151412;
+    --accent:#f7d75a;
+    --red:#e35d50;
+    --green:#94c48b;
+    --blue:#90c4dc;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--mono);
+    font-size:13px;
+    line-height:1.55;
+    letter-spacing:.015em;
+    -webkit-font-smoothing:antialiased;
+    text-transform:lowercase;
+  }
+  a{color:inherit;text-decoration:underline dotted;text-underline-offset:3px}
+  button{font:inherit;color:inherit}
+  .wrap{max-width:1220px;margin:0 auto;padding:26px 26px 64px}
+
+  header.app{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    gap:24px;
+    align-items:baseline;
+    border-bottom:1px solid var(--ink);
+    padding-bottom:16px;
+  }
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.20em;font-size:21px;white-space:nowrap}
+  .brand img{height:26px;width:26px;display:block}
+  .brand img.dk{display:none}
+  :root.dark .brand img.lt{display:none}
+  :root.dark .brand img.dk{display:block}
+  .bsub{font-size:10px;color:var(--muted);letter-spacing:.18em;font-weight:400}
+  .crumb{color:var(--muted);font-size:12.5px}
+  .crumb b{color:var(--ink);font-weight:600}
+  .meta{justify-self:end;color:var(--muted);font-size:11.5px;text-align:right;line-height:1.7;white-space:nowrap}
+  .meta b{color:var(--ink);font-weight:600;letter-spacing:.06em}
+  .tbtn{font:inherit;font-size:11px;background:var(--bg);color:var(--ink);border:1px solid var(--ink);padding:4px 9px;cursor:pointer;letter-spacing:.08em;border-radius:0}
+  .tbtn:hover{background:var(--ink);color:var(--bg)}
+  @media(max-width:820px){
+    header.app{grid-template-columns:1fr;gap:10px;align-items:start}
+    .meta{justify-self:start;text-align:left}
+    .brand{white-space:normal}
+  }
+
+  .thesis{
+    margin:18px 0 14px;
+    border:1px solid var(--ink);
+    padding:14px 18px;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:16px;
+    align-items:center;
+    background:var(--paper);
+  }
+  .thesis .tag{
+    font-size:10px;
+    letter-spacing:.20em;
+    text-transform:uppercase;
+    color:var(--muted);
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    align-self:stretch;
+    border-right:1px solid var(--soft);
+    padding-right:10px;
+  }
+  .thesis p{margin:0;font-size:13.5px;line-height:1.65;max-width:1060px}
+  .thesis b{font-weight:700}
+
+  .ctas{display:grid;grid-template-columns:2fr 1.35fr 1.2fr;gap:14px;margin:18px 0 22px}
+  .cta{
+    border:1px solid var(--ink);
+    padding:16px 18px;
+    text-decoration:none;
+    display:flex;
+    min-height:86px;
+    flex-direction:column;
+    justify-content:center;
+    background:var(--paper);
+  }
+  .cta:hover{background:var(--ink);color:var(--bg)}
+  .cta.hero{background:var(--ink);color:var(--bg)}
+  .cta.hero:hover{background:var(--bg);color:var(--ink)}
+  .ctaTop{font-weight:700;font-size:18px;line-height:1.2}
+  .ctaSub{display:block;color:var(--muted);font-size:10.5px;margin-top:8px;line-height:1.45}
+  .cta.hero .ctaSub{color:rgba(255,255,255,.62)}
+  .cta.hero:hover .ctaSub{color:var(--muted)}
+  .glyph{
+    width:28px;height:28px;border:1px solid currentColor;border-radius:50%;
+    display:inline-grid;place-items:center;margin-right:10px;font-weight:700;
+  }
+  @media(max-width:900px){.ctas{grid-template-columns:1fr}.cta{min-height:auto}}
+
+  nav.tabs{display:flex;gap:0;margin:18px 0 22px;border:1px solid var(--ink);width:fit-content;max-width:100%;overflow-x:auto}
+  nav.tabs button{
+    font:inherit;
+    font-size:11.5px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    background:var(--bg);
+    color:var(--ink);
+    border:0;
+    border-right:1px solid var(--ink);
+    padding:9px 19px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  nav.tabs button:last-child{border-right:0}
+  nav.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+  .panel{display:none}
+  .panel.on{display:block;animation:fade .18s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  h2.sec{
+    font-size:10.5px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--muted);
+    font-weight:500;
+    margin:30px 0 14px;
+    border-bottom:1px solid var(--soft);
+    padding-bottom:7px;
+  }
+  h2.sec:first-child{margin-top:4px}
+  .lead{font-size:13px;color:var(--ink);margin:0 0 16px;max-width:940px;overflow-wrap:anywhere}
+  .lead .muted,.muted{color:var(--muted)}
+
+  .mapHero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr);gap:18px;align-items:stretch}
+  .mapPanel,.sidePanel,.block,.pipe,.recipe,.configShell,.copyBox,.road li,.metric,.sourceCard{
+    border:1px solid var(--ink);
+    background:var(--paper);
+  }
+  .mapPanel{padding:18px}
+  .mapTitle{display:flex;justify-content:space-between;gap:14px;align-items:baseline;border-bottom:1px solid var(--soft);padding-bottom:10px;margin-bottom:16px}
+  .mapTitle b{font-size:13.5px;letter-spacing:.08em}
+  .mapTitle span{font-size:10px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
+  .approachGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--ink)}
+  .approach{
+    min-height:238px;
+    border-right:1px solid var(--soft);
+    padding:12px 12px 11px;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  .approach:last-child{border-right:0}
+  .approach.main{background:var(--ink);color:var(--bg)}
+  .approach .ey{font-size:9px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+  .approach.main .ey{color:rgba(255,255,255,.58)}
+  .approach h3{margin:0;font-size:13px;line-height:1.25;letter-spacing:.02em}
+  .approach ul{margin:0;padding-left:16px;color:var(--muted);font-size:10.8px;line-height:1.5}
+  .approach.main ul{color:rgba(255,255,255,.76)}
+  .approach .take{margin-top:auto;border-top:1px dashed var(--soft);padding-top:8px;font-size:10.5px;line-height:1.45}
+  .approach.main .take{border-color:rgba(255,255,255,.26)}
+  .take b{font-weight:700}
+
+  .funnel{margin-top:18px;border:1px solid var(--ink);display:grid;grid-template-columns:repeat(7,1fr)}
+  .step{min-height:78px;border-right:1px solid var(--soft);padding:11px 9px;position:relative;background:var(--paper)}
+  .step:last-child{border-right:0}
+  .step:after{content:"";position:absolute;right:-6px;top:calc(50% - 6px);width:10px;height:10px;border-top:1px solid var(--ink);border-right:1px solid var(--ink);background:var(--paper);transform:rotate(45deg);z-index:2}
+  .step:last-child:after{display:none}
+  .step .n{font-size:9px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .step b{display:block;margin-top:3px;font-size:11.5px;line-height:1.22}
+  .step span{display:block;margin-top:4px;font-size:9.5px;color:var(--muted);line-height:1.3}
+  .step.core{background:var(--ink);color:var(--bg)}
+  .step.core span,.step.core .n{color:rgba(255,255,255,.65)}
+  .step.core:after{background:var(--ink)}
+  @media(max-width:980px){
+    .mapHero{grid-template-columns:1fr}
+    .approachGrid{grid-template-columns:1fr 1fr}
+    .approach:nth-child(2){border-right:0}
+    .approach:nth-child(-n+2){border-bottom:1px solid var(--soft)}
+    .funnel{grid-template-columns:1fr}
+    .step{border-right:0;border-bottom:1px solid var(--soft)}
+    .step:after{display:none}
+  }
+  @media(max-width:620px){.approachGrid{grid-template-columns:1fr}.approach{border-right:0;border-bottom:1px solid var(--soft)}.approach:last-child{border-bottom:0}}
+
+  .sidePanel{padding:16px 17px;display:flex;flex-direction:column;gap:14px}
+  .bigNumber{font-size:54px;line-height:1;font-weight:800;letter-spacing:-.02em}
+  .sidePanel h3{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0}
+  .sidePanel p{margin:0;font-size:12px;color:var(--muted);line-height:1.55}
+  .modeList{display:grid;gap:8px}
+  .modeRow{border:1px solid var(--soft);padding:9px 10px;display:grid;grid-template-columns:120px 1fr;gap:10px;align-items:start}
+  .modeRow b{font-size:11px}
+  .modeRow span{font-size:10.5px;color:var(--muted);line-height:1.4}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .cards.two{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:900px){.cards,.cards.two{grid-template-columns:1fr}}
+  .block{padding:16px 17px;position:relative}
+  .block.inv{background:var(--ink);color:var(--bg)}
+  .num{position:absolute;top:-11px;left:14px;width:23px;height:23px;background:var(--ink);color:var(--bg);border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700}
+  .block.inv .num{background:var(--bg);color:var(--ink)}
+  .block h3{margin:3px 0 4px;font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);font-weight:500}
+  .block.inv h3{color:rgba(255,255,255,.62)}
+  .block .ld{font-size:14px;font-weight:700;margin:0 0 7px;line-height:1.25}
+  .block p{margin:0 0 8px;font-size:11.8px;color:var(--ink);line-height:1.5}
+  .block.inv p{color:rgba(255,255,255,.84)}
+  .src{font-size:10px;color:var(--muted);letter-spacing:.04em;border-top:1px dashed var(--soft);padding-top:7px;margin-top:9px}
+  .block.inv .src{color:rgba(255,255,255,.55);border-color:rgba(255,255,255,.25)}
+
+  .lanes{border:1px solid var(--ink);display:grid;grid-template-columns:170px 1fr;margin:4px 0 8px;background:var(--paper)}
+  .lname,.ldesc{border-bottom:1px solid var(--soft);padding:10px 13px}
+  .lname{border-right:1px solid var(--ink);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);background:var(--hi)}
+  .ldesc{font-size:11.7px}
+  .lanes>div:nth-last-child(-n+2){border-bottom:0}
+  @media(max-width:720px){.lanes{grid-template-columns:1fr}.lname{border-right:0}.ldesc{border-bottom:1px solid var(--soft)}}
+
+  .timeline{
+    border:1px solid var(--ink);
+    background:var(--paper);
+    padding:14px;
+    display:grid;
+    gap:10px;
+  }
+  .track{display:grid;grid-template-columns:120px 1fr;gap:0;min-height:34px}
+  .trackLabel{border:1px solid var(--soft);border-right:0;padding:8px 10px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:var(--hi)}
+  .trackBody{border:1px solid var(--soft);position:relative;padding:7px 8px;display:flex;gap:5px;align-items:center;overflow:hidden}
+  .pill{border:1px solid var(--ink);background:var(--bg);padding:4px 8px;font-size:10px;white-space:nowrap}
+  .pill.dark{background:var(--ink);color:var(--bg)}
+  .pill.dash{border-style:dashed;color:var(--muted)}
+  .pill.gold{background:var(--accent);color:#111}
+  @media(max-width:720px){.track{grid-template-columns:1fr}.trackLabel{border-right:1px solid var(--soft);border-bottom:0}}
+
+  table.cmp{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px;background:var(--paper)}
+  table.cmp th{text-align:left;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:8px 9px;border-bottom:1px solid var(--ink)}
+  table.cmp td{padding:9px 9px;border-bottom:1px solid var(--soft);vertical-align:top;line-height:1.45}
+  table.cmp tr:last-child td{border-bottom:0}
+  table.cmp td.l{font-weight:700;white-space:nowrap}
+  table.cmp td.move:before{content:"→ ";color:var(--muted)}
+  .verdict{font-size:9.5px;letter-spacing:.10em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--ink);white-space:nowrap;display:inline-block}
+  .verdict.us{background:var(--ink);color:var(--bg)}
+  .verdict.borrow{background:var(--bg);color:var(--ink)}
+  .verdict.option{border-style:dashed;color:var(--muted);border-color:var(--muted)}
+
+  .configShell{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(340px,.9fr);gap:0;overflow:hidden}
+  .configLeft{border-right:1px solid var(--ink);padding:16px}
+  .configRight{padding:16px;background:var(--paper)}
+  .selectorGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .selector h3{margin:0 0 10px;font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}
+  .seg{display:grid;gap:7px}
+  .seg button{border:1px solid var(--ink);background:transparent;min-height:48px;padding:8px 10px;cursor:pointer;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .seg button:hover{background:var(--hi)}
+  .seg button.active{background:var(--ink);color:var(--bg)}
+  .seg .label{font-weight:700;font-size:12.4px;line-height:1.15}
+  .seg .hint{font-size:9.8px;color:var(--muted);text-align:right;line-height:1.2}
+  .seg button.active .hint{color:rgba(255,255,255,.68)}
+  .recHead{display:flex;justify-content:space-between;gap:12px;align-items:start;border-bottom:1px solid var(--soft);padding-bottom:11px;margin-bottom:12px}
+  .recHead h3{margin:0;font-size:22px;line-height:1.08}
+  .score{border:1px solid var(--ink);background:var(--accent);color:#111;padding:7px 10px;text-align:center;font-weight:800;min-width:70px}
+  .score span{display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+  .recText{font-size:12.2px;color:var(--muted);margin:0 0 12px;line-height:1.55}
+  .miniCols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .mini{border:1px solid var(--soft);padding:10px;background:var(--hi)}
+  .mini b{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .mini ul{margin:0;padding-left:16px;font-size:11px;line-height:1.5}
+  .copyBox{margin-top:12px;background:#050505;color:#f6f1e7;padding:12px;font-size:10.6px;line-height:1.45;max-height:230px;overflow:auto;text-transform:none}
+  .copyBtn{margin-top:9px;border:1px solid var(--ink);background:var(--bg);padding:7px 10px;cursor:pointer;font-size:11px}
+  .copyBtn:hover{background:var(--ink);color:var(--bg)}
+  @media(max-width:980px){.configShell{grid-template-columns:1fr}.configLeft{border-right:0;border-bottom:1px solid var(--ink)}.selectorGrid{grid-template-columns:1fr}.miniCols{grid-template-columns:1fr}}
+
+  .road{counter-reset:r;list-style:none;padding:0;margin:6px 0 0}
+  .road li{padding:12px 14px 12px 44px;position:relative;margin-bottom:9px;background:var(--paper)}
+  .road li:before{counter-increment:r;content:counter(r);position:absolute;left:12px;top:12px;width:20px;height:20px;background:var(--ink);color:var(--bg);border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:700}
+  .road li b{font-size:12.5px}
+  .road li p{margin:4px 0 0;font-size:11.5px;color:var(--muted)}
+  .tagline{float:right;font-size:9.5px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);border:1px dashed var(--soft);padding:1px 7px}
+
+  .code{border:1px solid var(--ink);background:#050505;color:#f6f1e7;padding:13px 15px;overflow:auto;font-size:11px;line-height:1.5;text-transform:none}
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--ink);background:var(--paper)}
+  .metric{border:0;border-right:1px solid var(--soft);padding:13px}
+  .metric:last-child{border-right:0}
+  .metric .m{font-weight:800;font-size:20px;line-height:1}
+  .metric .lb{margin-top:5px;font-size:9.5px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;line-height:1.35}
+  @media(max-width:800px){.metrics{grid-template-columns:1fr 1fr}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:1px solid var(--soft)}}
+
+  .sourceGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .sourceCard{padding:13px 14px}
+  .sourceCard b{display:block;font-size:12px;margin-bottom:4px}
+  .sourceCard p{margin:0;font-size:11.5px;color:var(--muted)}
+  @media(max-width:800px){.sourceGrid{grid-template-columns:1fr}}
+
+  .exlib{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:6px}
+  .exo{border:1px solid var(--ink);padding:13px;background:var(--paper)}
+  .exo.you{background:var(--ink);color:var(--bg)}
+  .et{font-size:9.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase}
+  .exo.you .et{color:rgba(255,255,255,.6)}
+  .eh{font-size:13.5px;font-weight:700;margin:3px 0 6px}
+  .exo p{margin:0;color:var(--muted);font-size:11.2px;line-height:1.45}
+  .exo.you p{color:rgba(255,255,255,.78)}
+  @media(max-width:980px){.exlib{grid-template-columns:1fr 1fr}}
+  @media(max-width:620px){.exlib{grid-template-columns:1fr}}
+
+  footer.stamp{margin-top:30px;border-top:1px solid var(--ink);padding-top:14px;color:var(--muted);font-size:10.5px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer.stamp b{color:var(--ink)}
+  .kbd{border:1px solid var(--soft);padding:0 5px;font-size:10px}
+</style>
 </head>
 <body>
-  <main class="shell">
-    <header class="topbar">
-      <div class="brand">
-        <img src="assets/aim-logo.png" alt="" />
+<div class="wrap">
+
+  <header class="app">
+    <div class="brand"><img class="lt" src="assets/aim-logo-light.png" alt="ai mindset"><img class="dk" src="assets/aim-logo.png" alt="ai mindset">reels pipeline os <span class="bsub">· ai mindset</span></div>
+    <div class="crumb"><b>visual atlas</b> монтажных подходов · reel-edit skill · timeline state · stack configurator</div>
+    <div class="meta">
+      <b>v3.1</b> · 2026-06-26 · public<br>
+      <a href="https://github.com/aPoWall/reels-pipeline-os">github · repo</a> · <a href="https://apowall.github.io/reels-pipeline-os/">pages</a><br>
+      <button class="tbtn" onclick="document.documentElement.classList.toggle('dark')">◐ тема</button>
+    </div>
+  </header>
+
+  <div class="thesis">
+    <div class="tag">тезис</div>
+    <p><b>reels pipeline os</b> показывает монтаж как карту решений: разные школы дают полезные слои, общий примитив держит <b>editing state</b>, а твой <b>reel-edit 3.17</b> превращает запись в EDL, overlay lanes, branch matrix, render route, QA и publish loop. конфигуратор ниже собирает конкретный branch pack под задачу.</p>
+  </div>
+
+  <div class="ctas">
+    <a class="cta hero" href="#skill" onclick="openTab('skill')"><span class="ctaTop"><span class="glyph">◎</span>как работает мой reel-edit</span><span class="ctaSub">mode-first · audio-first · EDL · overlay lanes · branch matrix · QA</span></a>
+    <a class="cta" href="#config" onclick="openTab('config')"><span class="ctaTop"><span class="glyph">⌁</span>собрать стек</span><span class="ctaSub">source + goal + mode → branch pack + JSON config</span></a>
+    <a class="cta" href="STACK.md" download="ai-mindset-reels-pipeline-STACK.md"><span class="ctaTop"><span class="glyph">↓</span>скачать STACK.md</span><span class="ctaSub">слои, контракты, EDL-схема, public/private boundary</span></a>
+  </div>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" onclick="tab('map',this)">карта</button>
+    <button role="tab" aria-selected="false" onclick="tab('skill',this)">мой reel-edit</button>
+    <button role="tab" aria-selected="false" onclick="tab('approaches',this)">подходы</button>
+    <button role="tab" aria-selected="false" onclick="tab('config',this)">конфигуратор</button>
+    <button role="tab" aria-selected="false" onclick="tab('branches',this)">ветки</button>
+    <button role="tab" aria-selected="false" onclick="tab('sources',this)">sources</button>
+  </nav>
+
+  <section class="panel on" id="map">
+    <h2 class="sec">общая карта – что мы собираем</h2>
+    <div class="mapHero">
+      <div class="mapPanel">
+        <div class="mapTitle"><b>монтажные подходы складываются в один editing state</b><span>approaches → contracts → reel-edit</span></div>
+        <div class="approachGrid">
+          <div class="approach">
+            <div class="ey">discipline</div>
+            <h3>long-form plan</h3>
+            <ul>
+              <li>монтажный план как SSOT</li>
+              <li>draft → final loop</li>
+              <li>word-time рез</li>
+              <li>детерминированный publish</li>
+            </ul>
+            <div class="take"><b>берем:</b> план, дешёвые черновики, точность таймкодов.</div>
+          </div>
+          <div class="approach">
+            <div class="ey">portable kit</div>
+            <h3>creator handoff</h3>
+            <ul>
+              <li>preflight перед монтажом</li>
+              <li>iPhone HDR/HLG → SDR</li>
+              <li>templates вместо магии</li>
+              <li>stutter/dead-air hints</li>
+            </ul>
+            <div class="take"><b>берем:</b> avconvert, templates, healthcheck, переносимость.</div>
+          </div>
+          <div class="approach">
+            <div class="ey">agent timeline</div>
+            <h3>browser / nle wave</h3>
+            <ul>
+              <li>timeline tracks/items</li>
+              <li>JSON state → render</li>
+              <li>live preview</li>
+              <li>OTIO / Remotion bridge</li>
+            </ul>
+            <div class="take"><b>берем:</b> track model, adapters, future browser editor.</div>
+          </div>
+          <div class="approach main">
+            <div class="ey">ours</div>
+            <h3>reel-edit os</h3>
+            <ul>
+              <li>mode-first before style</li>
+              <li>one audio spine</li>
+              <li>EDL + overlay lanes</li>
+              <li>survivor patterns</li>
+            </ul>
+            <div class="take"><b>ядро:</b> raw reel → reusable recipe → branch pack.</div>
+          </div>
+        </div>
+
+        <div class="funnel" aria-label="reel-edit pipeline">
+          <div class="step"><div class="n">01</div><b>source audit</b><span>ffprobe · audio · frames</span></div>
+          <div class="step"><div class="n">02</div><b>transcript</b><span>word-times · pauses</span></div>
+          <div class="step"><div class="n">03</div><b>source blocks</b><span>hook · tension · turn</span></div>
+          <div class="step core"><div class="n">04</div><b>EDL SSOT</b><span>cuts · labels · risk</span></div>
+          <div class="step"><div class="n">05</div><b>overlay lanes</b><span>caption · card · rail</span></div>
+          <div class="step"><div class="n">06</div><b>render route</b><span>draft · review · base</span></div>
+          <div class="step"><div class="n">07</div><b>QA / trial</b><span>audio · watch · publish</span></div>
+        </div>
+      </div>
+
+      <aside class="sidePanel">
         <div>
-          <h1>reels stack configurator</h1>
-          <small>ai mindset pipeline os · v3.0 · 2026-06-25</small>
+          <h3>current reel-edit skill</h3>
+          <div class="bigNumber">3.17</div>
+          <p>главная настройка сейчас: сначала выбрать монтажную работу, потом визуальный стиль. skill хранит cut map, overlay tracks и QA так, чтобы результат можно было пересобрать, а не только посмотреть как mp4.</p>
         </div>
-      </div>
-      <div class="thesis">
-        <strong>Выбери источник, цель и монтажный режим.</strong> Dashboard соберёт стек: ingestion, EDL, overlay lanes, render route, QA, branch pack и skills.
-      </div>
-      <div class="meta">
-        public repo · <a href="https://github.com/aPoWall/reels-pipeline-os">github</a><br />
-        live · <a href="https://apowall.github.io/reels-pipeline-os/">pages</a><br />
-        <button class="theme" id="themeBtn">тема</button>
-      </div>
-    </header>
-
-    <section class="hero-grid" id="configurator">
-      <div class="panel">
-        <div class="panel-head"><b>конфигуратор</b><span>source · goal · mode</span></div>
-        <div class="panel-body">
-          <div class="selector-grid">
-            <div class="selector">
-              <h3>1 · источник</h3>
-              <div class="seg" data-group="source">
-                <button class="active" data-value="iphone_single"><span class="label">iPhone one-take</span><span class="hint">говорящая голова</span></button>
-                <button data-value="multi_take"><span class="label">multi-take</span><span class="hint">дубли и повторы</span></button>
-                <button data-value="collab"><span class="label">collab</span><span class="hint">2+ создателя</span></button>
-                <button data-value="screen_system"><span class="label">screen/system</span><span class="hint">агенты, терминал</span></button>
-                <button data-value="public_reference"><span class="label">reference echo</span><span class="hint">стиль без копии</span></button>
-                <button data-value="public_package"><span class="label">public package</span><span class="hint">repo / dashboard</span></button>
-              </div>
-            </div>
-            <div class="selector">
-              <h3>2 · цель</h3>
-              <div class="seg" data-group="goal">
-                <button class="active" data-value="publish_fast"><span class="label">publish fast</span><span class="hint">1 рилс сейчас</span></button>
-                <button data-value="reusable_recipe"><span class="label">recipe</span><span class="hint">повторить позже</span></button>
-                <button data-value="manual_review"><span class="label">reviewable</span><span class="hint">человек правит</span></button>
-                <button data-value="public_branch"><span class="label">public branch</span><span class="hint">отдать наружу</span></button>
-                <button data-value="challenge"><span class="label">challenge</span><span class="hint">рост / Trial</span></button>
-                <button data-value="skill_update"><span class="label">skill update</span><span class="hint">закрепить практику</span></button>
-              </div>
-            </div>
-            <div class="selector">
-              <h3>3 · режим</h3>
-              <div class="seg" data-group="mode">
-                <button data-value="dry_preserve"><span class="label">dry preserve</span><span class="hint">минимум резки</span></button>
-                <button class="active" data-value="caption_only"><span class="label">caption only</span><span class="hint">соц. дефолт</span></button>
-                <button data-value="proof_overlay"><span class="label">proof overlay</span><span class="hint">доказательства</span></button>
-                <button data-value="visible_flow"><span class="label">visible flow</span><span class="hint">процесс виден</span></button>
-                <button data-value="social_short"><span class="label">social short</span><span class="hint">панч и CTA</span></button>
-                <button data-value="experimental"><span class="label">experimental</span><span class="hint">1 wild branch</span></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <aside class="panel recommendation" aria-live="polite">
-        <div class="panel-head"><b>рекомендация</b><span id="recId">portable-core</span></div>
-        <div class="panel-body recommendation">
-          <div class="rec-title">
-            <h2 id="recTitle">Portable iPhone Core</h2>
-            <div class="score"><span>fit</span><div id="recScore">92</div></div>
-          </div>
-          <p class="rec-copy" id="recCopy"></p>
-          <div class="rec-lists">
-            <div class="mini">
-              <h4>layers</h4>
-              <ul id="recLayers"></ul>
-            </div>
-            <div class="mini">
-              <h4>artifacts</h4>
-              <ul id="recArtifacts"></ul>
-            </div>
-          </div>
-          <div class="config-row">
-            <pre id="configPreview"></pre>
-            <button class="copy-btn" id="copyBtn">copy config</button>
-          </div>
+        <div class="modeList">
+          <div class="modeRow"><b>default matrix</b><span>dry_preserve · caption_only · one context branch · short social cut</span></div>
+          <div class="modeRow"><b>audio policy</b><span>один voice master; cross-take remix только как explicit experimental branch</span></div>
+          <div class="modeRow"><b>public layer</b><span>только mechanics: no raw footage, names, transcripts, paths, handles</span></div>
+          <div class="modeRow"><b>survivors</b><span>color-return, kitchen os, dual persona, collab interruption, cover set</span></div>
         </div>
       </aside>
-    </section>
+    </div>
 
-    <section class="pipeline-strip" aria-label="pipeline map">
-      <div class="pipe">
-        <div class="pipe-step"><b>source audit</b><span>media, rotation, color, privacy boundary</span></div>
-        <div class="pipe-step"><b>ingest</b><span>avconvert / ffmpeg / browser decode</span></div>
-        <div class="pipe-step"><b>transcript</b><span>word timecodes + audio energy</span></div>
-        <div class="pipe-step"><b>source blocks</b><span>hook, turn, proof, punch, close</span></div>
-        <div class="pipe-step"><b>EDL state</b><span>cuts as SSOT, branch policy</span></div>
-        <div class="pipe-step"><b>overlay lanes</b><span>captions, cards, rail, proof</span></div>
-        <div class="pipe-step"><b>render route</b><span>ffmpeg, Remotion, browser, MCP</span></div>
-        <div class="pipe-step"><b>QA</b><span>ffprobe, contact sheet, listening pass</span></div>
-        <div class="pipe-step"><b>publish loop</b><span>Trial, metrics, skill update</span></div>
-      </div>
-    </section>
+    <h2 class="sec">таймлайн как главный объект</h2>
+    <p class="lead">страница должна объяснять главный объект: <b>состояние монтажа</b>. один cut map может иметь несколько overlay density branches, разные render routes и отдельный public recipe.</p>
+    <div class="timeline">
+      <div class="track"><div class="trackLabel">audio spine</div><div class="trackBody"><span class="pill dark">one voice master</span><span class="pill">silence trim</span><span class="pill">word-safe cuts</span><span class="pill dash">experimental splice only if marked</span></div></div>
+      <div class="track"><div class="trackLabel">cuts</div><div class="trackBody"><span class="pill">hook 0-3s</span><span class="pill">setup</span><span class="pill">turn</span><span class="pill">proof</span><span class="pill">closer + tail</span></div></div>
+      <div class="track"><div class="trackLabel">overlays</div><div class="trackBody"><span class="pill gold">hook card</span><span class="pill">lower captions</span><span class="pill">thin rail</span><span class="pill dash">soft card branch</span></div></div>
+      <div class="track"><div class="trackLabel">branches</div><div class="trackBody"><span class="pill">clean</span><span class="pill dark">captions</span><span class="pill">micro labels</span><span class="pill">visible flow</span><span class="pill dash">wild branch max 1</span></div></div>
+      <div class="track"><div class="trackLabel">qa</div><div class="trackBody"><span class="pill">first 3s</span><span class="pill">no clipped words</span><span class="pill">safe zones</span><span class="pill">ffprobe</span><span class="pill">trial reels</span></div></div>
+    </div>
+  </section>
 
-    <nav class="tabs" role="tablist" aria-label="dashboard sections">
-      <button role="tab" aria-selected="true" data-tab="map">карта</button>
-      <button role="tab" aria-selected="false" data-tab="packs">стеки</button>
-      <button role="tab" aria-selected="false" data-tab="dasha">dasha kit</button>
-      <button role="tab" aria-selected="false" data-tab="sessions">сессии</button>
-      <button role="tab" aria-selected="false" data-tab="architecture">архитектура</button>
-      <button role="tab" aria-selected="false" data-tab="qa">qa</button>
-      <button role="tab" aria-selected="false" data-tab="sources">sources</button>
-    </nav>
+  <section class="panel" id="skill">
+    <h2 class="sec">мой reel-edit – как он настроен сейчас</h2>
+    <p class="lead"><b>reel-edit 3.17</b> владеет render-grade spine: source audit, transcript, word-safe cuts, EDL, audio master, overlays, review MP4, text-free base и QA. Palmier/block editor получает state, а public dashboard получает sanitized mechanics.</p>
 
-    <section class="tab active" id="tab-map">
-      <div class="section-title">
-        <h2>карта процесса</h2>
-        <p>Монтажный процесс перевёрнут в сторону выбора и воспроизводимости: сперва контракт, затем рендер. MP4 остаётся выходом, а рабочая ценность живёт в EDL, overlay lanes и branch recipe.</p>
-      </div>
-      <div class="grid-3">
-        <article class="card">
-          <div class="big-number">01</div>
-          <h3>режим до стиля</h3>
-          <p>Сначала выбирается редакторская задача: сохранить живой дубль, сделать sound-off captions, показать proof, раскрыть процесс, упаковать short CTA или провести эксперимент.</p>
-          <div class="tagline"><span class="tag hot">mode-first</span><span class="tag">audio spine</span><span class="tag">safe zones</span></div>
-        </article>
-        <article class="card">
-          <div class="big-number">02</div>
-          <h3>EDL как ядро</h3>
-          <p>`edit_decision_list.json` хранит cut map, source blocks, overlay tracks, render outputs, QA gates и branch status. Рендеры собираются из одного состояния.</p>
-          <div class="tagline"><span class="tag green">SSOT</span><span class="tag">cuts[]</span><span class="tag">overlay_tracks[]</span></div>
-        </article>
-        <article class="card">
-          <div class="big-number">03</div>
-          <h3>branch pack</h3>
-          <p>Каждый тип задачи получает pack: portable iPhone, EDL block editor, collab challenge, proof flow, reference echo, public dashboard. Pack задаёт tools, skills, privacy и QA.</p>
-          <div class="tagline"><span class="tag blue">forkable</span><span class="tag">public-safe</span><span class="tag">skill memory</span></div>
-        </article>
-      </div>
-      <div class="matrix" style="margin-top:16px">
-        <table>
-          <thead><tr><th>decision</th><th>question</th><th>output</th><th>owner</th></tr></thead>
-          <tbody>
-            <tr><td>source audit</td><td>что за материал, цвет, звук, приватность?</td><td>source map + ingest plan</td><td>reel-edit</td></tr>
-            <tr><td>mode selection</td><td>что ролик должен сделать для зрителя?</td><td>mode + style bounds</td><td>reel-edit / inside-insanity</td></tr>
-            <tr><td>state layer</td><td>как сохранить монтаж как данные?</td><td>EDL / OTIO-ready timeline</td><td>reel-block-edit</td></tr>
-            <tr><td>render route</td><td>где быстрее и безопаснее рендерить?</td><td>ffmpeg / Remotion / browser / MCP</td><td>project pack</td></tr>
-            <tr><td>public branch</td><td>что можно показать без утечки?</td><td>README + sanitized EDL + metrics schema</td><td>stack-compare</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <div class="cards">
+      <article class="block inv"><div class="num">1</div><h3>mode first</h3><div class="ld">сначала работа, потом стиль</div><p>режим выбирается до визуала: `dry_preserve`, `caption_only`, `proof_overlay`, `visible_flow`, `social_short`, `experimental`.</p><div class="src">fix from 2026-06-05</div></article>
+      <article class="block"><div class="num">2</div><h3>audio first</h3><div class="ld">один аудио-источник</div><p>речь держит структуру. visual swaps возможны в паузах, звук не прыгает между камерами. lipsync_render мапит подготовленный audio master.</p><div class="src">critical policy</div></article>
+      <article class="block"><div class="num">3</div><h3>EDL layer</h3><div class="ld">editing state как SSOT</div><p>`cuts[]` хранит source ranges и labels. `overlay_tracks[]` живёт отдельно. draft и final рендерятся из одного state.</p><div class="src">shaper v2 · 2026-06-15</div></article>
+    </div>
 
-    <section class="tab" id="tab-packs">
-      <div class="section-title">
-        <h2>стеки</h2>
-        <p>Это каталог пакетов. Каждый pack – переносимая связка решений: когда включать, какие файлы создать, какие skills читать и какой QA пройти.</p>
-      </div>
-      <div class="grid-3">
-        <article class="card">
-          <h3>portable iPhone core</h3>
-          <p>Для одного автора и iPhone `.MOV`: preflight, `avconvert`, transcript, manual plan, stutter/dead-air review, finale/cover slots.</p>
-          <ul><li>`pipeline_check`</li><li>`avconvert -p Preset1920x1080`</li><li>`find_stutters` + RMS dead-air</li></ul>
-        </article>
-        <article class="card">
-          <h3>EDL block editor</h3>
-          <p>Для reusable state: source blocks, cut map, overlay lanes, branch surface и preview-friendly JSON. Это слой для будущего timeline UI.</p>
-          <ul><li>`edit_decision_list.json`</li><li>`realself.timeline.json`</li><li>overlay density ladder</li></ul>
-        </article>
-        <article class="card">
-          <h3>inside-insanity</h3>
-          <p>Для личного Instagram Алекса: raw iPhone/Fuji look, terminal/protocol edge, friction, lowercase captions, survivor-паттерны.</p>
-          <ul><li>`reel-edit`</li><li>`inside-insanity`</li><li>Saved Messages first</li></ul>
-        </article>
-        <article class="card">
-          <h3>collab spine</h3>
-          <p>Для роликов из живого обмена: interruptions и handoffs становятся story beats, а turn map сохраняет причину каждого сохранённого перебивания.</p>
-          <ul><li>`collabBeats[]`</li><li>one audio spine</li><li>handoff markers</li></ul>
-        </article>
-        <article class="card">
-          <h3>creator challenge</h3>
-          <p>Для публичной гонки роста: metrics schema, no paid ads flag, content count, prep minutes, Trial results и sanitized branch README.</p>
-          <ul><li>`followers_delta`</li><li>`paid_ads_allowed:false`</li><li>public stake</li></ul>
-        </article>
-        <article class="card">
-          <h3>public dashboard</h3>
-          <p>Для open repo: one-file Shaper dashboard, `STACK.md`, `CONTRIBUTING.md`, branch folders, source links and privacy firewall.</p>
-          <ul><li>no raw media</li><li>no handles</li><li>mechanics only</li></ul>
-        </article>
-      </div>
-    </section>
+    <h2 class="sec">рабочая последовательность</h2>
+    <ol class="road">
+      <li><span class="tagline">step 0</span><b>creative brief / mode selection</b><p>skill выводит inferred brief, если контекста достаточно: цель, нарративная арка, cut policy, overlay density, branch matrix.</p></li>
+      <li><span class="tagline">step 1</span><b>deep source analysis</b><p>ffprobe, ориентация, камера, аудио-каналы, frame scan, source map, аудио-источник и visual-only blocks.</p></li>
+      <li><span class="tagline">step 2</span><b>transcript + word-level timeline</b><p>слова, паузы, punch words, concept map. cut points ставятся в паузах, не внутри слов.</p></li>
+      <li><span class="tagline">step 3</span><b>clean baseline</b><p>silence trim, filler/repeat cleanup, handles 100-260ms, closer tail. baseline сохраняется перед стилем.</p></li>
+      <li><span class="tagline">step 4</span><b>branch matrix</b><p>минимум: dry_preserve, caption_only, context branch, optional social_short. Для 10+ вариантов сначала SPECS/render_queue, финалы последовательно.</p></li>
+      <li><span class="tagline">step 5</span><b>overlay lanes</b><p>caption, card, rail, stamp, proof. Viewer-facing copy, no internal labels, no source filenames, no `render/QA/branch` на экране.</p></li>
+      <li><span class="tagline">step 6</span><b>render + QA</b><p>review MP4, text-free base, contact sheet, ffprobe, volumedetect, first 3 seconds, safe-zone and no-overlap checks.</p></li>
+    </ol>
 
-    <section class="tab" id="tab-dasha">
-      <div class="section-title">
-        <h2>dasha kit</h2>
-        <p>Разбор `Voronik1801/reel_pipline` показывает сильный portable production kit для iPhone Reels. Мы берём его как ingestion + handoff pack внутри большего Pipeline OS.</p>
-      </div>
-      <div class="grid-2">
-        <article class="card">
-          <h3>что забираем</h3>
-          <ul>
-            <li>Apple `avconvert` как канонический вход iPhone HLG/bt2020 → SDR bt709.</li>
-            <li>`pipeline_check.sh` до творческой работы: зависимости, шрифты, папки, `avconvert`.</li>
-            <li>copy-fill-run templates: `build_TEMPLATE.py` и `make_reel_TEMPLATE.py`.</li>
-            <li>RMS dead-air detector для пауз, где `silencedetect` слабее из-за фонового шума.</li>
-            <li>stutter detector: длинные слова, микро-паузы, near-repeat.</li>
-            <li>identity slots: subtitle style, cover, finale, music, stickers as replaceable layers.</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>что добавляет наш OS</h3>
-          <ul>
-            <li>EDL as SSOT: cut decisions, overlay lanes and QA live in reusable data.</li>
-            <li>mode-first routing: dry, captions, proof, visible flow, social short, experimental.</li>
-            <li>branch surface: clean, captions, micro, low rail, soft card, challenge.</li>
-            <li>public/private firewall for open-source recipes.</li>
-            <li>block editor / Palmier direction for visual review before final render.</li>
-            <li>Trial loop and skill memory: survivor patterns are written back into skills.</li>
-          </ul>
-        </article>
-      </div>
-      <div class="matrix" style="margin-top:16px">
-        <table>
-          <thead><tr><th>layer</th><th>dasha/voronik kit</th><th>pipeline os role</th></tr></thead>
-          <tbody>
-            <tr><td>color</td><td>`avconvert -p Preset1920x1080`, then bt709 tags</td><td>required iPhone ingestion step</td></tr>
-            <tr><td>plan</td><td>`plan/*.json` with pieces and words</td><td>mapped into `cuts[]` + `source_blocks[]`</td></tr>
-            <tr><td>captions</td><td>Pillow PNG states over ffmpeg overlay</td><td>one overlay lane; style is replaceable</td></tr>
-            <tr><td>QA</td><td>frames, re-transcribe final, stutter/dead-air scripts</td><td>formal QA gate before publish</td></tr>
-            <tr><td>handoff</td><td>Claude Code quick-start + templates</td><td>branch pack install recipe</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <h2 class="sec">режимы и где они применяются</h2>
+    <table class="cmp">
+      <thead><tr><th>mode</th><th>работа</th><th>default output</th><th>важный риск</th></tr></thead>
+      <tbody>
+        <tr><td class="l">dry_preserve</td><td>исходник уже живой</td><td>trim only, no overlay</td><td>не убить физические beat-ы</td></tr>
+        <tr><td class="l">caption_only</td><td>социальный default</td><td>нижние sparse captions</td><td>не закрыть лицо / объект</td></tr>
+        <tr><td class="l">proof_overlay</td><td>нужен screen / terminal / site proof</td><td>один нижний proof block</td><td>не превратить в production label</td></tr>
+        <tr><td class="l">visible_flow</td><td>процесс важнее одной фразы</td><td>timeline rail / graph</td><td>не перегрузить интерфейсом</td></tr>
+        <tr><td class="l">social_short</td><td>нужен punch</td><td>short cut, minimal captions</td><td>не съесть смысл ради темпа</td></tr>
+        <tr><td class="l">experimental</td><td>поиск survivor style</td><td>одна wild ветка в batch</td><td>baseline остаётся рядом</td></tr>
+      </tbody>
+    </table>
 
-    <section class="tab" id="tab-sessions">
-      <div class="section-title">
-        <h2>сессии</h2>
-        <p>Локальная аналитика Codex и Claude Code показала эволюцию: от dashboard сравнения к монтажному OS с skill feedback loop, Murmur coordination и Dasha color canon.</p>
-      </div>
-      <div class="timeline">
-        <article class="event">
-          <div class="date">2026-06-15</div>
-          <div class="body"><h3>EDL v2 и первый публичный dashboard</h3><p>Появилась рамка: монтажный план как SSOT, draft→final loop, source blocks, overlay lanes, EXA research по OTIO, Remotion, X-Cut и Hyperframes.</p></div>
-          <div class="artifact">Claude: `reel-stack-compare` live на GH Pages · Codex: `reel-editor-v2-pipeline`</div>
-        </article>
-        <article class="event">
-          <div class="date">2026-06-18</div>
-          <div class="body"><h3>collab/project context</h3><p>Появилась связка Daria/Voronik в партнёрском и контентном контуре; приватные материалы остались в закрытых хранилищах, наружу ушли только mechanics.</p></div>
-          <div class="artifact">private CRM / Krisp / repo access checks</div>
-        </article>
-        <article class="event">
-          <div class="date">2026-06-23</div>
-          <div class="body"><h3>реальные render branches</h3><p>Codex собирал рилсы как EDL + ffmpeg trim/concat + cv2/PIL overlay lanes. Зафиксировалось правило одного аудио-мастера и branch variants.</p></div>
-          <div class="artifact">video-reels projects · contact sheets · EDL</div>
-        </article>
-        <article class="event">
-          <div class="date">2026-06-24</div>
-          <div class="body"><h3>collab interruption spine</h3><p>Для совместных роликов interruptions/handoffs стали смысловыми точками. От Dasha visual grammar взяты top cards, sparse captions, yellow semantic highlight, compact terminal layer.</p></div>
-          <div class="artifact">`collab_interruption_spine` · `dasha_answer_card_terminal_caption`</div>
-        </article>
-        <article class="event">
-          <div class="date">2026-06-25</div>
-          <div class="body"><h3>inside-insanity survivor loop</h3><p>Shaper и Codex закрепили режим: MP4 считается рабочим обменом, survivor фиксируется явно, каждый обмен оставляет render, contact sheet, manifest/EDL and next constraint.</p></div>
-          <div class="artifact">`v08_color_return` · agent collaboration block</div>
-        </article>
-        <article class="event">
-          <div class="date">2026-06-25</div>
-          <div class="body"><h3>Dasha/Voronik repo review</h3><p>Claude Code проверил публичный repo, подтвердил реальную разницу `avconvert` на нашем HLG material, отправил finding Codex через Murmur, обновил `reel-edit` and `inside-insanity` skills.</p></div>
-          <div class="artifact">`/private/tmp/dasha_reel_pipline` · color compare · skill update</div>
-        </article>
-        <article class="event">
-          <div class="date">2026-06-25</div>
-          <div class="body"><h3>repo reframed</h3><p>`reel-stack-compare` стал `reels-pipeline-os`, публичный Pages dashboard и repo были переименованы. Текущая версия делает следующий шаг: configurator first.</p></div>
-          <div class="artifact">aPoWall/reels-pipeline-os · commit `40c670e` baseline</div>
-        </article>
-      </div>
-    </section>
+    <h2 class="sec">survivor presets из последних сессий</h2>
+    <div class="lanes">
+      <div class="lname">shaper color return</div><div class="ldesc">gray/gong intro → color return → restrained captions → bodily payoff. хорош для morning / inside-insanity.</div>
+      <div class="lname">kitchen operating system</div><div class="ldesc">еда, лампа, устройство или бытовой объект становятся local OS. объект держит proof, captions редкие.</div>
+      <div class="lname">dual persona</div><div class="ldesc">coach / critic / meta lanes, no-overlap rules, persona pill в safe-zone, short cuts усиливают voice switch.</div>
+      <div class="lname">collab interruption</div><div class="ldesc">interruptions and handoffs как сюжетные beat-ы. turn_map и collabBeats[] обязательны.</div>
+      <div class="lname">cover set</div><div class="ldesc">10 cover options: identity references + motif object + clean no-text bases + Pillow caption layer.</div>
+    </div>
+  </section>
 
-    <section class="tab" id="tab-architecture">
-      <div class="section-title">
-        <h2>архитектура</h2>
-        <p>Целевая архитектура связывает переносимый iPhone kit, EDL/OTIO state, Remotion/browser preview и agentic render tools. Выбор stack route зависит от цены ошибки и скорости ревью.</p>
-      </div>
-      <div class="grid-4">
-        <article class="card"><h3>local fast</h3><p>ffmpeg + Pillow/OpenCV. Лучший маршрут для одного рилса, быстрых draft renders, проверяемого аудио и простого CI.</p><div class="tagline"><span class="tag green">cheap</span><span class="tag">repeatable</span></div></article>
-        <article class="card"><h3>state exchange</h3><p>OTIO-style model for clips, timing, tracks, markers and metadata. Media stays external; timeline becomes portable.</p><div class="tagline"><span class="tag blue">EDL</span><span class="tag">interchange</span></div></article>
-        <article class="card"><h3>render code</h3><p>Remotion: timeline state goes into Player and `inputProps`; server render uses the same JSON-serializable payload.</p><div class="tagline"><span class="tag hot">React</span><span class="tag">renderMedia</span></div></article>
-        <article class="card"><h3>browser editor</h3><p>WebCodecs/WebGPU class tools prove local preview/export can live in the browser for privacy-sensitive projects.</p><div class="tagline"><span class="tag">OpenReel</span><span class="tag">Omniclip</span></div></article>
-      </div>
-      <div class="matrix" style="margin-top:16px">
-        <table>
-          <thead><tr><th>route</th><th>use</th><th>watch</th></tr></thead>
-          <tbody>
-            <tr><td>Dasha portable core</td><td>iPhone ingestion, handoff, fast human/agent template</td><td>macOS-only `avconvert`; account assets separated</td></tr>
-            <tr><td>reel-edit + ffmpeg</td><td>current production MP4s, audio-first, local render</td><td>manual EDL discipline and QA pass required</td></tr>
-            <tr><td>reel-block-edit / Palmier</td><td>visual review, draggable blocks, survivor pinning</td><td>UI can lag behind contracts if state is weak</td></tr>
-            <tr><td>Remotion / OpenCut / ReelForge</td><td>component overlays, code-driven render, server pipeline</td><td>state must be JSON-serializable and stable</td></tr>
-            <tr><td>X-Cut / mcp-video style</td><td>agentic operations and chat-driven editing tools</td><td>tool surface needs clear safety and undo boundaries</td></tr>
-            <tr><td>public dashboard pack</td><td>sharing process, recruiting branches, documenting decisions</td><td>privacy and source attribution gates</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+  <section class="panel" id="approaches">
+    <h2 class="sec">подходы по слоям</h2>
+    <p class="lead">это layer map. каждый подход превращается в слой, который можно включить в branch pack.</p>
+    <table class="cmp">
+      <thead><tr><th>слой</th><th>long-form discipline</th><th>portable creator kit</th><th>agent timeline tools</th><th>наш move</th></tr></thead>
+      <tbody>
+        <tr><td class="l">ingest</td><td>сырой файл, frame-rate сохраняется</td><td>preflight + folders + scripts</td><td>drag/drop project state</td><td class="move">source audit как первый экран</td></tr>
+        <tr><td class="l">color</td><td>техническая нормализация</td><td>Apple avconvert для iPhone HDR/HLG</td><td>browser decode preview</td><td class="move">portable iPhone pack как отдельный branch</td></tr>
+        <tr><td class="l">transcript</td><td>Scribe / word accuracy</td><td>Whisper + manual hints</td><td>speech tools as timeline items</td><td class="move">word-level timeline + pause map</td></tr>
+        <tr><td class="l">state</td><td>монтажный план</td><td>template README / pipeline doc</td><td>tracks/items JSON</td><td class="move">EDL + overlay_tracks + render outputs</td></tr>
+        <tr><td class="l">editor</td><td>CLI chain</td><td>copy-fill templates</td><td>browser NLE / Remotion / OTIO</td><td class="move">block editor + future adapter bridge</td></tr>
+        <tr><td class="l">visual</td><td>alpha chips, zoom, cards</td><td>cover/finale/music/sticker slots</td><td>motion components</td><td class="move">mode-first style memory + survivor presets</td></tr>
+        <tr><td class="l">QA</td><td>draft loop</td><td>dead-air/stutter detectors</td><td>render diagnostics</td><td class="move">ffprobe + audio + first-3s + viewer QA</td></tr>
+      </tbody>
+    </table>
 
-    <section class="tab" id="tab-qa">
-      <div class="section-title">
-        <h2>qa</h2>
-        <p>QA gate is part of the stack. It protects color, audio, privacy, reproducibility and public handoff.</p>
-      </div>
-      <div class="grid-3">
-        <article class="card">
-          <h3>preflight</h3>
-          <ul><li>`ffprobe` rotation and color metadata</li><li>`command -v avconvert` for iPhone pack</li><li>dependency and asset check</li><li>raw media outside public repo</li></ul>
-        </article>
-        <article class="card">
-          <h3>render qa</h3>
-          <ul><li>1080×1920, fps, yuv420p, bt709 tags</li><li>AAC stereo 48k, sane bitrate</li><li>contact sheet: hook, overlay, seam, end</li><li>listening pass for speech seams</li></ul>
-        </article>
-        <article class="card">
-          <h3>public firewall</h3>
-          <ul><li>no real names, handles, filenames, paths</li><li>no raw transcript or screenshots</li><li>public metrics are aggregated</li><li>recipes use `creator_a`, `hook`, `handoff`</li></ul>
-        </article>
-      </div>
-      <div class="matrix" style="margin-top:16px">
-        <table>
-          <thead><tr><th>failure</th><th>signal</th><th>fix</th></tr></thead>
-          <tbody>
-            <tr><td>washed iPhone color</td><td>HLG/bt2020 source rendered with ffmpeg path only</td><td>run `avconvert -p Preset1920x1080`, grade SDR, tag bt709</td></tr>
-            <tr><td>bad speech seam</td><td>cross-take splice or per-segment audio filters</td><td>preserve clean baseline; mark experimental; listen before publish</td></tr>
-            <tr><td>caption clutter</td><td>viewer reads UI labels instead of story</td><td>short viewer-facing text; internal labels stay in EDL</td></tr>
-            <tr><td>public leak</td><td>paths, handles, raw text or provider keys in branch files</td><td>sanitize branch README and JSON before push</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <h2 class="sec">what we actually take</h2>
+    <div class="cards two">
+      <article class="block"><div class="num">1</div><h3>from portable kit</h3><div class="ld">handoff discipline</div><p>preflight, `avconvert`, templates, lightweight detectors, reusable identity slots. сильный вклад – сделать pipeline переносимым.</p></article>
+      <article class="block inv"><div class="num">2</div><h3>from our practice</h3><div class="ld">editing memory</div><p>mode-first, audio-first, EDL layer, overlay lanes, survivor pinning, Trial Reels A/B, inside-insanity visual DNA.</p></article>
+      <article class="block"><div class="num">3</div><h3>from timeline tools</h3><div class="ld">future adapter</div><p>OpenTimelineIO для interchange, Remotion/Hyperframes для JSON → render, WebCodecs/Mediabunny для live browser preview.</p></article>
+      <article class="block"><div class="num">4</div><h3>from long-form</h3><div class="ld">draft economics</div><p>дешёвый draft перед hero render, plan as SSOT, точные таймкоды, deterministic metadata. работает и для короткого формата.</p></article>
+    </div>
+  </section>
 
-    <section class="tab" id="tab-sources">
-      <div class="section-title">
-        <h2>sources</h2>
-        <p>Sources used for this rebuild: local Codex/Claude Code sessions, current `reel-edit`/`stack-compare` skills, public repo audit and EXA MCP research over primary docs/repos.</p>
+  <section class="panel" id="config">
+    <h2 class="sec">конфигуратор – второй слой после карты</h2>
+    <p class="lead">выбор source / goal / mode собирает pack: layers, artifacts и JSON config. Он нужен как рабочая панель после того, как понятна общая система.</p>
+    <div class="configShell">
+      <div class="configLeft">
+        <div class="selectorGrid">
+          <div class="selector">
+            <h3>1 · source</h3>
+            <div class="seg" data-group="source">
+              <button class="active" data-value="iphone_single"><span class="label">iPhone one-take</span><span class="hint">говорящая голова</span></button>
+              <button data-value="multi_take"><span class="label">multi-take</span><span class="hint">дубли / повторы</span></button>
+              <button data-value="collab"><span class="label">collab</span><span class="hint">2+ creators</span></button>
+              <button data-value="system"><span class="label">screen/system</span><span class="hint">агенты / терминал</span></button>
+              <button data-value="reference"><span class="label">reference echo</span><span class="hint">стиль без копии</span></button>
+            </div>
+          </div>
+          <div class="selector">
+            <h3>2 · goal</h3>
+            <div class="seg" data-group="goal">
+              <button class="active" data-value="publish_fast"><span class="label">publish fast</span><span class="hint">1 рил сейчас</span></button>
+              <button data-value="recipe"><span class="label">recipe</span><span class="hint">повторить позже</span></button>
+              <button data-value="reviewable"><span class="label">reviewable</span><span class="hint">человек правит</span></button>
+              <button data-value="public_branch"><span class="label">public branch</span><span class="hint">отдать наружу</span></button>
+              <button data-value="skill_update"><span class="label">skill update</span><span class="hint">закрепить практику</span></button>
+            </div>
+          </div>
+          <div class="selector">
+            <h3>3 · mode</h3>
+            <div class="seg" data-group="mode">
+              <button data-value="dry_preserve"><span class="label">dry preserve</span><span class="hint">минимум резки</span></button>
+              <button class="active" data-value="caption_only"><span class="label">caption only</span><span class="hint">соц. default</span></button>
+              <button data-value="proof_overlay"><span class="label">proof overlay</span><span class="hint">доказательства</span></button>
+              <button data-value="visible_flow"><span class="label">visible flow</span><span class="hint">процесс виден</span></button>
+              <button data-value="experimental"><span class="label">experimental</span><span class="hint">wild branch</span></button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="source-list">
-        <div class="source"><b>public repo</b><span><a href="https://github.com/Voronik1801/reel_pipline">Voronik1801/reel_pipline</a> · checked HEAD `2b255a8`, `PIPELINE.md`, scripts and templates.</span></div>
-        <div class="source"><b>this repo</b><span><a href="https://github.com/aPoWall/reels-pipeline-os">aPoWall/reels-pipeline-os</a> · public dashboard and branch packs.</span></div>
-        <div class="source"><b>OTIO</b><span><a href="https://opentimelineio.readthedocs.io/en/stable/">OpenTimelineIO docs</a> · EDL-style editorial interchange: clips, timing, tracks, markers, metadata, external media references.</span></div>
-        <div class="source"><b>Remotion</b><span><a href="https://www.remotion.dev/docs/building-a-timeline">Build a timeline-based editor</a> + <a href="https://www.remotion.dev/docs/timeline/render">Timeline rendering</a> · tracks/items, Player sync, JSON-serializable `inputProps`.</span></div>
-        <div class="source"><b>browser</b><span><a href="https://github.com/Augani/openreel-video">OpenReel Video</a> and <a href="https://github.com/omni-media/omniclip">Omniclip</a> · client-side WebCodecs/WebGPU editing direction.</span></div>
-        <div class="source"><b>agentic</b><span><a href="https://github.com/MeiGen-AI/X-Cut">X-Cut</a>, <a href="https://github.com/KyaniteLabs/mcp-video">mcp-video</a>, <a href="https://github.com/pedro199288/reelforge">ReelForge</a>, <a href="https://github.com/arach/premotion">Premotion</a> · chat/tool-driven timeline and render routes.</span></div>
+      <div class="configRight">
+        <div class="recHead">
+          <h3 id="recTitle">Portable iPhone Core</h3>
+          <div class="score"><span>fit</span><div id="recScore">94</div></div>
+        </div>
+        <p class="recText" id="recText">Быстрый production pack для iPhone Reels: правильный цвет, word timing, manual clean cut, caption lane, QA и минимальный public-safe EDL.</p>
+        <div class="miniCols">
+          <div class="mini"><b>layers</b><ul id="recLayers"></ul></div>
+          <div class="mini"><b>artifacts</b><ul id="recArtifacts"></ul></div>
+        </div>
+        <pre class="copyBox" id="configJson"></pre>
+        <button class="copyBtn" onclick="copyConfig()">copy config</button>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer>
-      <div>Reels Stack Configurator · AI Mindset Pipeline OS · mechanics only, no private media.</div>
-      <div>fork · configure · render · qa · publish · write the survivor back into the skill</div>
-    </footer>
-  </main>
+  <section class="panel" id="branches">
+    <h2 class="sec">branch packs</h2>
+    <div class="exlib">
+      <div class="exo"><div class="et">portable</div><div class="eh">iphone core</div><p>preflight, avconvert, transcript, caption lane, QA. быстрый production pack.</p></div>
+      <div class="exo"><div class="et">personal</div><div class="eh">inside-insanity</div><p>raw day, gray→color return, object protocol, lowercase captions, Trial candidates.</p></div>
+      <div class="exo"><div class="et">state</div><div class="eh">edl-block</div><p>source blocks, branch surface, overlay lanes, text-free base, Palmier handoff.</p></div>
+      <div class="exo"><div class="et">collab</div><div class="eh">interruption spine</div><p>turn_map, collabBeats, handoffs, generic public challenge schema.</p></div>
+      <div class="exo"><div class="et">proof</div><div class="eh">system receipt</div><p>terminal/site proof in one safe zone, no production labels, viewer-facing copy.</p></div>
+      <div class="exo"><div class="et">trend</div><div class="eh">gyro / echo</div><p>reference mechanics, not assets. one clean branch plus one trend experiment.</p></div>
+      <div class="exo"><div class="et">covers</div><div class="eh">cover set ×10</div><p>clean no-text bases, crisp caption layer, contact sheet, A/B candidates.</p></div>
+      <div class="exo you"><div class="et">open slot</div><div class="eh">your branch</div><p>fork repo, add generic EDL, explain the layer, keep private media outside.</p></div>
+    </div>
 
-  <script>
-    const state = {
-      source: "iphone_single",
-      goal: "publish_fast",
-      mode: "caption_only"
+    <h2 class="sec">public package rules</h2>
+    <div class="metrics">
+      <div class="metric"><div class="m">yes</div><div class="lb">generic timings, labels, modes, overlay lanes</div></div>
+      <div class="metric"><div class="m">yes</div><div class="lb">public-safe branch README + EDL schema</div></div>
+      <div class="metric"><div class="m">no</div><div class="lb">raw footage, faces, handles, local paths</div></div>
+      <div class="metric"><div class="m">no</div><div class="lb">private transcripts, DMs, provider keys</div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="sources">
+    <h2 class="sec">sources / research anchors</h2>
+    <p class="lead">страница цитирует источники как anchors для решений. подробности остаются в README / STACK, а главный экран держит только карту.</p>
+    <div class="sourceGrid">
+      <div class="sourceCard"><b>Voronik1801/reel_pipline</b><p><a href="https://github.com/Voronik1801/reel_pipline">github.com/Voronik1801/reel_pipline</a> · portable creator kit: avconvert, preflight, templates, stutter/dead-air hints.</p></div>
+      <div class="sourceCard"><b>OpenTimelineIO</b><p><a href="https://github.com/AcademySoftwareFoundation/OpenTimelineIO">github.com/AcademySoftwareFoundation/OpenTimelineIO</a> · interchange for timeline state.</p></div>
+      <div class="sourceCard"><b>Remotion</b><p><a href="https://www.remotion.dev/docs/building-a-timeline">remotion.dev/docs/building-a-timeline</a> · tracks/items, JSON inputProps, render adapter.</p></div>
+      <div class="sourceCard"><b>Hyperframes</b><p><a href="https://github.com/heygen-com/hyperframes">github.com/heygen-com/hyperframes</a> · HTML to video, agent-friendly rendering.</p></div>
+      <div class="sourceCard"><b>X-Cut</b><p><a href="https://github.com/MeiGen-AI/X-Cut">github.com/MeiGen-AI/X-Cut</a> · agent edits multi-track timeline with Remotion render.</p></div>
+      <div class="sourceCard"><b>mcp-video / ReelForge / OpenReel / Omniclip</b><p>market proof for chat-driven video editing, browser local timelines, WebCodecs/WebGPU direction.</p></div>
+    </div>
+  </section>
+
+  <footer class="stamp">
+    <div><b>fig.1</b> · reels-pipeline-os · visual atlas · 2026-06-26</div>
+    <div>shortcuts: <span class="kbd">1</span> map · <span class="kbd">2</span> skill · <span class="kbd">3</span> approaches · <span class="kbd">4</span> config · <span class="kbd">d</span> theme</div>
+  </footer>
+</div>
+
+<script>
+  const state = { source: "iphone_single", goal: "publish_fast", mode: "caption_only" };
+  const packs = {
+    portable: {
+      title: "Portable iPhone Core",
+      score: 94,
+      text: "Быстрый production pack для iPhone Reels: правильный цвет, word timing, manual clean cut, caption lane, QA и минимальный public-safe EDL.",
+      layers: ["ffprobe source audit", "Apple avconvert SDR", "Whisper/Scribe word timing", "caption overlay lane", "ffmpeg render + QA"],
+      artifacts: ["source_map.md", "raw_sdr/*.mov", "transcripts/*.json", "edit_decision_list.json", "renders/final.mp4", "QA.md"]
+    },
+    edl: {
+      title: "EDL Block Editor Pack",
+      score: 91,
+      text: "Когда важна ручная правка и повторяемость: source blocks, branch surface, overlay lanes и text-free base для Palmier/timeline review.",
+      layers: ["source blocks", "cut map", "overlay_tracks[]", "branch density ladder", "text-free base render"],
+      artifacts: ["realself.timeline.json", "edit_decision_list.json", "overlayEvents.json", "renders/review.mp4", "renders/base.mp4"]
+    },
+    collab: {
+      title: "Collab Interruption Pack",
+      score: 88,
+      text: "Для живого обмена между создателями: interruptions, reactions, handoffs, collabBeats[] и public-safe metrics branch.",
+      layers: ["turn_map", "interruption handles", "speaker-safe captions", "challenge metrics", "public/private split"],
+      artifacts: ["turn_map.json", "collabBeats.json", "branches/creator-collab-challenge", "trial_metrics.schema.json"]
+    },
+    proof: {
+      title: "Proof Overlay Pack",
+      score: 86,
+      text: "Для экранов, агентов, сайтов и терминала: один proof layer, viewer-facing captions, no production labels, clean audio spine.",
+      layers: ["screen/system source map", "proof overlay safe zone", "caption lane", "terminal receipt", "audio-first render"],
+      artifacts: ["proof_sources.md", "overlays/proof.png", "edit_decision_list.json", "renders/review.mp4"]
+    },
+    public: {
+      title: "Public Dashboard Branch",
+      score: 82,
+      text: "Когда надо отдать наружу механику: STACK.md, CONTRIBUTING, generic EDL, sanitized branch examples and no personal data.",
+      layers: ["sanitized recipe", "branch README", "public EDL", "metrics schema", "source links"],
+      artifacts: ["STACK.md", "CONTRIBUTING.md", "branches/*/README.md", "branches/*/edit_decision_list.json"]
+    },
+    skill: {
+      title: "Skill Feedback Pack",
+      score: 89,
+      text: "Для закрепления практики обратно в skill: survivor pattern, failed branch notes, render QA and next default.",
+      layers: ["practice ledger", "winner/failure pair", "mode/style rule", "skill update target", "sync mirrors"],
+      artifacts: ["practice_ledger.md", "SPECS.md", "QA.md", "skill_patch_notes.md"]
+    }
+  };
+  function choosePack(){
+    if(state.goal === "public_branch") return packs.public;
+    if(state.goal === "skill_update") return packs.skill;
+    if(state.source === "collab") return packs.collab;
+    if(state.goal === "reviewable" || state.goal === "recipe" || state.mode === "visible_flow") return packs.edl;
+    if(state.source === "system" || state.mode === "proof_overlay") return packs.proof;
+    return packs.portable;
+  }
+  function renderConfig(){
+    const pack = choosePack();
+    document.getElementById("recTitle").textContent = pack.title;
+    document.getElementById("recScore").textContent = pack.score;
+    document.getElementById("recText").textContent = pack.text;
+    document.getElementById("recLayers").innerHTML = pack.layers.map(x=>`<li>${x}</li>`).join("");
+    document.getElementById("recArtifacts").innerHTML = pack.artifacts.map(x=>`<li>${x}</li>`).join("");
+    const json = {
+      schema: "reels.stack.config.v3",
+      selected: state,
+      recommended_pack: pack.title,
+      reel_edit_defaults: {
+        skill_version: "3.17",
+        mode_first: true,
+        audio_policy: "one_audio_spine",
+        baseline_required: true,
+        public_safe: true
+      },
+      layers: pack.layers,
+      artifacts: pack.artifacts
     };
-
-    const packs = {
-      "portable-core": {
-        title: "Portable iPhone Core",
-        score: 92,
-        copy: "Быстрый production pack для iPhone Reels: правильный цвет, word timing, ручной clean cut, caption lane, QA и минимальный public-safe EDL.",
-        skills: ["reel-edit", "portable-iphone-kit"],
-        layers: ["ffprobe source audit", "Apple avconvert SDR", "Whisper/Scribe word timing", "manual pieces plan", "caption overlay lane", "ffmpeg render + QA"],
-        artifacts: ["source_map.md", "raw_sdr/*.mov", "transcripts/*.json", "edit_decision_list.json", "renders/final.mp4", "QA.md"],
-        qa: ["bt709 tags", "stutter review", "dead-air review", "contact sheet"]
-      },
-      "edl-block": {
-        title: "EDL Block Editor",
-        score: 88,
-        copy: "Pack для монтажного состояния: блоки, cut map, overlay tracks и branch surface живут как данные, чтобы можно было переигрывать стиль и рендер.",
-        skills: ["reel-edit", "reel-block-edit"],
-        layers: ["source blocks", "cuts[] SSOT", "overlay_tracks[]", "branch ladder", "preview manifest", "render adapters"],
-        artifacts: ["edit_decision_list.json", "realself.timeline.json", "branch_matrix.md", "overlay_manifest.json", "contact_sheet.jpg"],
-        qa: ["baseline branch", "seam listening", "viewer-facing copy", "safe-zone pass"]
-      },
-      "collab-challenge": {
-        title: "Collab Challenge Pack",
-        score: 90,
-        copy: "Pack для совместного ролика и публичной гонки роста: сохраняем handoff beats, ведём aggregate metrics, держим private CRM outside.",
-        skills: ["reel-edit", "stack-compare"],
-        layers: ["turn map", "collabBeats[]", "single audio policy", "public metrics", "Trial loop", "sanitized branch"],
-        artifacts: ["turn_map.json", "collab_edl.json", "metrics.json", "branches/creator-collab-challenge/README.md", "trial_results.md"],
-        qa: ["no handles", "no raw transcript", "interruptions justified", "paid_ads_allowed=false"]
-      },
-      "proof-flow": {
-        title: "Proof Flow Stack",
-        score: 84,
-        copy: "Pack для роликов про системы, агентов, терминал и доказательства: один proof lane, visible flow rail, строгий запрет на лишние internal labels.",
-        skills: ["reel-edit", "inside-insanity"],
-        layers: ["screen/source audit", "proof snippet selection", "visible rail", "caption lane", "terminal stamp", "privacy crop"],
-        artifacts: ["proof_map.md", "screen_redactions.json", "edit_decision_list.json", "overlay_tracks.json", "QA.md"],
-        qa: ["crop secrets", "proof is readable", "face/object safe", "cold viewer pass"]
-      },
-      "reference-echo": {
-        title: "Reference Echo Pack",
-        score: 81,
-        copy: "Pack для вдохновения от чужого языка: вытаскиваем механику кадра, типографики и pacing, затем собираем свой branch recipe без копирования контента.",
-        skills: ["reel-edit", "visual-pipeline"],
-        layers: ["reference grammar", "mechanic extraction", "own source map", "style bounds", "variant ladder", "QA"],
-        artifacts: ["reference_notes.md", "style_bounds.md", "edit_decision_list.json", "variants.md", "contact_sheet.jpg"],
-        qa: ["no asset reuse", "own footage only", "one borrowed mechanic per branch", "viewer clarity"]
-      },
-      "public-dashboard": {
-        title: "Public Dashboard Pack",
-        score: 86,
-        copy: "Pack для open-source packaging: stack spec, branch examples, configurator UI, source links and privacy firewall.",
-        skills: ["stack-compare"],
-        layers: ["STACK.md", "CONTRIBUTING.md", "branch README", "sanitized JSON", "one-file dashboard", "GitHub Pages"],
-        artifacts: ["index.html", "STACK.md", "CONTRIBUTING.md", "branches/*/README.md", "assets/og-cover.png"],
-        qa: ["HTML parse", "desktop/mobile screenshot", "public links", "no private paths"]
-      }
-    };
-
-    function pickPack() {
-      if (state.source === "public_package" || state.goal === "public_branch") return "public-dashboard";
-      if (state.source === "collab" || state.goal === "challenge") return "collab-challenge";
-      if (state.source === "multi_take" || state.goal === "reusable_recipe" || state.goal === "manual_review") return "edl-block";
-      if (state.source === "screen_system" || state.mode === "proof_overlay" || state.mode === "visible_flow") return "proof-flow";
-      if (state.source === "public_reference") return "reference-echo";
-      return "portable-core";
-    }
-
-    function renderRecommendation() {
-      const id = pickPack();
-      const pack = packs[id];
-      const modeBoost = state.mode === "experimental" ? -7 : state.goal === "publish_fast" ? 2 : 0;
-      const score = Math.max(71, Math.min(97, pack.score + modeBoost));
-      document.getElementById("recId").textContent = id;
-      document.getElementById("recTitle").textContent = pack.title;
-      document.getElementById("recScore").textContent = score;
-      document.getElementById("recCopy").textContent = pack.copy;
-      listInto("recLayers", pack.layers);
-      listInto("recArtifacts", pack.artifacts);
-      const config = {
-        schema: "reels.stack.config.v3",
-        selected: {...state},
-        pack: id,
-        skills: pack.skills,
-        layers: pack.layers,
-        artifacts: pack.artifacts,
-        qa: pack.qa,
-        privacy: "public branch stores mechanics only"
-      };
-      document.getElementById("configPreview").textContent = JSON.stringify(config, null, 2);
-    }
-
-    function listInto(id, values) {
-      const node = document.getElementById(id);
-      node.innerHTML = "";
-      values.forEach((value) => {
-        const li = document.createElement("li");
-        li.textContent = value;
-        node.appendChild(li);
-      });
-    }
-
-    document.querySelectorAll(".seg").forEach((group) => {
-      group.addEventListener("click", (event) => {
-        const btn = event.target.closest("button[data-value]");
-        if (!btn) return;
-        const key = group.dataset.group;
-        state[key] = btn.dataset.value;
-        group.querySelectorAll("button").forEach((b) => b.classList.toggle("active", b === btn));
-        renderRecommendation();
-      });
+    document.getElementById("configJson").textContent = JSON.stringify(json, null, 2);
+  }
+  document.querySelectorAll(".seg button").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const group = btn.closest(".seg").dataset.group;
+      state[group] = btn.dataset.value;
+      btn.closest(".seg").querySelectorAll("button").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      renderConfig();
     });
-
-    document.querySelector(".tabs").addEventListener("click", (event) => {
-      const btn = event.target.closest("[data-tab]");
-      if (!btn) return;
-      document.querySelectorAll(".tabs [role='tab']").forEach((tab) => tab.setAttribute("aria-selected", String(tab === btn)));
-      document.querySelectorAll(".tab").forEach((tab) => tab.classList.toggle("active", tab.id === `tab-${btn.dataset.tab}`));
-    });
-
-    document.getElementById("themeBtn").addEventListener("click", () => {
-      const root = document.documentElement;
-      root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
-    });
-
-    document.getElementById("copyBtn").addEventListener("click", async () => {
-      const text = document.getElementById("configPreview").textContent;
-      try {
-        await navigator.clipboard.writeText(text);
-        document.getElementById("copyBtn").textContent = "copied";
-        setTimeout(() => document.getElementById("copyBtn").textContent = "copy config", 1200);
-      } catch {
-        document.getElementById("copyBtn").textContent = "select json";
-      }
-    });
-
-    renderRecommendation();
-  </script>
+  });
+  function copyConfig(){
+    navigator.clipboard.writeText(document.getElementById("configJson").textContent);
+  }
+  function tab(id, btn){
+    document.querySelectorAll(".panel").forEach(p=>p.classList.remove("on"));
+    document.getElementById(id).classList.add("on");
+    document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-selected","false"));
+    btn.setAttribute("aria-selected","true");
+    history.replaceState(null, "", "#" + id);
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function openTab(id){
+    const order = ["map","skill","approaches","config","branches","sources"];
+    const btn = document.querySelectorAll("nav.tabs button")[order.indexOf(id)];
+    if(btn) tab(id, btn);
+  }
+  document.addEventListener("keydown",e=>{
+    const map = {"1":"map","2":"skill","3":"approaches","4":"config","5":"branches","6":"sources"};
+    if(map[e.key]) openTab(map[e.key]);
+    if(e.key === "d") document.documentElement.classList.toggle("dark");
+  });
+  renderConfig();
+  if(location.hash){
+    const id = location.hash.replace("#","");
+    if(document.getElementById(id)) openTab(id);
+  }
+</script>
 </body>
 </html>

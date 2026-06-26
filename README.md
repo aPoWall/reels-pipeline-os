@@ -1,9 +1,9 @@
-# Reels Stack Configurator
+# Reels Pipeline OS
 
-> **Forkable dashboard and stack spec for agentic Reels editing.**
+> **Visual atlas and stack spec for agentic Reels editing.**
 > Live: https://apowall.github.io/reels-pipeline-os/
 
-This repo is a public **configuration surface** for short-form montage stacks. It helps you pick a stack before editing: source type, goal, mode, branch pack, EDL contract, render route, QA gate and public/private boundary.
+This repo is a public **visual atlas** for short-form montage stacks. It explains the shared editing state first: source audit, transcript, source blocks, EDL, overlay lanes, render route, QA and public/private boundary. The configurator is the second layer: it turns that map into a concrete branch pack.
 
 It is built from our real Codex/Claude Code reel sessions, the `reel-edit` skill, the `stack-compare` skill, and a fresh audit of the public `Voronik1801/reel_pipline` repo.
 
@@ -13,19 +13,20 @@ It is built from our real Codex/Claude Code reel sessions, the `reel-edit` skill
 
 | file | what |
 |------|------|
-| **[index.html](index.html)** | visual dashboard and live stack configurator |
+| **[index.html](index.html)** | visual atlas, `reel-edit` map and live stack configurator |
 | **[STACK.md](STACK.md)** | full stack spec: packs, contracts, EDL schema, QA gates, source research |
 | **[CONTRIBUTING.md](CONTRIBUTING.md)** | how to contribute a branch without leaking private data |
 | **[branches/](branches/)** | public-safe branch recipes and sample EDLs |
 
 ## What Changed
 
-The old page was a comparison artifact. The current version is a **stack configurator**:
+The current version leads with the **montage map**:
 
-1. choose `source`: iPhone one-take, multi-take, collab, screen/system, reference echo, public package;
-2. choose `goal`: publish fast, reusable recipe, reviewable, public branch, challenge, skill update;
-3. choose `mode`: dry preserve, caption only, proof overlay, visible flow, social short, experimental;
-4. copy the generated JSON config and branch pack checklist.
+1. see how different editing approaches become one `editing state`;
+2. inspect how Alex's `reel-edit 3.17` skill is configured now;
+3. compare useful layers from portable kits, long-form planning and timeline tools;
+4. choose `source`, `goal` and `mode` in the configurator;
+5. copy the generated JSON config and branch pack checklist.
 
 ## Branch Packs
 
