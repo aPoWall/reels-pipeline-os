@@ -350,6 +350,16 @@
   .useStep.hot .u,.useStep.hot p{color:#4c3d00}
   @media(max-width:850px){.useGrid{grid-template-columns:1fr 1fr}.useStep:nth-child(2){border-right:0}.useStep:nth-child(-n+2){border-bottom:1px solid var(--soft)}}
   @media(max-width:560px){.useGrid{grid-template-columns:1fr}.useStep{border-right:0;border-bottom:1px solid var(--soft)}.useStep:last-child{border-bottom:0}}
+  .creditGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+  .creditCell{border:1px solid var(--ink);background:var(--paper);padding:12px;min-height:126px}
+  .creditCell.hot{background:var(--ink);color:var(--bg)}
+  .creditCell .role{font-size:9px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
+  .creditCell.hot .role{color:rgba(255,255,255,.6)}
+  .creditCell b{display:block;margin-top:10px;font-size:12.5px;line-height:1.25}
+  .creditCell p{margin:7px 0 0;color:var(--muted);font-size:10.7px;line-height:1.45}
+  .creditCell.hot p{color:rgba(255,255,255,.75)}
+  @media(max-width:900px){.creditGrid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.creditGrid{grid-template-columns:1fr}}
 
   .authorGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
   .authorCard{border:1px solid var(--ink);background:var(--paper);padding:15px 16px;min-height:210px;display:flex;flex-direction:column;overflow-wrap:anywhere}
@@ -411,7 +421,7 @@
     <div class="brand"><img class="lt" src="assets/aim-logo-light.png" alt="ai mindset"><img class="dk" src="assets/aim-logo.png" alt="ai mindset">reels pipeline os <span class="bsub">· ai mindset</span></div>
     <div class="crumb"><b>public atlas</b> как монтировать reels · libraries · coauthors · configurator</div>
     <div class="meta">
-      <b>v3.4</b> · 2026-06-26 · public<br>
+      <b>v3.5</b> · 2026-06-26 · public<br>
       <a href="https://github.com/aPoWall/reels-pipeline-os">github · repo</a> · <a href="https://apowall.github.io/reels-pipeline-os/">pages</a><br>
       <button class="tbtn" onclick="document.documentElement.classList.toggle('dark')">◐ тема</button>
     </div>
@@ -522,6 +532,27 @@
       <div class="useStep"><div class="u">02</div><b>читай pipeline</b><p>увидеть монтажный contract: mode, audio, EDL, overlays, QA.</p></div>
       <div class="useStep"><div class="u">03</div><b>смотри соавторов</b><p>понять, какие публичные инструменты и подходы повлияли на stack.</p></div>
       <div class="useStep hot"><div class="u">04</div><b>собери pack</b><p>выбрать source/goal/mode и скопировать prompt для агента.</p></div>
+    </div>
+
+    <h2 class="sec">кто это собрал и какие слои внес</h2>
+    <div class="creditGrid">
+      <div class="creditCell hot"><div class="role">maintainer</div><b>AI Mindset / aPoWall</b><p>держит public repo, dashboard, STACK.md, contribution boundary and public-safe packaging.</p></div>
+      <div class="creditCell"><div class="role">agent build</div><b>Codex + Claude Code</b><p>собрали dashboard, docs, branch packs, prompt builder, QA smoke and GitHub Pages release.</p></div>
+      <div class="creditCell"><div class="role">portable kit</div><b>Dasha / Voronik1801</b><p>дала iPhone/macOS production mechanics: preflight, avconvert, templates, stutter and dead-air review.</p></div>
+      <div class="creditCell"><div class="role">research</div><b>EXA + public repos</b><p>дали diversified source scan: open video agents, editors, render adapters and pipeline patterns.</p></div>
+      <div class="creditCell"><div class="role">agent editor</div><b>X-Cut + OpenScript</b><p>показали chat intent, timeline operations, MCP tools, validation and verification layer.</p></div>
+      <div class="creditCell"><div class="role">timeline/render</div><b>OTIO + Remotion + HyperFrames</b><p>дали state interchange, React render path and HTML/CSS/media route for agent video work.</p></div>
+      <div class="creditCell"><div class="role">production core</div><b>FFmpeg + Whisper/Scribe + Apple</b><p>закрывают source audit, word timings, SDR conversion, audio checks and final MP4 diagnostics.</p></div>
+      <div class="creditCell"><div class="role">open wave</div><b>ReelStack + OpenReels + OpenCut</b><p>дали API/CLI pipeline, live UI, provider registry, editor API and headless direction.</p></div>
+    </div>
+
+    <h2 class="sec">как это работает в AI Mindset skill system</h2>
+    <div class="stackLayers">
+      <div class="layerName">context / brief</div><div class="layerBody">контекстный skill или человек формулирует цель, аудиторию, ограничения, source type and publish channel. В публичный пакет уходит только generic summary.</div>
+      <div class="layerName">reel-edit</div><div class="layerBody">владеет приватным video state: source audit, transcript, source blocks, EDL, overlay lanes, render outputs and QA. Raw media, transcripts and local paths остаются локально.</div>
+      <div class="layerName">reel-block-edit</div><div class="layerBody">может быть visual/timeline surface: branch surface, overlay density ladder, manual review, safe-zone checks and text-free base.</div>
+      <div class="layerName">stack-compare</div><div class="layerBody">владеет публичным Shaper artifact: dashboard, library stack, coauthor map, sanitized EDL examples, README, STACK.md and contribution rules.</div>
+      <div class="layerName">github pages</div><div class="layerBody">публикует текущую версию как open artifact. Проверка релиза: live URL returns 200 and expected tab text appears in deployed HTML.</div>
     </div>
 
     <h2 class="sec">таймлайн как главный объект</h2>

@@ -25,10 +25,11 @@ The current version leads with the **public montage atlas**:
 
 1. see how different editing approaches become one `editing state`;
 2. inspect the public pipeline contract: mode, audio, EDL, overlays, QA;
-3. review the coauthor/source map: Dasha/Voronik, X-Cut, OpenScript, HyperFrames, ReelStack, OpenReels, OpenCut;
-4. inspect the library stack: ffmpeg, ffprobe, avconvert, Whisper/Scribe, Pillow, numpy, ASS/SRT/WebVTT, OTIO, Remotion, HyperFrames, WebCodecs, MCP;
-5. choose `source`, `goal` and `mode` in the configurator;
-6. copy the generated JSON config and agent prompt.
+3. review who contributed which layer: AI Mindset/aPoWall, Codex + Claude Code, Dasha/Voronik, EXA/public repos, X-Cut, OpenScript, OTIO, Remotion, HyperFrames, FFmpeg, Whisper/Scribe, Apple, ReelStack, OpenReels, OpenCut;
+4. inspect how the public artifact fits the AI Mindset skill system: context/brief -> reel-edit -> reel-block-edit -> stack-compare -> GitHub Pages;
+5. inspect the library stack: ffmpeg, ffprobe, avconvert, Whisper/Scribe, Pillow, numpy, ASS/SRT/WebVTT, OTIO, Remotion, HyperFrames, WebCodecs, MCP;
+6. choose `source`, `goal` and `mode` in the configurator;
+7. copy the generated JSON config and agent prompt.
 
 ## Branch Packs
 

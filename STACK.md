@@ -203,6 +203,24 @@ Use for open-source packaging.
 - `branches/*/edit_decision_list.json`
 - `assets/og-cover.png`
 
+## 3.9 AI Mindset Skill System Placement
+
+Public-safe skill chain:
+
+```text
+context / brief -> reel-edit -> reel-block-edit -> stack-compare -> GitHub Pages
+```
+
+| layer | role |
+|-------|------|
+| context / brief | defines goal, audience, constraints, source type and publish channel |
+| `reel-edit` | owns private video state: source audit, transcript, source blocks, EDL, overlay lanes, render outputs and QA |
+| `reel-block-edit` | optional visual/timeline surface: branch surface, overlay density, manual review and safe-zone checks |
+| `stack-compare` | owns public dashboard, library stack, coauthor map, sanitized examples, README and STACK.md |
+| GitHub Pages | publishes the public artifact and verifies live tab text after release |
+
+Raw media, transcripts and local paths stay in the private video project. The public artifact carries mechanics only.
+
 ## 4. EDL Schema
 
 Generic public-safe shape:
