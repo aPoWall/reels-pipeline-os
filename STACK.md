@@ -1,6 +1,6 @@
 # Reels Pipeline OS - stack spec
 
-> Public stack specification for agentic short-form editing: source audit → ingest → transcript → source blocks → EDL → overlay lanes → render → QA → publish loop.
+> Public stack specification for agentic short-form editing: source audit → ingest → transcript → source blocks → EDL → overlay lanes → cover lane → render → QA → monitor loop.
 
 - **Live dashboard:** https://apowall.github.io/reels-pipeline-os/
 - **Repo:** https://github.com/aPoWall/reels-pipeline-os
@@ -15,7 +15,7 @@ A Reels pipeline should choose the **editing contract** before it renders.
 The reusable state is:
 
 ```text
-source audit -> ingest/color -> transcript/timing -> source blocks -> EDL state -> overlay lanes -> render route -> QA -> publish loop
+source audit -> ingest/color -> transcript/timing -> source blocks -> EDL state -> overlay lanes -> cover lane -> render route -> QA -> monitor loop
 ```
 
 The MP4 is an output. The durable artifact is the recipe: source blocks, cut map, overlay tracks, QA decisions and branch status.
@@ -31,7 +31,7 @@ The MP4 is an output. The durable artifact is the recipe: source blocks, cut map
 | P4 | EDL protocol | `edit_decision_list.json` with `cuts[]`, `overlay_tracks[]`, `render.outputs`, branch status |
 | P5 | overlay protocol | caption/card/rail/proof/stamp/cover lanes, safe-zone rules, viewer-facing copy |
 | P6 | render protocol | draft, review MP4, text-free base, final 1080x1920 MP4 |
-| P7 | QA protocol | ffprobe, listening pass, first-3s check, safe-zone pass, privacy pass, learning note |
+| P7 | QA protocol | ffprobe, listening pass, first-3s check, safe-zone pass, privacy pass, monitor note |
 
 ## 2. Decision Order
 
@@ -44,6 +44,7 @@ The MP4 is an output. The durable artifact is the recipe: source blocks, cut map
 | `collab` | `collab-spine` / `creator-collab-challenge` | interruptions and handoffs are story beats |
 | `screen_system` | `proof-flow` | terminal/agent/proof overlays with redaction |
 | `public_reference` | `reference-echo` | borrow mechanics, keep own footage and copy |
+| `visual_board` | `cover-visual-board` | style tokens, cover references and public-safe visual mechanics |
 | `public_package` | `public-dashboard` | open-source branch recipe and docs |
 
 ### 2.2 Goal
@@ -55,6 +56,7 @@ The MP4 is an output. The durable artifact is the recipe: source blocks, cut map
 | `manual_review` | block/timeline state + contact sheet |
 | `public_branch` | sanitized README + sample EDL |
 | `challenge` | metrics schema + collab EDL |
+| `skill_update` | survivor mechanics, private skill note and public-safe protocol delta |
 | `article_demo` | schematic EDL, library list and public citation paragraph |
 
 ### 2.3 Mode
@@ -67,6 +69,7 @@ Pick the editorial mode before the visual style:
 | `caption_only` | social default | sparse bottom or top captions |
 | `proof_overlay` | evidence matters | one proof lane, cropped/redacted |
 | `visible_flow` | process is the point | rail / graph / sequence |
+| `cover_set` | cover or visual-board pass | clean no-text base, title layer and contact sheet |
 | `social_short` | punch and CTA carry the reel | tight cut and minimal copy |
 | `experimental` | deliberate exploration | one wild branch with clean baseline preserved |
 
@@ -80,6 +83,7 @@ The configurator selects a route after `source`, `goal` and `mode`. Route contro
 | `block_timeline` | `reel-block-edit` | inspectable timeline board: source blocks, cuts, overlay events, contact sheet and manual trim notes |
 | `palmier` | `reel-palmier-board` | editable board: base video/audio, frame shells, native text clips and winner cutlane |
 | `shaper` | `shaper-reels` | public proof/process overlay: monochrome rails, labels, safe-zone contact sheet and style reuse note |
+| `cover_lab` | `inside-insanity` + `reel-edit` | cover/visual-board pass: clean bases, text layer, contact sheet, style tokens and public-safe protocol delta |
 | `article_research` | `stack-compare` | public article branch: research sessions, source credits, route matrix and prompt contract |
 
 ### 2.5 Soft Communication Layer
@@ -98,13 +102,18 @@ The configurator selects a route after `source`, `goal` and `mode`. Route contro
 | source | strongest contribution | adopted layer |
 |--------|------------------------|---------------|
 | [Voronik1801/reel_pipline](https://github.com/Voronik1801/reel_pipline) | portable macOS/iPhone kit, `PIPELINE.md`, `pipeline_check.sh`, `avconvert`, templates, stutter/dead-air review | P1 source, P2 timing, P7 QA |
+| [FeezRM/AI-ShortForm-Editor](https://github.com/FeezRM/AI-ShortForm-Editor) | transcript, scene/silence/audio rhythm, EDL, confidence gate, vertical render | P2 timing, P4 EDL, P7 QA |
+| [CarlAmine/AI_Editor](https://github.com/CarlAmine/AI_Editor) | OCR/SceneDetect, brief-to-edit-plan JSON, overlay planner, timeline render | P1 source, P3 story, P5 overlay |
 | [MeiGen-AI/X-Cut](https://github.com/MeiGen-AI/X-Cut) | chat-driven video agent, dynamic skills, asset analysis, real-time Remotion timeline | P0 brief, P3 story, future editor surface |
 | [birchrust/OpenScript](https://github.com/birchrust/openscript) | MCP tools, EDL v2, multi-track timeline, verification layer | P4 EDL, P7 QA, agent control |
+| [floomhq/opencut](https://github.com/floomhq/opencut) | TypeScript timeline-as-code, Whisper word captions, validate/render CLI, Remotion route | P4 EDL, P5 captions, P6 render |
+| [neutral-Stage/remotion-captioneer](https://github.com/neutral-Stage/remotion-captioneer) | word-level caption components, presets, SRT/VTT/ASS exports | P2 timing, P5 caption lane |
 | [heygen-com/HyperFrames](https://github.com/heygen-com/hyperframes) | HTML/CSS/media render loop, CLI lint/preview/render, agent skills | P5 overlays, P6 render |
 | [jurczykpawel/ReelStack](https://github.com/jurczykpawel/reelstack) | CLI/API production stages, provider registry, prompt templates, self-hosting | P0 brief, P6 render, automation |
 | [tsensei/OpenReels](https://github.com/tsensei/OpenReels) | topic-to-short pipeline: research, script, voiceover, visuals, music, captions, assembly | article-demo pack |
-| [OpenCut-app/OpenCut](https://github.com/OpenCut-app/OpenCut) | open timeline editor direction, plugin/headless surface | future browser review board |
 | [OpenTimelineIO](https://github.com/AcademySoftwareFoundation/OpenTimelineIO) | editorial timeline interchange format | EDL export and NLE bridge |
+| [Mediabunny](https://mediabunny.dev/guide/output-formats) / [WebCodecs](https://www.w3.org/TR/webcodecs/) | browser media containers and decode/encode primitives | future browser preview/export |
+| [thumbnail-guru](https://github.com/sebastianhardy/thumbnail-guru), [Adobe Express](https://www.adobe.com/express/create/ai/thumbnail), [Canva](https://www.canva.com/ai-thumbnail-maker/) | clean base, separate text layer, variant contact sheet, small-size QA | cover-visual-board |
 
 ### 3.1 `portable-iphone-kit`
 
@@ -239,7 +248,30 @@ Use for open-source packaging.
 - `branches/*/edit_decision_list.json`
 - `assets/og-cover.png`
 
-## 3.9 AI Mindset Skill System Placement
+### 3.9 `cover-visual-board`
+
+Use for cover sets, visual-board updates and style survivor extraction.
+
+**Rules:**
+
+- start from a private visual board or reel review, then strip it to mechanics;
+- generate or select clean no-text cover bases;
+- keep title/caption as a separate editable layer;
+- produce 5-10 variants and one contact sheet;
+- check readability at small mobile-preview size;
+- write `style_tokens.json` and `public_pipeline_delta.md`;
+- publish only generated/sanitized imagery and generic mechanics.
+
+**Artifacts:**
+
+- `visual_board.md`
+- `covers/clean/*.png`
+- `covers/text/*.png`
+- `cover_contact_sheet.png`
+- `style_tokens.json`
+- `public_pipeline_delta.md`
+
+## 3.10 AI Mindset Skill System Placement
 
 Public-safe skill chain:
 
@@ -249,8 +281,8 @@ inside-insanity -> reel-edit -> reel-block-edit -> reel-palmier-board -> shaper-
 
 | layer | role |
 |-------|------|
-| `inside-insanity` | defines personal visual board, motif, tone, caption grammar and public-safe summary |
-| `reel-edit` | owns private video state: source audit, transcript, source blocks, EDL, overlay lanes, render outputs and QA |
+| `inside-insanity` | defines personal visual board, motif, tone, caption grammar, cover references and public-safe summary |
+| `reel-edit` | owns private video state: source audit, transcript, source blocks, EDL, overlay lanes, cover set, render outputs and QA |
 | `reel-block-edit` | visual/timeline surface: branch surface, overlay density, manual review and safe-zone checks |
 | `reel-palmier-board` | editable review and winner cutlane board with base tracks, frame shells and native text clips |
 | `shaper-reels` | monochrome proof/process overlay grammar for public-safe visible flow |
@@ -267,13 +299,13 @@ Generic public-safe shape:
 {
   "schema": "reel.edl.v3",
   "source": {
-    "kind": "iphone_single | multi_take | collab | screen_system | public_reference",
+    "kind": "iphone_single | multi_take | collab | screen_system | public_reference | visual_board",
     "media": "private/source.mov",
     "public_name": "source_take_a"
   },
   "strategy": {
     "pack": "portable-iphone-kit",
-    "mode": "caption_only",
+    "mode": "caption_only | cover_set",
     "style": "minimal_caption",
     "audio_policy": "single_source"
   },
@@ -311,6 +343,12 @@ Generic public-safe shape:
       ]
     }
   ],
+  "cover": {
+    "basePolicy": "clean_no_text",
+    "textLayer": "separate",
+    "variants": 10,
+    "qa": "small_size_readability"
+  },
   "render": {
     "route": "ffmpeg | remotion | hyperframes | browser",
     "outputs": {
@@ -338,7 +376,7 @@ Generic public-safe shape:
 | `rail` | process sequence, thin lower/side lane |
 | `stamp` | small context marker |
 | `proof` | only for proof mode; redacted |
-| `cover` | first-frame or first-2s hook surface |
+| `cover` | clean base plus separate title/caption layer; never burn private text into reusable base |
 
 On-screen copy must not include internal terms like `EDL`, `branch`, `render`, `segment`, file paths, source filenames or implementation notes.
 
@@ -393,17 +431,22 @@ EXA MCP research and primary docs point to a converging pattern:
 | source | useful role |
 |--------|-------------|
 | [Dasha / Voronik1801 reel_pipline](https://github.com/Voronik1801/reel_pipline) | portable iPhone production kit: `PIPELINE.md`, `avconvert`, `pipeline_check.sh`, templates, stutter/dead-air review |
+| [FeezRM/AI-ShortForm-Editor](https://github.com/FeezRM/AI-ShortForm-Editor) | transcript, scene/silence/audio rhythm analysis, EDL, confidence gate and vertical render |
+| [CarlAmine/AI_Editor](https://github.com/CarlAmine/AI_Editor) | OCR/SceneDetect, brief-to-edit-plan JSON, overlay planner and render timeline |
+| [floomhq/opencut](https://github.com/floomhq/opencut) | TypeScript timeline-as-code, Whisper word captions, validate/render CLI and Remotion render |
+| [neutral-Stage/remotion-captioneer](https://github.com/neutral-Stage/remotion-captioneer) | word-level caption components, presets, STT providers and SRT/VTT/ASS exports |
 | [OpenTimelineIO](https://github.com/AcademySoftwareFoundation/OpenTimelineIO) | editorial interchange: cut information, timing, external media refs and adapter direction |
-| [Remotion timeline docs](https://www.remotion.dev/docs/building-a-timeline) | typed tracks/items, Player sync and JSON `inputProps` as render state |
+| [Remotion renderer docs](https://www.remotion.dev/docs/renderer/render-media) and [timeline render docs](https://www.remotion.dev/docs/timeline/render) | typed tracks/items, Player sync and JSON `inputProps` as render state |
+| [Mediabunny output formats](https://mediabunny.dev/guide/output-formats) | browser media containers and explicit codec/container constraints |
 | [HyperFrames](https://github.com/heygen-com/hyperframes) | HTML/CSS/media to deterministic MP4, agent skills, CLI validation and render loop |
 | [X-Cut](https://github.com/MeiGen-AI/X-Cut) | chat-driven video agent, multi-track timeline, reusable style skills and Remotion render |
 | [OpenScript](https://github.com/birchrust/openscript) | MCP tools, EDL v2, multi-track timeline, verification layer and agent-directed render |
 | [AI Video Editor](https://github.com/tjameswilliams/ai-video-editor) | natural-language edits, multi-track timeline and Remotion motion graphics |
-| [OpenCut Engine](https://github.com/buildingopen/opencut) | code-driven video production with Whisper, TypeScript timelines and Remotion render |
 | [Elah](https://github.com/elahlabs/elah), [timeline](https://github.com/webpacked/timeline), [OpenReel Video](https://github.com/Augani/openreel-video) | browser-native editor direction: timeline core, UI adapter and local preview |
 | [ReelStack](https://github.com/jurczykpawel/reelstack) | API/CLI production pipeline, templates, effects, provider registry and self-hosting |
 | [OpenReels](https://github.com/tsensei/OpenReels) | topic-to-short pipeline, live pipeline visualization, provider mix and critique/rerun loop |
-| [Captions.ai Reels guide](https://captions.ai/blog/how-to-make-instagram-reels), [WaveGen size guide](https://wavegen.ai/instagram-reel-size) | first 3 seconds, watch time, shares, 1080x1920 and safe-zone QA |
+| [Later Reels guide](https://later.com/blog/instagram-reels/), [Captions.ai Reels guide](https://captions.ai/blog/how-to-make-instagram-reels) | third-party platform heuristics: first seconds, captions, 9:16, watch time and shares |
+| [thumbnail-guru](https://github.com/sebastianhardy/thumbnail-guru), [Adobe Express thumbnail maker](https://www.adobe.com/express/create/ai/thumbnail), [Canva AI thumbnail maker](https://www.canva.com/ai-thumbnail-maker/) | cover workflow: clean base, separate text layer, multiple variants and readability QA |
 | [Whisper](https://github.com/openai/whisper), [FFmpeg](https://ffmpeg.org/ffmpeg.html), [WebCodecs](https://www.w3.org/TR/webcodecs/) | speech timing, render/diagnostics and future browser media primitives |
 
 Practical conclusion: keep the state model small and portable, then route rendering by use case.
@@ -413,19 +456,21 @@ Practical conclusion: keep the state model small and portable, then route render
 ```text
 Build a public-safe Reels pipeline branch.
 
-Selected source: <iphone_single | multi_take | collab | screen_system | reference>
-Selected goal: <publish_fast | recipe | reviewable | public_branch | article_demo>
-Selected mode: <dry_preserve | caption_only | proof_overlay | visible_flow | experimental>
-Selected route: <reel_edit | block_timeline | palmier | shaper | article_research>
+Selected source: <iphone_single | multi_take | collab | screen_system | reference | visual_board>
+Selected goal: <publish_fast | recipe | reviewable | public_branch | skill_update | article_demo>
+Selected mode: <dry_preserve | caption_only | proof_overlay | visible_flow | cover_set | experimental>
+Selected route: <reel_edit | block_timeline | palmier | shaper | cover_lab | article_research>
 
 Use this stack:
 - Python 3.10+ orchestration, JSON files as contracts, sequential render queue.
 - ffmpeg and ffprobe for source audit, crop, scale, concat, audio extraction, AAC, bt709 tags and diagnostics.
 - On macOS/iPhone footage, use Apple avconvert for HDR/HLG to SDR bt709 before creative render.
 - Whisper or Scribe for transcript, word timings and pause map.
+- PySceneDetect/librosa/EasyOCR/PaddleOCR where scene, rhythm or proof analysis matters.
 - Pillow and numpy for PNG caption overlays, contact sheets and review frames.
+- Cover lab rule: clean no-text bases, independent title/caption layer, 5-10 variants and small-size readability QA.
 - EDL JSON as the source of truth: source_blocks[], cuts[], overlay_tracks[], render.outputs and qa.
-- Optional adapters: OpenTimelineIO export, Remotion tracks/items render, HyperFrames HTML render, WebCodecs/browser preview.
+- Optional adapters: OpenTimelineIO export, Remotion tracks/items render, HyperFrames HTML render, Mediabunny/WebCodecs browser preview.
 
 Required protocols:
 - P0 brief: goal, audience, source type, mode, privacy boundary.
@@ -435,19 +480,20 @@ Required protocols:
 - P4 EDL: cuts[], overlay_tracks[], render.outputs, branch status.
 - P5 overlay: caption, card, rail, proof, stamp, cover, safe zones.
 - P6 render: draft, review MP4, text-free base, final 1080x1920.
-- P7 QA: ffprobe, listening pass, first 3s, privacy pass, learning note.
+- P7 QA: ffprobe, listening pass, first 3s, privacy pass, monitor note.
 
 Route process:
 - `reel_edit`: build source map, transcript, EDL, overlay lanes, review/final MP4, text-free base and QA.
 - `block_timeline`: export source blocks, cut map, overlayEvents, board state, safe-zone contact sheet and manual review notes.
 - `palmier`: create base video/audio references, frame shells, native text clips, editable board state and winner cutlane.
 - `shaper`: apply monochrome proof/process overlay grammar to a clean baseline and run safe-zone QA.
+- `cover_lab`: build clean cover bases, separate text layer, contact sheet, style tokens and public-safe protocol delta.
 - `article_research`: summarize sources as signal, diagnosis and move; update public article, route matrix and prompt contract.
 
 Same-source comparison:
 1. Use the same source_map, transcript baseline and audio policy when comparing routes.
 2. Save outputs under test_runs/<route>/.
-3. Compare first_3s, safe_zone, editability, render_qa and publish_readiness.
+3. Compare first_3s, safe_zone, cover_readability, editability, render_qa and publish_readiness.
 4. Write one route verdict: keep, rerun with notes, or archive.
 
 Public boundary:

@@ -1,6 +1,6 @@
 # Contributing to Reels Stack Configurator
 
-This repo is a public configurator for montage stacks. Contribute **branch packs**, **EDL schemas**, **QA checks**, **render routes** or **sanitized worked recipes**.
+This repo is a public configurator for montage stacks. Contribute **branch packs**, **EDL schemas**, **QA checks**, **render routes**, **cover/visual-board recipes** or **sanitized worked recipes**.
 
 ## What To Contribute
 
@@ -10,6 +10,7 @@ This repo is a public configurator for montage stacks. Contribute **branch packs
 4. **Render route** – ffmpeg, Remotion, browser/WebCodecs, MCP or cloud render adapter.
 5. **Challenge mechanic** – aggregate metrics + sanitized collab recipe.
 6. **Portable production kit** – dependency check, templates, platform-specific normalization and QA scripts.
+7. **Cover/visual-board recipe** – clean no-text base, separate text layer, contact sheet and style tokens.
 
 ## Public Boundary
 
@@ -19,6 +20,7 @@ Do not include:
 
 - real footage;
 - contact sheets or frame strips with real faces;
+- cover variants generated from private frames, private locations or identifiable screenshots;
 - real names, handles, nicknames or account names;
 - raw transcript text or real captions;
 - local paths, project names or source filenames that identify a recording;
@@ -29,7 +31,7 @@ Use:
 
 - `creator_a`, `creator_b`, `host_creator`, `guest_creator`;
 - `hook`, `tension`, `turn`, `proof`, `punch`, `closer`;
-- `caption`, `highlight`, `card`, `rail`, `stamp`, `proof`;
+- `caption`, `highlight`, `card`, `rail`, `stamp`, `proof`, `cover`;
 - aggregate metrics only.
 
 If the branch came from a real recording, strip it to structure before opening a PR.
@@ -92,6 +94,12 @@ Use `reel.edl.v3` from [STACK.md](STACK.md#4-edl-schema). Minimum public-safe sh
       ]
     }
   ],
+  "cover": {
+    "basePolicy": "clean_no_text",
+    "textLayer": "separate",
+    "variants": 10,
+    "qa": "small_size_readability"
+  },
   "qa": {
     "ffprobe": "required",
     "contact_sheet": "required",
@@ -100,6 +108,29 @@ Use `reel.edl.v3` from [STACK.md](STACK.md#4-edl-schema). Minimum public-safe sh
   }
 }
 ```
+
+## Cover / Visual Board Minimum
+
+```json
+{
+  "branch": "cover-visual-board",
+  "source": "visual_board",
+  "privacy": "generated_or_sanitized_imagery_only",
+  "cover": {
+    "basePolicy": "clean_no_text",
+    "textLayer": "separate",
+    "variants": 10,
+    "contactSheet": "required",
+    "qa": ["small_size_readability", "safe_zone", "no_private_frames"]
+  },
+  "publicDelta": {
+    "allowed": ["card_grammar", "caption_density", "palette_tokens", "audio_policy", "qa_rule"],
+    "forbidden": ["raw_frames", "faces", "local_paths", "private_transcript"]
+  }
+}
+```
+
+The cover recipe may cite public references, but it must not package private frames or identity-specific moodboards.
 
 ## Challenge Branch Minimum
 
@@ -168,6 +199,7 @@ PR review checks:
 - clear source/goal/mode;
 - reproducible artifacts;
 - QA gate;
+- cover/privacy gate where relevant;
 - useful README.
 
 Low friction, high signal.
